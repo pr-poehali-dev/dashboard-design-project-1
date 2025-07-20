@@ -24,6 +24,27 @@ const Index = () => {
     { range: "46+", count: 600, percentage: 12 },
   ];
 
+  const genderAgeData = {
+    male: {
+      percentage: 45,
+      ageDistribution: [
+        { range: "18-25", percentage: 28 },
+        { range: "26-35", percentage: 38 },
+        { range: "36-45", percentage: 22 },
+        { range: "46+", percentage: 12 }
+      ]
+    },
+    female: {
+      percentage: 55,
+      ageDistribution: [
+        { range: "18-25", percentage: 22 },
+        { range: "26-35", percentage: 45 },
+        { range: "36-45", percentage: 20 },
+        { range: "46+", percentage: 13 }
+      ]
+    }
+  };
+
   const familyData = [
     { label: "Есть дети", value: 68, icon: "Baby" },
     { label: "Есть автомобиль", value: 74, icon: "Car" },
@@ -32,10 +53,10 @@ const Index = () => {
 
   // Финансовые данные с динамикой
   const incomeData = {
-    week: { value: "82,300₽", change: "+5.2%", trend: [75, 78, 80, 82, 85, 83, 82] },
-    month: { value: "85,500₽", change: "+12.5%", trend: [70, 72, 75, 80, 82, 84, 85] },
-    quarter: { value: "83,200₽", change: "+8.7%", trend: [68, 70, 74, 78, 81, 83, 83] },
-    year: { value: "79,800₽", change: "+15.3%", trend: [60, 65, 70, 73, 76, 78, 80] }
+    week: { value: "82,300₽", change: "+5.2%", trend: [75, 78, 80, 82, 85, 83, 82], vsCompetitors: { value: "+8%", description: "выше конкурентов" } },
+    month: { value: "85,500₽", change: "+12.5%", trend: [70, 72, 75, 80, 82, 84, 85], vsCompetitors: { value: "+11%", description: "выше конкурентов" } },
+    quarter: { value: "83,200₽", change: "+8.7%", trend: [68, 70, 74, 78, 81, 83, 83], vsCompetitors: { value: "+9%", description: "выше конкурентов" } },
+    year: { value: "79,800₽", change: "+15.3%", trend: [60, 65, 70, 73, 76, 78, 80], vsCompetitors: { value: "+13%", description: "выше конкурентов" } }
   };
 
   const expenseData = {
@@ -66,17 +87,17 @@ const Index = () => {
   };
 
   const averageCheckData = {
-    week: { value: "2,380₽", change: "+2.1%", trend: [2100, 2200, 2300, 2380, 2400, 2350, 2380] },
-    month: { value: "2,450₽", change: "+15.7%", trend: [2000, 2100, 2250, 2350, 2400, 2450, 2450] },
-    quarter: { value: "2,320₽", change: "+8.9%", trend: [1950, 2050, 2150, 2250, 2300, 2320, 2320] },
-    year: { value: "2,180₽", change: "+22.3%", trend: [1800, 1900, 2000, 2100, 2150, 2180, 2180] }
+    week: { value: "2,380₽", change: "+2.1%", trend: [2100, 2200, 2300, 2380, 2400, 2350, 2380], vsCompetitors: { value: "+6%", description: "выше конкурентов" } },
+    month: { value: "2,450₽", change: "+15.7%", trend: [2000, 2100, 2250, 2350, 2400, 2450, 2450], vsCompetitors: { value: "+12%", description: "выше конкурентов" } },
+    quarter: { value: "2,320₽", change: "+8.9%", trend: [1950, 2050, 2150, 2250, 2300, 2320, 2320], vsCompetitors: { value: "+8%", description: "выше конкурентов" } },
+    year: { value: "2,180₽", change: "+22.3%", trend: [1800, 1900, 2000, 2100, 2150, 2180, 2180], vsCompetitors: { value: "+18%", description: "выше конкурентов" } }
   };
 
   const creditLoadData = {
-    week: { value: "22%", change: "-1.8%", trend: [25, 24, 23, 22, 21, 22, 22] },
-    month: { value: "23%", change: "-2.1%", trend: [26, 25, 24, 23, 22, 23, 23] },
-    quarter: { value: "24%", change: "-3.2%", trend: [28, 27, 26, 25, 24, 24, 24] },
-    year: { value: "25%", change: "-4.5%", trend: [30, 29, 27, 26, 25, 25, 25] }
+    week: { value: "22%", change: "-1.8%", trend: [25, 24, 23, 22, 21, 22, 22], vsCompetitors: { value: "-3%", description: "ниже конкурентов" } },
+    month: { value: "23%", change: "-2.1%", trend: [26, 25, 24, 23, 22, 23, 23], vsCompetitors: { value: "-5%", description: "ниже конкурентов" } },
+    quarter: { value: "24%", change: "-3.2%", trend: [28, 27, 26, 25, 24, 24, 24], vsCompetitors: { value: "-4%", description: "ниже конкурентов" } },
+    year: { value: "25%", change: "-4.5%", trend: [30, 29, 27, 26, 25, 25, 25], vsCompetitors: { value: "-6%", description: "ниже конкурентов" } }
   };
 
   // Категории расходов
@@ -199,6 +220,12 @@ const Index = () => {
                       {incomeData[selectedPeriod as keyof typeof incomeData].change}
                     </Badge>
                   </div>
+
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.value} {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.description}
+                    </Badge>
+                  </div>
                   
                   {/* Мини график */}
                   <div className="flex items-end gap-1 h-8">
@@ -271,6 +298,12 @@ const Index = () => {
                       {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
                     </Badge>
                   </div>
+
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.value} {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.description}
+                    </Badge>
+                  </div>
                   
                   {/* Мини график */}
                   <div className="flex items-end gap-1 h-8">
@@ -307,6 +340,12 @@ const Index = () => {
                       {creditLoadData[selectedPeriod as keyof typeof creditLoadData].change}
                     </Badge>
                   </div>
+
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].vsCompetitors.value} {creditLoadData[selectedPeriod as keyof typeof creditLoadData].vsCompetitors.description}
+                    </Badge>
+                  </div>
                   
                   {/* Мини график */}
                   <div className="flex items-end gap-1 h-8">
@@ -323,48 +362,73 @@ const Index = () => {
             </Card>
           </div>
 
-          {/* Быстрая демография */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <CardTitle className="flex items-center gap-2 mb-4">
-                <Icon name="PieChart" size={20} />
-                Распределение по полу
-              </CardTitle>
+          {/* Объединенная демография */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Users" size={20} />
+              Демографический профиль аудитории
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Мужчины */}
               <div className="space-y-4">
-                {demographicData.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="font-medium">{item.label}</span>
-                    <div className="flex items-center gap-3">
-                      <div className="w-32 h-3 bg-slate-200 rounded-full overflow-hidden">
-                        <div className={`h-full ${item.color} transition-all duration-500`} style={{ width: `${item.value}%` }} />
-                      </div>
-                      <span className="text-sm font-bold">{item.value}%</span>
-                    </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-4xl">👨</div>
+                  <div>
+                    <div className="text-xl font-bold text-blue-600">45%</div>
+                    <div className="text-sm text-slate-600">Мужчины</div>
                   </div>
-                ))}
+                </div>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
+                  {genderAgeData.male.ageDistribution.map((age, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <span className="text-sm">{age.range} лет</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-2 bg-slate-200 rounded-full">
+                          <div 
+                            className="h-full bg-blue-500 rounded-full transition-all duration-500"
+                            style={{ width: `${age.percentage}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </Card>
 
-            <Card className="p-6">
-              <CardTitle className="flex items-center gap-2 mb-4">
-                <Icon name="Calendar" size={20} />
-                Возрастные группы
-              </CardTitle>
+              {/* Женщины */}
               <div className="space-y-4">
-                {ageGroups.map((group, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="font-medium">{group.range}</span>
-                    <div className="flex items-center gap-3">
-                      <div className="w-32 h-3 bg-slate-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500" style={{ width: `${group.percentage}%` }} />
-                      </div>
-                      <span className="text-sm font-bold">{group.count}</span>
-                    </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-4xl">👩</div>
+                  <div>
+                    <div className="text-xl font-bold text-pink-600">55%</div>
+                    <div className="text-sm text-slate-600">Женщины</div>
                   </div>
-                ))}
+                </div>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
+                  {genderAgeData.female.ageDistribution.map((age, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <span className="text-sm">{age.range} лет</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-2 bg-slate-200 rounded-full">
+                          <div 
+                            className="h-full bg-pink-500 rounded-full transition-all duration-500"
+                            style={{ width: `${age.percentage}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </TabsContent>
 
         {/* Демография */}
