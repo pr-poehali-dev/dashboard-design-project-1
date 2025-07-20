@@ -218,8 +218,8 @@ const Index = () => {
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="TrendingDown" size={16} />
-                  Средние расходы
+                  <Icon name="Wallet" size={16} />
+                  Кошелек клиента
                 </CardTitle>
               </CardHeader>
               <CardContent>
