@@ -66,10 +66,17 @@ const Index = () => {
   };
 
   const averageCheckData = {
-    week: { value: "2,380₽", change: "+2.1%" },
-    month: { value: "2,450₽", change: "+15.7%" },
-    quarter: { value: "2,320₽", change: "+8.9%" },
-    year: { value: "2,180₽", change: "+22.3%" }
+    week: { value: "2,380₽", change: "+2.1%", trend: [2100, 2200, 2300, 2380, 2400, 2350, 2380] },
+    month: { value: "2,450₽", change: "+15.7%", trend: [2000, 2100, 2250, 2350, 2400, 2450, 2450] },
+    quarter: { value: "2,320₽", change: "+8.9%", trend: [1950, 2050, 2150, 2250, 2300, 2320, 2320] },
+    year: { value: "2,180₽", change: "+22.3%", trend: [1800, 1900, 2000, 2100, 2150, 2180, 2180] }
+  };
+
+  const creditLoadData = {
+    week: { value: "22%", change: "-1.8%", trend: [25, 24, 23, 22, 21, 22, 22] },
+    month: { value: "23%", change: "-2.1%", trend: [26, 25, 24, 23, 22, 23, 23] },
+    quarter: { value: "24%", change: "-3.2%", trend: [28, 27, 26, 25, 24, 24, 24] },
+    year: { value: "25%", change: "-4.5%", trend: [30, 29, 27, 26, 25, 25, 25] }
   };
 
   // Категории расходов
@@ -172,50 +179,75 @@ const Index = () => {
 
         {/* Обзор */}
         <TabsContent value="overview" className="space-y-6">
-          {/* Топ метрики */}
+          {/* Топ метрики с динамикой */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Доходы */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-sm font-medium">
                   <Icon name="TrendingUp" size={16} />
                   Средний доход
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-emerald-700">
-                    {incomeData[selectedPeriod as keyof typeof incomeData].value}
-                  </span>
-                  <Badge variant="default" className="bg-emerald-600">
-                    {incomeData[selectedPeriod as keyof typeof incomeData].change}
-                  </Badge>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-emerald-700">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].value}
+                    </span>
+                    <Badge variant="default" className="bg-emerald-600 text-xs">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                    </Badge>
+                  </div>
+                  
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm"
+                        style={{ height: `${(point / 100) * 100}%`, width: '10px' }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Расходы */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-sm font-medium">
                   <Icon name="TrendingDown" size={16} />
                   Средние расходы
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-red-700">
+                    <span className="text-xl font-bold text-red-700">
                       {expenseData[selectedPeriod as keyof typeof expenseData].value}
                     </span>
-                    <Badge variant="destructive">
+                    <Badge variant="destructive" className="text-xs">
                       {expenseData[selectedPeriod as keyof typeof expenseData].change}
                     </Badge>
                   </div>
+                  
                   <div className="text-xs text-slate-600">
                     <Badge variant="outline" className="text-xs">
-                      {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.value} {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.description}
+                      {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.value} выше конкурентов
                     </Badge>
+                  </div>
+                  
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {expenseData[selectedPeriod as keyof typeof expenseData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-red-500 to-pink-300 rounded-t-sm"
+                        style={{ height: `${(point / 100) * 100}%`, width: '10px' }}
+                      />
+                    ))}
                   </div>
                 </div>
               </CardContent>
@@ -223,36 +255,69 @@ const Index = () => {
 
             {/* Средний чек */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-sm font-medium">
                   <Icon name="Receipt" size={16} />
                   Средний чек
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-blue-700">
-                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].value}
-                  </span>
-                  <Badge variant="default" className="bg-blue-600">
-                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
-                  </Badge>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-blue-700">
+                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].value}
+                    </span>
+                    <Badge variant="default" className="bg-blue-600 text-xs">
+                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
+                    </Badge>
+                  </div>
+                  
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].trend.map((point, index) => {
+                      const normalizedHeight = ((point - 1800) / (2450 - 1800)) * 100;
+                      return (
+                        <div
+                          key={index}
+                          className="bg-gradient-to-t from-blue-500 to-indigo-300 rounded-t-sm"
+                          style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Активные клиенты */}
-            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
-              <CardHeader className="pb-3">
+            {/* Кредитная нагрузка */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-orange-50 to-yellow-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="Users" size={16} />
-                  Активные клиенты
+                  <Icon name="CreditCard" size={16} />
+                  Кредитная нагрузка
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-purple-700">35,000</span>
-                  <Badge variant="default" className="bg-purple-600">+8.2%</Badge>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-orange-700">
+                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].value}
+                    </span>
+                    <Badge variant="default" className="bg-green-600 text-xs">
+                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].change}
+                    </Badge>
+                  </div>
+                  
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {creditLoadData[selectedPeriod as keyof typeof creditLoadData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-orange-500 to-yellow-300 rounded-t-sm"
+                        style={{ height: `${(point / 30) * 100}%`, width: '10px' }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
