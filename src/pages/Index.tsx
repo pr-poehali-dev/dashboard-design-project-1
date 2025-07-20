@@ -166,6 +166,34 @@ const Index = () => {
     year: { value: "562,800₽", change: "+28.3%", trend: [420000, 450000, 480000, 520000, 550000, 562800, 562800], vsCompetitors: { value: "+52%", description: "выше конкурентов" } }
   };
 
+  // Данные кошелька клиента
+  const walletData = {
+    week: {
+      segmentSpending: { value: "7,500₽", change: "+5.2%", trend: [6800, 7000, 7200, 7300, 7400, 7500, 7500] },
+      companySpending: { value: "2,350₽", change: "+8.7%", trend: [2100, 2150, 2200, 2250, 2300, 2350, 2350] },
+      shareInWallet: { value: "31.3%", change: "+2.8%", trend: [28.5, 29.2, 30.1, 30.8, 31.1, 31.3, 31.3] },
+      dynamicsTrend: [28.5, 29.2, 30.1, 30.8, 31.1, 31.3, 31.3]
+    },
+    month: {
+      segmentSpending: { value: "30,000₽", change: "+6.8%", trend: [27000, 28000, 28500, 29200, 29800, 30000, 30000] },
+      companySpending: { value: "10,200₽", change: "+12.1%", trend: [8500, 9200, 9600, 9900, 10100, 10200, 10200] },
+      shareInWallet: { value: "34.0%", change: "+4.2%", trend: [31.5, 32.8, 33.7, 33.9, 33.9, 34.0, 34.0] },
+      dynamicsTrend: [31.5, 32.8, 33.7, 33.9, 33.9, 34.0, 34.0]
+    },
+    quarter: {
+      segmentSpending: { value: "92,500₽", change: "+8.3%", trend: [82000, 85000, 87500, 89500, 91000, 92500, 92500] },
+      companySpending: { value: "31,800₽", change: "+15.2%", trend: [26000, 28000, 29500, 30800, 31500, 31800, 31800] },
+      shareInWallet: { value: "34.4%", change: "+5.8%", trend: [31.7, 32.9, 33.7, 34.4, 34.6, 34.4, 34.4] },
+      dynamicsTrend: [31.7, 32.9, 33.7, 34.4, 34.6, 34.4, 34.4]
+    },
+    year: {
+      segmentSpending: { value: "385,000₽", change: "+9.5%", trend: [320000, 340000, 355000, 370000, 380000, 385000, 385000] },
+      companySpending: { value: "132,500₽", change: "+18.7%", trend: [105000, 115000, 122000, 128000, 130000, 132500, 132500] },
+      shareInWallet: { value: "34.4%", change: "+7.2%", trend: [32.8, 33.8, 34.4, 34.6, 34.2, 34.4, 34.4] },
+      dynamicsTrend: [32.8, 33.8, 34.4, 34.6, 34.2, 34.4, 34.4]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -211,8 +239,9 @@ const Index = () => {
 
       {/* Main Dashboard */}
       <Tabs defaultValue="loyalty" className="space-y-6">
-        <TabsList className="grid grid-cols-7 w-fit">
+        <TabsList className="grid grid-cols-8 w-fit">
           <TabsTrigger value="loyalty">Лояльность</TabsTrigger>
+          <TabsTrigger value="wallet">Кошелек клиента</TabsTrigger>
           <TabsTrigger value="overview">Обзор</TabsTrigger>
           <TabsTrigger value="demographics">Демография</TabsTrigger>
           <TabsTrigger value="finances">Финансы</TabsTrigger>
@@ -472,6 +501,318 @@ const Index = () => {
                 <div className="text-3xl font-bold text-green-600 mb-2">68%</div>
                 <div className="text-sm text-slate-600 font-medium">Рекомендующие клиенты</div>
                 <div className="text-xs text-slate-500 mt-1">+15% к прошлому периоду</div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Кошелек клиента */}
+        <TabsContent value="wallet" className="space-y-6">
+          {/* Ключевые метрики кошелька */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {/* Траты в сегменте */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-orange-50 to-red-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="PieChart" size={16} />
+                  Траты в сегменте
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-orange-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.value}
+                    </span>
+                    <Badge variant="default" className="bg-orange-600 text-xs">
+                      {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.change}
+                    </Badge>
+                  </div>
+
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.trend.map((point, index) => {
+                      const maxValue = Math.max(...walletData[selectedPeriod as keyof typeof walletData].segmentSpending.trend);
+                      const normalizedHeight = (point / maxValue) * 100;
+                      return (
+                        <div
+                          key={index}
+                          className="bg-gradient-to-t from-orange-500 to-red-300 rounded-t-sm"
+                          style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  <div className="text-xs text-slate-500">
+                    {selectedPeriod === 'month' ? 'питание вне дома' : 'общий сегмент'} за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Траты в компании */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-green-50 to-emerald-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Building2" size={16} />
+                  Траты в компании
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-green-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].companySpending.value}
+                    </span>
+                    <Badge variant="default" className="bg-green-600 text-xs">
+                      {walletData[selectedPeriod as keyof typeof walletData].companySpending.change}
+                    </Badge>
+                  </div>
+
+                  {/* Мини график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {walletData[selectedPeriod as keyof typeof walletData].companySpending.trend.map((point, index) => {
+                      const maxValue = Math.max(...walletData[selectedPeriod as keyof typeof walletData].companySpending.trend);
+                      const normalizedHeight = (point / maxValue) * 100;
+                      return (
+                        <div
+                          key={index}
+                          className="bg-gradient-to-t from-green-500 to-emerald-300 rounded-t-sm"
+                          style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  <div className="text-xs text-slate-500">
+                    траты в нашей компании за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Доля кошелька */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-violet-50 to-purple-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Target" size={16} />
+                  Доля кошелька
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-violet-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value}
+                    </span>
+                    <Badge variant="default" className="bg-violet-600 text-xs">
+                      {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.change}
+                    </Badge>
+                  </div>
+
+                  {/* Круговая диаграмма */}
+                  <div className="relative w-16 h-16 mx-auto">
+                    <div className="absolute inset-0 rounded-full bg-slate-200"></div>
+                    <div 
+                      className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-purple-400"
+                      style={{
+                        background: `conic-gradient(from 0deg, #8b5cf6 0deg, #8b5cf6 ${parseFloat(walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value) * 3.6}deg, #e2e8f0 ${parseFloat(walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value) * 3.6}deg, #e2e8f0 360deg)`
+                      }}
+                    ></div>
+                    <div className="absolute inset-2 rounded-full bg-white flex items-center justify-center">
+                      <span className="text-xs font-bold text-violet-700">{walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value}</span>
+                    </div>
+                  </div>
+
+                  <div className="text-xs text-slate-500 text-center">
+                    от всех трат в сегменте
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Динамика доли */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-teal-50 to-cyan-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="TrendingUp" size={16} />
+                  Динамика доли
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-teal-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.change}
+                    </span>
+                    <Badge variant="default" className="bg-teal-600 text-xs">
+                      рост
+                    </Badge>
+                  </div>
+
+                  {/* Линейный график */}
+                  <div className="flex items-end gap-1 h-8">
+                    {walletData[selectedPeriod as keyof typeof walletData].dynamicsTrend.map((point, index) => {
+                      const maxValue = Math.max(...walletData[selectedPeriod as keyof typeof walletData].dynamicsTrend);
+                      const normalizedHeight = (point / maxValue) * 100;
+                      return (
+                        <div
+                          key={index}
+                          className="bg-gradient-to-t from-teal-500 to-cyan-300 rounded-t-sm"
+                          style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  <div className="text-xs text-slate-500">
+                    изменение за 7 периодов
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Детальный анализ кошелька */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Структура трат в сегменте */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="BarChart4" size={20} />
+                Структура трат в сегменте "Питание вне дома"
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-orange-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Общие траты клиента в сегменте</div>
+                  <div className="text-2xl font-bold text-orange-700 mb-1">
+                    {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.value}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    Средний клиент тратит на питание вне дома за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium">Рестораны премиум</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '12,000₽' : selectedPeriod === 'week' ? '3,000₽' : selectedPeriod === 'quarter' ? '37,000₽' : '154,000₽'}</div>
+                      <div className="text-xs text-slate-600">40%</div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium">Фастфуд сети</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '9,000₽' : selectedPeriod === 'week' ? '2,250₽' : selectedPeriod === 'quarter' ? '27,750₽' : '115,500₽'}</div>
+                      <div className="text-xs text-slate-600">30%</div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium">Кафе и бары</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '6,000₽' : selectedPeriod === 'week' ? '1,500₽' : selectedPeriod === 'quarter' ? '18,500₽' : '77,000₽'}</div>
+                      <div className="text-xs text-slate-600">20%</div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium">Доставка еды</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '3,000₽' : selectedPeriod === 'week' ? '750₽' : selectedPeriod === 'quarter' ? '9,250₽' : '38,500₽'}</div>
+                      <div className="text-xs text-slate-600">10%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Анализ доли в кошельке */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="PieChart" size={20} />
+                Позиция компании в кошельке клиента
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-violet-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Доля нашей компании</div>
+                  <div className="text-2xl font-bold text-violet-700 mb-1">
+                    {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    {walletData[selectedPeriod as keyof typeof walletData].companySpending.value} из {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.value} всех трат в сегменте
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-green-50 rounded-lg">
+                    <div className="text-lg font-bold text-green-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].companySpending.change}
+                    </div>
+                    <div className="text-xs text-slate-600">рост трат в компании</div>
+                  </div>
+                  <div className="text-center p-3 bg-blue-50 rounded-lg">
+                    <div className="text-lg font-bold text-blue-700">
+                      {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.change}
+                    </div>
+                    <div className="text-xs text-slate-600">рост доли кошелька</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <div className="text-sm font-medium text-slate-700 mb-2">Конкуренты в кошельке:</div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span>Конкурент А</span>
+                      <span className="font-medium">{selectedPeriod === 'month' ? '28.5%' : '28.2%'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Конкурент Б</span>
+                      <span className="font-medium">{selectedPeriod === 'month' ? '22.1%' : '22.8%'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Прочие</span>
+                      <span className="font-medium">{selectedPeriod === 'month' ? '15.4%' : '15.7%'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Сводка по кошельку */}
+          <Card className="p-6 bg-gradient-to-br from-amber-50 to-orange-50">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Wallet" size={20} />
+              Анализ позиции в кошельке клиента
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-amber-600 mb-2">
+                  {walletData[selectedPeriod as keyof typeof walletData].shareInWallet.value}
+                </div>
+                <div className="text-sm text-slate-600 font-medium">Доля в кошельке</div>
+                <div className="text-xs text-slate-500 mt-1">{walletData[selectedPeriod as keyof typeof walletData].shareInWallet.change} к прошлому периоду</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-orange-600 mb-2">2-е</div>
+                <div className="text-sm text-slate-600 font-medium">Место среди конкурентов</div>
+                <div className="text-xs text-slate-500 mt-1">+1 позиция</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-red-600 mb-2">85%</div>
+                <div className="text-sm text-slate-600 font-medium">Удержание клиентов</div>
+                <div className="text-xs text-slate-500 mt-1">+3% к прошлому периоду</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-pink-600 mb-2">+12%</div>
+                <div className="text-sm text-slate-600 font-medium">Прирост доли</div>
+                <div className="text-xs text-slate-500 mt-1">опережает рынок</div>
               </div>
             </div>
           </Card>
