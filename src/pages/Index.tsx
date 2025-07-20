@@ -97,19 +97,25 @@ const Index = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {demographicData.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-4 h-4 rounded-full ${item.color}`}></div>
-                        <span className="font-medium">{item.label}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Progress value={item.value} className="w-20" />
-                        <span className="text-sm font-semibold">{item.value}%</span>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-around py-4">
+                  {/* Мужчины */}
+                  <div className="text-center space-y-3">
+                    <div className="text-6xl mb-2">👨</div>
+                    <div className="text-2xl font-bold text-blue-600">45%</div>
+                    <div className="text-sm text-slate-600 font-medium">Мужчины</div>
+                    <div className="w-20 h-2 bg-blue-500 rounded-full mx-auto"></div>
+                  </div>
+                  
+                  {/* Разделитель */}
+                  <div className="h-20 w-px bg-slate-200"></div>
+                  
+                  {/* Женщины */}
+                  <div className="text-center space-y-3">
+                    <div className="text-6xl mb-2">👩</div>
+                    <div className="text-2xl font-bold text-pink-600">55%</div>
+                    <div className="text-sm text-slate-600 font-medium">Женщины</div>
+                    <div className="w-20 h-2 bg-pink-500 rounded-full mx-auto"></div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
