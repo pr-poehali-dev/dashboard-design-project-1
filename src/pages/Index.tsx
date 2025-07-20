@@ -198,17 +198,20 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-4 mb-2">
           <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
             <Icon name="BarChart3" size={24} className="text-white" />
           </div>
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <h1 className="text-3xl font-bold text-slate-900">Аналитика клиентов</h1>
-              <span className="text-lg font-bold text-red-600">ALFA</span>
-              <span className="text-lg font-normal text-slate-700">Insight</span>
+          <div className="flex items-center gap-4">
+            <img 
+              src="https://cdn.poehali.dev/files/9558675f-6a97-45e5-b0bf-ebfdb20e7841.png" 
+              alt="AI. Alfa Insight" 
+              className="h-8 object-contain"
+            />
+            <div className="border-l border-slate-300 pl-4">
+              <h1 className="text-2xl font-bold text-slate-900">Аналитика клиентов</h1>
+              <p className="text-slate-600">Комплексный анализ поведения и предпочтений</p>
             </div>
-            <p className="text-slate-600">Комплексный анализ поведения и предпочтений</p>
           </div>
         </div>
         
