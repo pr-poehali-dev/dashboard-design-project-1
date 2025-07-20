@@ -9,7 +9,9 @@ import Icon from "@/components/ui/icon";
 
 const Index = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("month");
+  const [selectedRegion, setSelectedRegion] = useState("all");
 
+  // Демографические данные
   const demographicData = [
     { label: "Мужчины", value: 45, color: "bg-blue-500" },
     { label: "Женщины", value: 55, color: "bg-pink-500" },
@@ -22,6 +24,13 @@ const Index = () => {
     { range: "46+", count: 600, percentage: 12 },
   ];
 
+  const familyData = [
+    { label: "Есть дети", value: 68, icon: "Baby" },
+    { label: "Есть автомобиль", value: 74, icon: "Car" },
+    { label: "Есть животные", value: 43, icon: "Heart" },
+  ];
+
+  // Финансовые данные с динамикой
   const incomeData = {
     week: { value: "82,300₽", change: "+5.2%", trend: [75, 78, 80, 82, 85, 83, 82] },
     month: { value: "85,500₽", change: "+12.5%", trend: [70, 72, 75, 80, 82, 84, 85] },
@@ -29,374 +38,637 @@ const Index = () => {
     year: { value: "79,800₽", change: "+15.3%", trend: [60, 65, 70, 73, 76, 78, 80] }
   };
 
-  const financialMetrics = [
-    { title: "Средние расходы", value: "67,200₽", change: "+8.3%" },
-    { title: "Средний чек", value: "2,450₽", change: "+15.7%" },
-    { title: "Кредитная нагрузка", value: "23%", change: "-2.1%" },
+  const expenseData = {
+    week: { 
+      value: "64,100₽", 
+      change: "+3.8%", 
+      trend: [58, 60, 62, 64, 66, 65, 64],
+      vsCompetitors: { value: "+18%", description: "выше конкурентов" }
+    },
+    month: { 
+      value: "67,200₽", 
+      change: "+8.3%", 
+      trend: [55, 58, 62, 65, 66, 67, 67],
+      vsCompetitors: { value: "+15%", description: "выше конкурентов" }
+    },
+    quarter: { 
+      value: "65,800₽", 
+      change: "+6.1%", 
+      trend: [52, 55, 59, 62, 64, 65, 66],
+      vsCompetitors: { value: "+12%", description: "выше конкурентов" }
+    },
+    year: { 
+      value: "61,400₽", 
+      change: "+11.7%", 
+      trend: [48, 52, 56, 58, 60, 61, 61],
+      vsCompetitors: { value: "+20%", description: "выше конкурентов" }
+    }
+  };
+
+  const averageCheckData = {
+    week: { value: "2,380₽", change: "+2.1%" },
+    month: { value: "2,450₽", change: "+15.7%" },
+    quarter: { value: "2,320₽", change: "+8.9%" },
+    year: { value: "2,180₽", change: "+22.3%" }
+  };
+
+  // Категории расходов
+  const expenseCategories = [
+    { name: "Продукты питания", amount: "18,500₽", percentage: 28, avgCheck: "1,250₽", color: "bg-emerald-500" },
+    { name: "Транспорт", amount: "12,300₽", percentage: 18, avgCheck: "2,100₽", color: "bg-blue-500" },
+    { name: "Развлечения", amount: "9,800₽", percentage: 15, avgCheck: "1,850₽", color: "bg-purple-500" },
+    { name: "Одежда", amount: "7,600₽", percentage: 11, avgCheck: "3,200₽", color: "bg-pink-500" },
+    { name: "Здоровье", amount: "6,200₽", percentage: 9, avgCheck: "1,950₽", color: "bg-red-500" },
+    { name: "Коммунальные", amount: "4,800₽", percentage: 7, avgCheck: "4,800₽", color: "bg-orange-500" },
+    { name: "Прочее", amount: "7,800₽", percentage: 12, avgCheck: "890₽", color: "bg-gray-500" },
   ];
 
-  const topCategories = [
-    { name: "Продукты питания", amount: "18,500₽", percentage: 28 },
-    { name: "Транспорт", amount: "12,300₽", percentage: 18 },
-    { name: "Развлечения", amount: "9,800₽", percentage: 15 },
-    { name: "Одежда", amount: "7,600₽", percentage: 11 },
-    { name: "Здоровье", amount: "6,200₽", percentage: 9 },
+  // Перетоки между сетями
+  const flowData = [
+    { from: "Пятерочка", to: "Магнит", people: 1240, money: "2.8М₽", trend: "+15%" },
+    { from: "Лента", to: "Ашан", people: 890, money: "3.2М₽", trend: "+8%" },
+    { from: "ВкусВилл", to: "Пятерочка", people: 650, money: "1.9М₽", trend: "-5%" },
+    { from: "Магнит", to: "Лента", people: 420, money: "1.2М₽", trend: "+22%" },
+  ];
+
+  // География
+  const regionData = [
+    { region: "Москва", clients: 12500, avgSpend: "89,200₽", growth: "+18%" },
+    { region: "СПб", clients: 8900, avgSpend: "76,400₽", growth: "+12%" },
+    { region: "Екатеринбург", clients: 5600, avgSpend: "58,300₽", growth: "+9%" },
+    { region: "Новосибирск", clients: 4200, avgSpend: "52,100₽", growth: "+15%" },
+    { region: "Казань", clients: 3800, avgSpend: "48,900₽", growth: "+7%" },
+  ];
+
+  // Кредиты и ипотека
+  const creditData = [
+    { type: "Есть ипотека", percentage: 34, avgAmount: "2.8М₽" },
+    { type: "Потребкредиты", percentage: 52, avgAmount: "485К₽" },
+    { type: "Кредитные карты", percentage: 78, avgAmount: "125К₽" },
+    { type: "Автокредиты", percentage: 23, avgAmount: "920К₽" },
+  ];
+
+  // Анализ корзины
+  const basketAnalysis = [
+    { category: "Премиум товары", share: 18, trend: "+12%", avgItems: 3.2 },
+    { category: "Сезонные товары", share: 25, trend: "+8%", avgItems: 4.8 },
+    { category: "Импульсивные покупки", share: 15, trend: "+22%", avgItems: 2.1 },
+    { category: "Планируемые покупки", share: 42, trend: "+5%", avgItems: 8.5 },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+            <Icon name="BarChart3" size={24} className="text-white" />
+          </div>
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Analytics Dashboard
-            </h1>
-            <p className="text-slate-600 mt-2">Аналитика клиентской базы и поведения</p>
+            <h1 className="text-3xl font-bold text-slate-900">Аналитика клиентов</h1>
+            <p className="text-slate-600">Комплексный анализ поведения и предпочтений</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" className="hover-scale">
-              <Icon name="Settings" size={16} className="mr-2" />
-              Настройки
-            </Button>
-            <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover-scale">
-              <Icon name="Download" size={16} className="mr-2" />
-              Экспорт
-            </Button>
-          </div>
+        </div>
+        
+        <div className="flex items-center gap-4 mt-6">
+          <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
+            <SelectTrigger className="w-40">
+              <Icon name="Calendar" size={16} />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="week">Неделя</SelectItem>
+              <SelectItem value="month">Месяц</SelectItem>
+              <SelectItem value="quarter">Квартал</SelectItem>
+              <SelectItem value="year">Год</SelectItem>
+            </SelectContent>
+          </Select>
+          
+          <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+            <SelectTrigger className="w-40">
+              <Icon name="MapPin" size={16} />
+              <SelectValue placeholder="Регион" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Все регионы</SelectItem>
+              <SelectItem value="moscow">Москва</SelectItem>
+              <SelectItem value="spb">СПб</SelectItem>
+              <SelectItem value="regions">Регионы</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {/* Main Dashboard */}
       <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="grid grid-cols-5 w-fit">
+        <TabsList className="grid grid-cols-6 w-fit">
           <TabsTrigger value="overview">Обзор</TabsTrigger>
           <TabsTrigger value="demographics">Демография</TabsTrigger>
           <TabsTrigger value="finances">Финансы</TabsTrigger>
           <TabsTrigger value="purchases">Покупки</TabsTrigger>
           <TabsTrigger value="flows">Перетоки</TabsTrigger>
+          <TabsTrigger value="geography">География</TabsTrigger>
         </TabsList>
 
+        {/* Обзор */}
         <TabsContent value="overview" className="space-y-6">
-          {/* Interactive Income Card */}
-          <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-lg font-semibold">
-                  <Icon name="TrendingUp" size={20} />
-                  Средний доход в динамике
+          {/* Топ метрики */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Доходы */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="TrendingUp" size={16} />
+                  Средний доход
                 </CardTitle>
-                <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-                  <SelectTrigger className="w-32">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="week">Неделя</SelectItem>
-                    <SelectItem value="month">Месяц</SelectItem>
-                    <SelectItem value="quarter">Квартал</SelectItem>
-                    <SelectItem value="year">Год</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-3xl font-bold text-emerald-700">
-                      {incomeData[selectedPeriod as keyof typeof incomeData].value}
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-emerald-700">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].value}
+                  </span>
+                  <Badge variant="default" className="bg-emerald-600">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Расходы */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="TrendingDown" size={16} />
+                  Средние расходы
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-red-700">
+                      {expenseData[selectedPeriod as keyof typeof expenseData].value}
                     </span>
-                    <Badge variant="default" className="animate-pulse bg-emerald-600">
-                      {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                    <Badge variant="destructive">
+                      {expenseData[selectedPeriod as keyof typeof expenseData].change}
                     </Badge>
                   </div>
-                  
-                  {/* Mini Chart */}
-                  <div className="flex items-end gap-1 h-16">
-                    {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
-                      <div
-                        key={index}
-                        className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm hover-scale"
-                        style={{ height: `${point}%`, width: '12px' }}
-                      />
-                    ))}
-                  </div>
-                  <div className="text-xs text-slate-600 mt-2">
-                    Период: {selectedPeriod === 'week' ? '7 дней' : 
-                             selectedPeriod === 'month' ? '30 дней' : 
-                             selectedPeriod === 'quarter' ? '3 месяца' : '12 месяцев'}
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.value} {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.description}
+                    </Badge>
                   </div>
                 </div>
-                
-                <div className="text-6xl opacity-20">📈</div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Other Key Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {financialMetrics.map((metric, index) => (
-              <Card key={index} className="hover-scale transition-all duration-300 bg-gradient-to-br from-white to-slate-50 border-0 shadow-lg">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-slate-600">{metric.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-slate-900">{metric.value}</span>
-                    <Badge variant={metric.change.startsWith('+') ? 'default' : 'destructive'} className="animate-pulse">
-                      {metric.change}
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {/* Средний чек */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Receipt" size={16} />
+                  Средний чек
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-blue-700">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].value}
+                  </span>
+                  <Badge variant="default" className="bg-blue-600">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Активные клиенты */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Users" size={16} />
+                  Активные клиенты
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-purple-700">35,000</span>
+                  <Badge variant="default" className="bg-purple-600">+8.2%</Badge>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Audience Overview */}
-          <Card className="bg-gradient-to-br from-white via-indigo-50 to-purple-50 border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Icon name="Users" size={20} />
-                Основная часть аудитории покупателей
+          {/* Быстрая демография */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-4">
+                <Icon name="PieChart" size={20} />
+                Распределение по полу
               </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Распределение по полу */}
+              <div className="space-y-4">
+                {demographicData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="font-medium">{item.label}</span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-32 h-3 bg-slate-200 rounded-full overflow-hidden">
+                        <div className={`h-full ${item.color} transition-all duration-500`} style={{ width: `${item.value}%` }} />
+                      </div>
+                      <span className="text-sm font-bold">{item.value}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-4">
+                <Icon name="Calendar" size={20} />
+                Возрастные группы
+              </CardTitle>
+              <div className="space-y-4">
+                {ageGroups.map((group, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="font-medium">{group.range}</span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-32 h-3 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500" style={{ width: `${group.percentage}%` }} />
+                      </div>
+                      <span className="text-sm font-bold">{group.count}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* Демография */}
+        <TabsContent value="demographics" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Базовая демография */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Users" size={20} />
+                Демографический профиль
+              </CardTitle>
+              
+              <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-center">Распределение по полу</h3>
-                  <div className="flex items-center justify-around py-4">
-                    {/* Мужчины */}
-                    <div className="text-center space-y-3">
-                      <div className="text-6xl mb-2">👨</div>
-                      <div className="text-2xl font-bold text-blue-600">45%</div>
-                      <div className="text-sm text-slate-600 font-medium">Мужчины</div>
-                      <div className="w-20 h-2 bg-blue-500 rounded-full mx-auto"></div>
-                    </div>
-                    
-                    {/* Разделитель */}
-                    <div className="h-20 w-px bg-slate-200"></div>
-                    
-                    {/* Женщины */}
-                    <div className="text-center space-y-3">
-                      <div className="text-6xl mb-2">👩</div>
-                      <div className="text-2xl font-bold text-pink-600">55%</div>
-                      <div className="text-sm text-slate-600 font-medium">Женщины</div>
-                      <div className="w-20 h-2 bg-pink-500 rounded-full mx-auto"></div>
-                    </div>
+                  <h4 className="font-semibold mb-3">Распределение по полу</h4>
+                  <div className="space-y-3">
+                    {demographicData.map((item, index) => (
+                      <div key={index} className="flex items-center justify-between">
+                        <span>{item.label}</span>
+                        <div className="flex items-center gap-3">
+                          <div className="w-24 h-2 bg-slate-200 rounded-full">
+                            <div className={`h-full ${item.color} rounded-full transition-all duration-500`} style={{ width: `${item.value}%` }} />
+                          </div>
+                          <span className="text-sm font-bold w-10">{item.value}%</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Возрастные группы */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-center">Возрастные группы</h3>
+                  <h4 className="font-semibold mb-3">Возрастные группы</h4>
                   <div className="space-y-3">
                     {ageGroups.map((group, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-white/60 rounded-lg backdrop-blur-sm">
+                      <div key={index} className="flex items-center justify-between">
+                        <span>{group.range} лет</span>
                         <div className="flex items-center gap-3">
-                          <span className="font-medium text-slate-700">{group.range}</span>
-                          <Badge variant="outline">{group.count.toLocaleString()}</Badge>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Progress value={group.percentage} className="w-16" />
-                          <span className="text-sm font-semibold">{group.percentage}%</span>
+                          <div className="w-24 h-2 bg-slate-200 rounded-full">
+                            <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500" style={{ width: `${group.percentage}%` }} />
+                          </div>
+                          <span className="text-sm font-bold w-16">{group.count}</span>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="demographics" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Card className="bg-gradient-to-br from-white to-purple-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="MapPin" size={20} />
-                  География клиентов
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span>Москва</span>
-                    <Badge>35%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>СПб</span>
-                    <Badge>22%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Регионы</span>
-                    <Badge>43%</Badge>
-                  </div>
-                </div>
-              </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-white to-orange-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Baby" size={20} />
-                  Наличие детей
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span>Есть дети</span>
-                    <Badge>67%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Нет детей</span>
-                    <Badge>33%</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-white to-cyan-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Car" size={20} />
-                  Владение авто
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span>Есть авто</span>
-                    <Badge>78%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Нет авто</span>
-                    <Badge>22%</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="finances" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-gradient-to-br from-white to-emerald-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="TrendingUp" size={20} />
-                  Динамика доходов
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-32 bg-gradient-to-r from-emerald-100 to-emerald-200 rounded-lg flex items-center justify-center">
-                  <span className="text-emerald-700 font-medium">График доходов +12.5% ↗</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-white to-red-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="TrendingDown" size={20} />
-                  Динамика расходов
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-32 bg-gradient-to-r from-red-100 to-red-200 rounded-lg flex items-center justify-center">
-                  <span className="text-red-700 font-medium">График расходов +8.3% ↗</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="purchases" className="space-y-6">
-          <Card className="bg-gradient-to-br from-white to-indigo-50 border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Icon name="ShoppingCart" size={20} />
-                Топ категории расходов
+            {/* Семейный статус */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Home" size={20} />
+                Семейный статус и владение
               </CardTitle>
-            </CardHeader>
-            <CardContent>
+              
               <div className="space-y-4">
-                {topCategories.map((category, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm hover-scale">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full"></div>
-                      <span className="font-medium">{category.name}</span>
+                {familyData.map((item, index) => (
+                  <Card key={index} className="p-4 bg-gradient-to-r from-slate-50 to-slate-100">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                          <Icon name={item.icon as any} size={20} className="text-slate-600" />
+                        </div>
+                        <span className="font-medium">{item.label}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-bold text-slate-900">{item.value}%</div>
+                        <div className="w-16 h-1 bg-slate-300 rounded-full mt-1">
+                          <div 
+                            className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-500"
+                            style={{ width: `${item.value}%` }}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <Progress value={category.percentage} className="w-20" />
-                      <span className="font-semibold text-slate-900">{category.amount}</span>
-                      <Badge variant="outline">{category.percentage}%</Badge>
-                    </div>
-                  </div>
+                  </Card>
                 ))}
               </div>
-            </CardContent>
+            </Card>
+          </div>
+
+          {/* Кредитная нагрузка */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="CreditCard" size={20} />
+              Кредитная нагрузка и финансовые обязательства
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {creditData.map((credit, index) => (
+                <Card key={index} className="p-4 bg-gradient-to-br from-orange-50 to-red-50">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-orange-700 mb-1">{credit.percentage}%</div>
+                    <div className="text-sm font-medium text-slate-700 mb-2">{credit.type}</div>
+                    <div className="text-xs text-slate-600">Средний размер: {credit.avgAmount}</div>
+                    <div className="w-full h-1 bg-orange-200 rounded-full mt-2">
+                      <div 
+                        className="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-500"
+                        style={{ width: `${credit.percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </Card>
         </TabsContent>
 
+        {/* Финансы */}
+        <TabsContent value="finances" className="space-y-6">
+          {/* Доходы и расходы в динамике */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="p-6 bg-gradient-to-br from-emerald-50 to-green-100">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2">
+                  <Icon name="TrendingUp" size={20} />
+                  Доходы в динамике
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-bold text-emerald-700">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].value}
+                    </span>
+                    <Badge variant="default" className="bg-emerald-600">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                    </Badge>
+                  </div>
+                  
+                  <div className="flex items-end gap-1 h-20">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm hover-scale cursor-pointer"
+                        style={{ height: `${point}%`, width: '14%' }}
+                        title={`День ${index + 1}: ${point}%`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="p-6 bg-gradient-to-br from-red-50 to-pink-100">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2">
+                  <Icon name="TrendingDown" size={20} />
+                  Расходы в динамике
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl font-bold text-red-700">
+                        {expenseData[selectedPeriod as keyof typeof expenseData].value}
+                      </span>
+                      <Badge variant="destructive">
+                        {expenseData[selectedPeriod as keyof typeof expenseData].change}
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  <div className="text-sm text-slate-600 mb-3">
+                    <Badge variant="outline" className="text-xs">
+                      {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.value} {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.description}
+                    </Badge>
+                  </div>
+                  
+                  <div className="flex items-end gap-1 h-20">
+                    {expenseData[selectedPeriod as keyof typeof expenseData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-red-500 to-pink-300 rounded-t-sm hover-scale cursor-pointer"
+                        style={{ height: `${point}%`, width: '14%' }}
+                        title={`День ${index + 1}: ${point}%`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Средний чек */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Receipt" size={20} />
+              Анализ среднего чека клиента
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {Object.entries(averageCheckData).map(([period, data], index) => (
+                <Card key={index} className={`p-4 transition-all cursor-pointer ${selectedPeriod === period ? 'ring-2 ring-blue-500 bg-blue-50' : 'hover:shadow-md'}`}>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-slate-900">{data.value}</div>
+                    <div className="text-sm text-slate-600 mb-2">
+                      {period === 'week' ? 'Неделя' : period === 'month' ? 'Месяц' : period === 'quarter' ? 'Квартал' : 'Год'}
+                    </div>
+                    <Badge variant={data.change.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                      {data.change}
+                    </Badge>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Покупки */}
+        <TabsContent value="purchases" className="space-y-6">
+          {/* Категории расходов */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="ShoppingBag" size={20} />
+              Основные категории расходов
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {expenseCategories.map((category, index) => (
+                <Card key={index} className="p-4 hover-scale transition-all">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-3 h-3 rounded-full ${category.color}`} />
+                    <span className="font-medium">{category.name}</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg font-bold">{category.amount}</span>
+                      <Badge variant="outline">{category.percentage}%</Badge>
+                    </div>
+                    
+                    <div className="w-full h-2 bg-slate-200 rounded-full">
+                      <div 
+                        className={`h-full ${category.color} rounded-full transition-all duration-500`}
+                        style={{ width: `${category.percentage}%` }}
+                      />
+                    </div>
+                    
+                    <div className="text-sm text-slate-600">
+                      Средний чек: <span className="font-medium">{category.avgCheck}</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
+
+          {/* Анализ корзины */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="ShoppingCart" size={20} />
+              Анализ корзины покупок
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {basketAnalysis.map((item, index) => (
+                <Card key={index} className="p-4 bg-gradient-to-br from-slate-50 to-slate-100">
+                  <div className="text-center space-y-3">
+                    <h4 className="font-semibold text-slate-800">{item.category}</h4>
+                    
+                    <div className="text-2xl font-bold text-slate-900">{item.share}%</div>
+                    <div className="text-sm text-slate-600">доли в корзине</div>
+                    
+                    <Badge variant={item.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                      {item.trend}
+                    </Badge>
+                    
+                    <div className="text-xs text-slate-600">
+                      Среднее кол-во: <span className="font-medium">{item.avgItems} товаров</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Перетоки */}
         <TabsContent value="flows" className="space-y-6">
-          <Card className="bg-gradient-to-br from-white to-violet-50 border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Icon name="ArrowLeftRight" size={20} />
-                Перетоки между сетями
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                  <div className="text-2xl font-bold text-violet-600">2,580</div>
-                  <div className="text-sm text-slate-600">Приток клиентов</div>
-                </div>
-                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                  <div className="text-2xl font-bold text-orange-600">1,240</div>
-                  <div className="text-sm text-slate-600">Отток клиентов</div>
-                </div>
-                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                  <div className="text-2xl font-bold text-emerald-600">+52%</div>
-                  <div className="text-sm text-slate-600">Чистый прирост</div>
-                </div>
-              </div>
-            </CardContent>
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="ArrowRightLeft" size={20} />
+              Перетоки клиентов между сетями
+            </CardTitle>
+            
+            <div className="space-y-4">
+              {flowData.map((flow, index) => (
+                <Card key={index} className="p-4 hover-scale transition-all bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="px-3 py-2 bg-white rounded-lg shadow-sm font-medium">
+                          {flow.from}
+                        </div>
+                        <Icon name="ArrowRight" size={20} className="text-slate-400" />
+                        <div className="px-3 py-2 bg-white rounded-lg shadow-sm font-medium">
+                          {flow.to}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-slate-900">{flow.people}</div>
+                        <div className="text-xs text-slate-600">человек</div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-slate-900">{flow.money}</div>
+                        <div className="text-xs text-slate-600">оборот</div>
+                      </div>
+                      
+                      <Badge variant={flow.trend.startsWith('+') ? 'default' : 'destructive'}>
+                        {flow.trend}
+                      </Badge>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* География */}
+        <TabsContent value="geography" className="space-y-6">
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="MapPin" size={20} />
+              Географическое распределение клиентов
+            </CardTitle>
+            
+            <div className="space-y-4">
+              {regionData.map((region, index) => (
+                <Card key={index} className="p-4 hover-scale transition-all">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold">
+                        {region.region.slice(0, 2).toUpperCase()}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-slate-900">{region.region}</h4>
+                        <p className="text-sm text-slate-600">{region.clients.toLocaleString()} клиентов</p>
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-slate-900">{region.avgSpend}</div>
+                      <div className="text-sm text-slate-600">средние траты</div>
+                      <Badge variant="default" className="text-xs mt-1">
+                        {region.growth}
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-3 w-full h-1 bg-slate-200 rounded-full">
+                    <div 
+                      className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000"
+                      style={{ width: `${Math.min((region.clients / 12500) * 100, 100)}%` }}
+                    />
+                  </div>
+                </Card>
+              ))}
+            </div>
           </Card>
         </TabsContent>
       </Tabs>
-
-      {/* ML Insights */}
-      <Card className="mt-8 bg-gradient-to-br from-slate-900 to-slate-800 text-white border-0 shadow-xl">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Icon name="Brain" size={20} />
-            ML Прогнозы поведения клиентов
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-              <div className="text-lg font-semibold text-emerald-400">Высокая вероятность покупки</div>
-              <div className="text-2xl font-bold">1,250 клиентов</div>
-              <div className="text-sm text-slate-300">Следующие 7 дней</div>
-            </div>
-            <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-              <div className="text-lg font-semibold text-orange-400">Риск оттока</div>
-              <div className="text-2xl font-bold">340 клиентов</div>
-              <div className="text-sm text-slate-300">Требуют внимания</div>
-            </div>
-            <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-              <div className="text-lg font-semibold text-blue-400">Потенциал роста чека</div>
-              <div className="text-2xl font-bold">+28%</div>
-              <div className="text-sm text-slate-300">При персонализации</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
