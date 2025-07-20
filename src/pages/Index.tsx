@@ -239,19 +239,76 @@ const Index = () => {
 
       {/* Main Dashboard */}
       <Tabs defaultValue="loyalty" className="space-y-6">
-        <TabsList className="grid grid-cols-8 w-fit">
-          <TabsTrigger value="loyalty">Лояльность</TabsTrigger>
-          <TabsTrigger value="wallet">Кошелек клиента</TabsTrigger>
-          <TabsTrigger value="overview">Обзор</TabsTrigger>
-          <TabsTrigger value="demographics">Демография</TabsTrigger>
-          <TabsTrigger value="finances">Финансы</TabsTrigger>
-          <TabsTrigger value="purchases">Покупки</TabsTrigger>
-          <TabsTrigger value="flows">Перетоки</TabsTrigger>
-          <TabsTrigger value="geography">География</TabsTrigger>
-        </TabsList>
+        <div className="bg-white rounded-xl shadow-sm border p-4 mb-6">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
+            <TabsTrigger 
+              value="loyalty" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="Heart" size={18} />
+              <span className="text-xs font-medium">Лояльность</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="wallet" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-orange-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="Wallet" size={18} />
+              <span className="text-xs font-medium">Кошелек</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="overview" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-purple-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="BarChart3" size={18} />
+              <span className="text-xs font-medium">Обзор</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="demographics" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-green-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="Users" size={18} />
+              <span className="text-xs font-medium">Демография</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="finances" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-emerald-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="DollarSign" size={18} />
+              <span className="text-xs font-medium">Финансы</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="purchases" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-pink-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="ShoppingCart" size={18} />
+              <span className="text-xs font-medium">Покупки</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="flows" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-teal-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="ArrowRightLeft" size={18} />
+              <span className="text-xs font-medium">Перетоки</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="geography" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="MapPin" size={18} />
+              <span className="text-xs font-medium">География</span>
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         {/* Лояльность */}
         <TabsContent value="loyalty" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
+            <Icon name="Heart" size={24} className="text-blue-600" />
+            <div>
+              <h2 className="text-xl font-bold text-blue-900">Анализ лояльности клиентов</h2>
+              <p className="text-sm text-blue-700">Показатели приверженности и долгосрочного взаимодействия</p>
+            </div>
+          </div>
           {/* Ключевые метрики лояльности */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Частота покупок */}
@@ -508,6 +565,13 @@ const Index = () => {
 
         {/* Кошелек клиента */}
         <TabsContent value="wallet" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl border-l-4 border-orange-500">
+            <Icon name="Wallet" size={24} className="text-orange-600" />
+            <div>
+              <h2 className="text-xl font-bold text-orange-900">Кошелек клиента</h2>
+              <p className="text-sm text-orange-700">Анализ доли трат и позиции в сегменте</p>
+            </div>
+          </div>
           {/* Ключевые метрики кошелька */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Траты в сегменте */}
@@ -820,6 +884,13 @@ const Index = () => {
 
         {/* Обзор */}
         <TabsContent value="overview" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-l-4 border-purple-500">
+            <Icon name="BarChart3" size={24} className="text-purple-600" />
+            <div>
+              <h2 className="text-xl font-bold text-purple-900">Общий обзор</h2>
+              <p className="text-sm text-purple-700">Ключевые метрики и сводная аналитика</p>
+            </div>
+          </div>
           {/* Топ метрики с динамикой */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Доходы */}
@@ -1053,6 +1124,13 @@ const Index = () => {
 
         {/* Демография */}
         <TabsContent value="demographics" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
+            <Icon name="Users" size={24} className="text-green-600" />
+            <div>
+              <h2 className="text-xl font-bold text-green-900">Демографический анализ</h2>
+              <p className="text-sm text-green-700">Возраст, пол, семейное положение и образ жизни</p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Базовая демография */}
             <Card className="p-6">
@@ -1160,6 +1238,13 @@ const Index = () => {
 
         {/* Финансы */}
         <TabsContent value="finances" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border-l-4 border-emerald-500">
+            <Icon name="DollarSign" size={24} className="text-emerald-600" />
+            <div>
+              <h2 className="text-xl font-bold text-emerald-900">Финансовый профиль</h2>
+              <p className="text-sm text-emerald-700">Доходы, расходы, кредитная нагрузка и платежеспособность</p>
+            </div>
+          </div>
           {/* Доходы и расходы в динамике */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="p-6 bg-gradient-to-br from-emerald-50 to-green-100">
@@ -1262,6 +1347,13 @@ const Index = () => {
 
         {/* Покупки */}
         <TabsContent value="purchases" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl border-l-4 border-pink-500">
+            <Icon name="ShoppingCart" size={24} className="text-pink-600" />
+            <div>
+              <h2 className="text-xl font-bold text-pink-900">Поведение покупателей</h2>
+              <p className="text-sm text-pink-700">Анализ корзины, частота и предпочтения в покупках</p>
+            </div>
+          </div>
           {/* Категории расходов */}
           <Card className="p-6">
             <CardTitle className="flex items-center gap-2 mb-6">
@@ -1331,6 +1423,13 @@ const Index = () => {
 
         {/* Перетоки */}
         <TabsContent value="flows" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl border-l-4 border-teal-500">
+            <Icon name="ArrowRightLeft" size={24} className="text-teal-600" />
+            <div>
+              <h2 className="text-xl font-bold text-teal-900">Перетоки клиентов</h2>
+              <p className="text-sm text-teal-700">Миграция между брендами и конкурентами</p>
+            </div>
+          </div>
           <Card className="p-6">
             <CardTitle className="flex items-center gap-2 mb-6">
               <Icon name="ArrowRightLeft" size={20} />
@@ -1377,6 +1476,13 @@ const Index = () => {
 
         {/* География */}
         <TabsContent value="geography" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl border-l-4 border-indigo-500">
+            <Icon name="MapPin" size={24} className="text-indigo-600" />
+            <div>
+              <h2 className="text-xl font-bold text-indigo-900">Географическое распределение</h2>
+              <p className="text-sm text-indigo-700">Региональная активность и предпочтения клиентов</p>
+            </div>
+          </div>
           <Card className="p-6">
             <CardTitle className="flex items-center gap-2 mb-6">
               <Icon name="MapPin" size={20} />
