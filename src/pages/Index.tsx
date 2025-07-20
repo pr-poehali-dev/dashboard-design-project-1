@@ -87,64 +87,62 @@ const Index = () => {
             ))}
           </div>
 
-          {/* Demographics Overview */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-gradient-to-br from-white to-blue-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Users" size={20} />
-                  Распределение по полу
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-around py-4">
-                  {/* Мужчины */}
-                  <div className="text-center space-y-3">
-                    <div className="text-6xl mb-2">👨</div>
-                    <div className="text-2xl font-bold text-blue-600">45%</div>
-                    <div className="text-sm text-slate-600 font-medium">Мужчины</div>
-                    <div className="w-20 h-2 bg-blue-500 rounded-full mx-auto"></div>
-                  </div>
-                  
-                  {/* Разделитель */}
-                  <div className="h-20 w-px bg-slate-200"></div>
-                  
-                  {/* Женщины */}
-                  <div className="text-center space-y-3">
-                    <div className="text-6xl mb-2">👩</div>
-                    <div className="text-2xl font-bold text-pink-600">55%</div>
-                    <div className="text-sm text-slate-600 font-medium">Женщины</div>
-                    <div className="w-20 h-2 bg-pink-500 rounded-full mx-auto"></div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-white to-green-50 border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Calendar" size={20} />
-                  Возрастные группы
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {ageGroups.map((group, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="font-medium text-slate-700">{group.range}</span>
-                        <Badge variant="outline">{group.count.toLocaleString()}</Badge>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Progress value={group.percentage} className="w-16" />
-                        <span className="text-sm font-semibold">{group.percentage}%</span>
-                      </div>
+          {/* Audience Overview */}
+          <Card className="bg-gradient-to-br from-white via-indigo-50 to-purple-50 border-0 shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Icon name="Users" size={20} />
+                Основная часть аудитории покупателей
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Распределение по полу */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-center">Распределение по полу</h3>
+                  <div className="flex items-center justify-around py-4">
+                    {/* Мужчины */}
+                    <div className="text-center space-y-3">
+                      <div className="text-6xl mb-2">👨</div>
+                      <div className="text-2xl font-bold text-blue-600">45%</div>
+                      <div className="text-sm text-slate-600 font-medium">Мужчины</div>
+                      <div className="w-20 h-2 bg-blue-500 rounded-full mx-auto"></div>
                     </div>
-                  ))}
+                    
+                    {/* Разделитель */}
+                    <div className="h-20 w-px bg-slate-200"></div>
+                    
+                    {/* Женщины */}
+                    <div className="text-center space-y-3">
+                      <div className="text-6xl mb-2">👩</div>
+                      <div className="text-2xl font-bold text-pink-600">55%</div>
+                      <div className="text-sm text-slate-600 font-medium">Женщины</div>
+                      <div className="w-20 h-2 bg-pink-500 rounded-full mx-auto"></div>
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+
+                {/* Возрастные группы */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-center">Возрастные группы</h3>
+                  <div className="space-y-3">
+                    {ageGroups.map((group, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-white/60 rounded-lg backdrop-blur-sm">
+                        <div className="flex items-center gap-3">
+                          <span className="font-medium text-slate-700">{group.range}</span>
+                          <Badge variant="outline">{group.count.toLocaleString()}</Badge>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Progress value={group.percentage} className="w-16" />
+                          <span className="text-sm font-semibold">{group.percentage}%</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="demographics" className="space-y-6">
