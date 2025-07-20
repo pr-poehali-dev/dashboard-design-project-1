@@ -3,9 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState("month");
+
   const demographicData = [
     { label: "Мужчины", value: 45, color: "bg-blue-500" },
     { label: "Женщины", value: 55, color: "bg-pink-500" },
@@ -18,8 +22,14 @@ const Index = () => {
     { range: "46+", count: 600, percentage: 12 },
   ];
 
+  const incomeData = {
+    week: { value: "82,300₽", change: "+5.2%", trend: [75, 78, 80, 82, 85, 83, 82] },
+    month: { value: "85,500₽", change: "+12.5%", trend: [70, 72, 75, 80, 82, 84, 85] },
+    quarter: { value: "83,200₽", change: "+8.7%", trend: [68, 70, 74, 78, 81, 83, 83] },
+    year: { value: "79,800₽", change: "+15.3%", trend: [60, 65, 70, 73, 76, 78, 80] }
+  };
+
   const financialMetrics = [
-    { title: "Средний доход", value: "85,500₽", change: "+12.5%" },
     { title: "Средние расходы", value: "67,200₽", change: "+8.3%" },
     { title: "Средний чек", value: "2,450₽", change: "+15.7%" },
     { title: "Кредитная нагрузка", value: "23%", change: "-2.1%" },
@@ -68,8 +78,63 @@ const Index = () => {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          {/* Key Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Interactive Income Card */}
+          <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-lg font-semibold">
+                  <Icon name="TrendingUp" size={20} />
+                  Средний доход в динамике
+                </CardTitle>
+                <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
+                  <SelectTrigger className="w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="week">Неделя</SelectItem>
+                    <SelectItem value="month">Месяц</SelectItem>
+                    <SelectItem value="quarter">Квартал</SelectItem>
+                    <SelectItem value="year">Год</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-3xl font-bold text-emerald-700">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].value}
+                    </span>
+                    <Badge variant="default" className="animate-pulse bg-emerald-600">
+                      {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                    </Badge>
+                  </div>
+                  
+                  {/* Mini Chart */}
+                  <div className="flex items-end gap-1 h-16">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm hover-scale"
+                        style={{ height: `${point}%`, width: '12px' }}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-xs text-slate-600 mt-2">
+                    Период: {selectedPeriod === 'week' ? '7 дней' : 
+                             selectedPeriod === 'month' ? '30 дней' : 
+                             selectedPeriod === 'quarter' ? '3 месяца' : '12 месяцев'}
+                  </div>
+                </div>
+                
+                <div className="text-6xl opacity-20">📈</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Other Key Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {financialMetrics.map((metric, index) => (
               <Card key={index} className="hover-scale transition-all duration-300 bg-gradient-to-br from-white to-slate-50 border-0 shadow-lg">
                 <CardHeader className="pb-3">
