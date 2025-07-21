@@ -298,6 +298,13 @@ const Index = () => {
               <span className="text-xs font-medium">Перетоки</span>
             </TabsTrigger>
             <TabsTrigger 
+              value="sexual-orientation" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-rose-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="Users" size={18} />
+              <span className="text-xs font-medium">Ориентация</span>
+            </TabsTrigger>
+            <TabsTrigger 
               value="geography" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-500 data-[state=active]:text-white transition-all duration-200 h-auto"
             >
@@ -884,6 +891,218 @@ const Index = () => {
                 <div className="text-3xl font-bold text-pink-600 mb-2">+12%</div>
                 <div className="text-sm text-slate-600 font-medium">Прирост доли</div>
                 <div className="text-xs text-slate-500 mt-1">опережает рынок</div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Сексуальная ориентация */}
+        <TabsContent value="sexual-orientation" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl border-l-4 border-rose-500">
+            <Icon name="Users" size={24} className="text-rose-600" />
+            <div>
+              <h2 className="text-xl font-bold text-rose-900">Анализ сексуальной ориентации</h2>
+              <p className="text-sm text-rose-700">Демографические характеристики и поведенческие паттерны</p>
+            </div>
+          </div>
+
+          {/* Ключевые метрики ориентации */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Гетеросексуальные */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Heart" size={16} />
+                  Гетеросексуальные
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-blue-700">76.2%</span>
+                    <Badge variant="default" className="bg-blue-600 text-xs">-1.2%</Badge>
+                  </div>
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      Средний чек: 3,450₽
+                    </Badge>
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    наибольшая группа клиентов
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* ЛГБТ+ */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="Rainbow" size={16} />
+                  ЛГБТ+
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-purple-700">18.6%</span>
+                    <Badge variant="default" className="bg-purple-600 text-xs">+2.1%</Badge>
+                  </div>
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      Средний чек: 4,280₽
+                    </Badge>
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    высокая покупательная способность
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Не указано */}
+            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-gray-50 to-slate-100 border-0 shadow-lg">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                  <Icon name="HelpCircle" size={16} />
+                  Не указано
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-slate-700">5.2%</span>
+                    <Badge variant="default" className="bg-slate-600 text-xs">-0.9%</Badge>
+                  </div>
+                  <div className="text-xs text-slate-600">
+                    <Badge variant="outline" className="text-xs">
+                      Средний чек: 2,890₽
+                    </Badge>
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    предпочитают анонимность
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Детальная аналитика */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Поведенческие особенности */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="TrendingUp" size={20} />
+                Поведенческие паттерны
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-rose-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">ЛГБТ+ сегмент</div>
+                  <div className="text-lg font-bold text-rose-700 mb-1">
+                    +24% выше средний чек
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    Чаще покупают премиальные товары и услуги
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-slate-50 rounded-lg">
+                    <div className="text-lg font-bold text-slate-900">2.3x</div>
+                    <div className="text-xs text-slate-600">чаще покупают онлайн</div>
+                  </div>
+                  <div className="text-center p-3 bg-slate-50 rounded-lg">
+                    <div className="text-lg font-bold text-slate-900">89%</div>
+                    <div className="text-xs text-slate-600">используют мобильное приложение</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Предпочтения по категориям */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="ShoppingBag" size={20} />
+                Категории товаров
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Мода и стиль</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-slate-200 rounded-full h-2">
+                        <div className="bg-rose-500 h-2 rounded-full" style={{width: '78%'}}></div>
+                      </div>
+                      <span className="text-sm font-bold text-rose-600">78%</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Красота и уход</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-slate-200 rounded-full h-2">
+                        <div className="bg-purple-500 h-2 rounded-full" style={{width: '65%'}}></div>
+                      </div>
+                      <span className="text-sm font-bold text-purple-600">65%</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Развлечения</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-slate-200 rounded-full h-2">
+                        <div className="bg-blue-500 h-2 rounded-full" style={{width: '72%'}}></div>
+                      </div>
+                      <span className="text-sm font-bold text-blue-600">72%</span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Путешествия</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-slate-200 rounded-full h-2">
+                        <div className="bg-green-500 h-2 rounded-full" style={{width: '83%'}}></div>
+                      </div>
+                      <span className="text-sm font-bold text-green-600">83%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Сводка */}
+          <Card className="p-6 bg-gradient-to-br from-rose-50 to-pink-50">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Users" size={20} />
+              Ключевые инсайты по сегментам
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-rose-600 mb-2">18.6%</div>
+                <div className="text-sm text-slate-600 font-medium">ЛГБТ+ аудитория</div>
+                <div className="text-xs text-slate-500 mt-1">+2.1% рост за год</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-600 mb-2">4,280₽</div>
+                <div className="text-sm text-slate-600 font-medium">Средний чек ЛГБТ+</div>
+                <div className="text-xs text-slate-500 mt-1">+24% к среднему</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">89%</div>
+                <div className="text-sm text-slate-600 font-medium">Мобильные пользователи</div>
+                <div className="text-xs text-slate-500 mt-1">ЛГБТ+ сегмент</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-600 mb-2">+15%</div>
+                <div className="text-sm text-slate-600 font-medium">Рост лояльности</div>
+                <div className="text-xs text-slate-500 mt-1">ЛГБТ+ клиенты</div>
               </div>
             </div>
           </Card>
