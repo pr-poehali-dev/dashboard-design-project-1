@@ -2280,7 +2280,7 @@ const Index = () => {
                   <div className="space-y-3">
                     <div className="bg-white rounded-lg p-3 border-l-4 border-red-500">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-sm">📉 Снижение новых клиентов > 5%</span>
+                        <span className="font-medium text-sm">📉 Снижение новых клиентов &gt; 5%</span>
                         <Badge className="bg-red-600 text-white text-xs">Активно</Badge>
                       </div>
                       <div className="text-xs text-slate-600 mb-2">
@@ -2295,7 +2295,7 @@ const Index = () => {
 
                     <div className="bg-white rounded-lg p-3 border-l-4 border-orange-500">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-sm">💰 Снижение выручки > 10%</span>
+                        <span className="font-medium text-sm">💰 Снижение выручки &gt; 10%</span>
                         <Badge className="bg-orange-600 text-white text-xs">Активно</Badge>
                       </div>
                       <div className="text-xs text-slate-600 mb-2">
@@ -2310,7 +2310,7 @@ const Index = () => {
 
                     <div className="bg-white rounded-lg p-3 border-l-4 border-blue-500">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-sm">🎯 LTV снижается > 15%</span>
+                        <span className="font-medium text-sm">🎯 LTV снижается &gt; 15%</span>
                         <Badge className="bg-blue-600 text-white text-xs">Активно</Badge>
                       </div>
                       <div className="text-xs text-slate-600 mb-2">
