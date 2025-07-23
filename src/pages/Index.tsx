@@ -428,7 +428,7 @@ const Index = () => {
               
               <div className="space-y-6 h-full overflow-y-auto">
                 {/* Основные гипотезы */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                     <h4 className="font-semibold text-blue-800 mb-2">
                       💡 Рост среднего чека при снижении количества заказов
@@ -436,11 +436,28 @@ const Index = () => {
                     <p className="text-sm text-blue-700 mb-3">
                       Клиенты стали покупать меньше, но дороже. Возможные причины:
                     </p>
-                    <ul className="text-xs text-blue-600 space-y-1 ml-4">
+                    <ul className="text-xs text-blue-600 space-y-1 ml-4 mb-4">
                       <li>• Сезонность: переход к покупке зимних товаров</li>
                       <li>• Улучшение ассортимента премиум-сегмента</li>
                       <li>• Изменение поведения: более осознанные покупки</li>
                     </ul>
+                    
+                    <div className="bg-white rounded-lg p-3 border border-blue-200">
+                      <h5 className="font-medium text-blue-800 mb-2 flex items-center gap-2">
+                        <Icon name="CheckCircle" size={14} />
+                        Рекомендации к действию
+                      </h5>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-green-600 text-white text-xs">Высокий</Badge>
+                          <span className="text-xs text-blue-700">Поставить задачу команде аналитики на исследование сезонных трендов и подготовить прогноз спроса за 1 неделю</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-blue-600 text-white text-xs">Средний</Badge>
+                          <span className="text-xs text-blue-700">Дать задание команде закупок расширить премиальный ассортимент на 20% к декабрю</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
@@ -450,11 +467,28 @@ const Index = () => {
                     <p className="text-sm text-purple-700 mb-3">
                       Обновление UI приложения дало положительный эффект:
                     </p>
-                    <ul className="text-xs text-purple-600 space-y-1 ml-4">
+                    <ul className="text-xs text-purple-600 space-y-1 ml-4 mb-4">
                       <li>• Упрощение процесса оформления заказа</li>
                       <li>• Персонализированные рекомендации</li>
                       <li>• Улучшенная навигация по каталогу</li>
                     </ul>
+                    
+                    <div className="bg-white rounded-lg p-3 border border-purple-200">
+                      <h5 className="font-medium text-purple-800 mb-2 flex items-center gap-2">
+                        <Icon name="CheckCircle" size={14} />
+                        Рекомендации к действию
+                      </h5>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-green-600 text-white text-xs">Высокий</Badge>
+                          <span className="text-xs text-purple-700">Поставить задачу команде разработки перенести успешные решения с мобильного приложения на веб-версию за 3 недели</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-purple-600 text-white text-xs">Средний</Badge>
+                          <span className="text-xs text-purple-700">Дать задание продуктовой команде проанализировать метрики и подготовить план дальнейших улучшений за 2 недели</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500">
@@ -464,32 +498,66 @@ const Index = () => {
                     <p className="text-sm text-orange-700 mb-3">
                       Рост возвратов требует внимания:
                     </p>
-                    <ul className="text-xs text-orange-600 space-y-1 ml-4">
+                    <ul className="text-xs text-orange-600 space-y-1 ml-4 mb-4">
                       <li>• Проверить качество новых поставщиков</li>
                       <li>• Улучшить описания товаров</li>
                       <li>• Анализ отзывов и причин возвратов</li>
                     </ul>
+                    
+                    <div className="bg-white rounded-lg p-3 border border-orange-200">
+                      <h5 className="font-medium text-orange-800 mb-2 flex items-center gap-2">
+                        <Icon name="CheckCircle" size={14} />
+                        Рекомендации к действию
+                      </h5>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-red-600 text-white text-xs">Критический</Badge>
+                          <span className="text-xs text-orange-700">Поставить задачу команде качества провести аудит поставщиков и подготовить отчет с планом устранения проблем за 1 неделю</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-orange-600 text-white text-xs">Высокий</Badge>
+                          <span className="text-xs text-orange-700">Дать задание команде контента улучшить описания товаров и добавить больше фотографий за 2 недели</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-yellow-600 text-white text-xs">Средний</Badge>
+                          <span className="text-xs text-orange-700">Поставить задачу службе поддержки создать систему категоризации причин возвратов за 1 неделю</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                {/* Рекомендации */}
-                <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
-                  <h4 className="font-semibold text-amber-800 mb-3 flex items-center gap-2">
-                    <Icon name="CheckCircle" size={16} />
-                    Рекомендации к действию
-                  </h4>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2">
-                      <Badge className="bg-green-600 text-white text-xs">Высокий</Badge>
-                      <span className="text-sm text-amber-700">Масштабировать успешные изменения в приложении на веб-версию</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Badge className="bg-yellow-600 text-white text-xs">Средний</Badge>
-                      <span className="text-sm text-amber-700">Провести анализ причин роста возвратов</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Badge className="bg-blue-600 text-white text-xs">Средний</Badge>
-                      <span className="text-sm text-amber-700">Усилить маркетинг для привлечения новых клиентов</span>
+                  <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+                    <h4 className="font-semibold text-red-800 mb-2">
+                      💡 Снижение притока новых клиентов
+                    </h4>
+                    <p className="text-sm text-red-700 mb-3">
+                      Падение на 4.8% требует активных мер по привлечению:
+                    </p>
+                    <ul className="text-xs text-red-600 space-y-1 ml-4 mb-4">
+                      <li>• Снижение эффективности текущих каналов привлечения</li>
+                      <li>• Усиление конкуренции на рынке</li>
+                      <li>• Сезонный спад активности пользователей</li>
+                    </ul>
+                    
+                    <div className="bg-white rounded-lg p-3 border border-red-200">
+                      <h5 className="font-medium text-red-800 mb-2 flex items-center gap-2">
+                        <Icon name="CheckCircle" size={14} />
+                        Рекомендации к действию
+                      </h5>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-red-600 text-white text-xs">Критический</Badge>
+                          <span className="text-xs text-red-700">Поставить задачу команде маркетинга на разработка плана увеличения привлечения новых клиентов на 15% за 2 недели</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-orange-600 text-white text-xs">Высокий</Badge>
+                          <span className="text-xs text-red-700">Дать задание performance-команде провести аудит эффективности рекламных каналов за 1 неделю</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Badge className="bg-yellow-600 text-white text-xs">Средний</Badge>
+                          <span className="text-xs text-red-700">Поставить задачу команде продукта запустить реферальную программу за 3 недели</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
