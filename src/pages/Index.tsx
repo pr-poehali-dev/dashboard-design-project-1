@@ -576,6 +576,75 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Новые клиенты - первый блок */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <Card className="p-6">
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="UserPlus" size={20} />
+                  Новые клиенты
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-1">Методология расчета:</div>
+                    <div>Новые клиенты определяются как уникальные идентификаторы, совершившие первую покупку в текущем периоде. Сравнение с рынком основано на отраслевых данных аналогичных компаний.</div>
+                  </div>
+                </div>
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-orange-50 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-slate-600">Изменение за период</span>
+                    <Badge className="bg-red-600 text-white">-4.8%</Badge>
+                  </div>
+                  <div className="text-2xl font-bold text-orange-700 mb-1">
+                    2,713
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    Предыдущий месяц: 2,850
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Сравнение с рынком</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Наша компания</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-20 bg-slate-200 rounded-full h-2">
+                          <div className="bg-red-500 h-2 rounded-full" style={{width: '45%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-red-600">-4.8%</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Средний по рынку</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-20 bg-slate-200 rounded-full h-2">
+                          <div className="bg-green-500 h-2 rounded-full" style={{width: '60%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-green-600">+2.1%</span>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Топ конкуренты</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-20 bg-slate-200 rounded-full h-2">
+                          <div className="bg-blue-500 h-2 rounded-full" style={{width: '80%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-blue-600">+7.3%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Количество покупок */}
             <Card className="p-6">
@@ -665,102 +734,27 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Новые клиенты */}
-            <Card className="p-6">
-              <CardTitle className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2">
-                  <Icon name="UserPlus" size={20} />
-                  Новые клиенты
-                </div>
-                <div className="relative group">
-                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
-                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                    <div className="font-semibold mb-1">Методология расчета:</div>
-                    <div>Новые клиенты определяются как уникальные идентификаторы, совершившие первую покупку в текущем периоде. Сравнение с рынком основано на отраслевых данных аналогичных компаний.</div>
-                  </div>
-                </div>
-              </CardTitle>
-              
-              <div className="space-y-4">
-                <div className="bg-orange-50 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-slate-600">Изменение за период</span>
-                    <Badge className="bg-red-600 text-white">-4.8%</Badge>
-                  </div>
-                  <div className="text-2xl font-bold text-orange-700 mb-1">
-                    2,713
-                  </div>
-                  <div className="text-sm text-slate-600">
-                    Предыдущий месяц: 2,850
-                  </div>
-                </div>
 
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <h4 className="font-semibold text-slate-800 mb-3">Сравнение с рынком</h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Наша компания</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 bg-slate-200 rounded-full h-2">
-                          <div className="bg-red-500 h-2 rounded-full" style={{width: '45%'}}></div>
-                        </div>
-                        <span className="text-sm font-bold text-red-600">-4.8%</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Средний по рынку</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 bg-slate-200 rounded-full h-2">
-                          <div className="bg-green-500 h-2 rounded-full" style={{width: '60%'}}></div>
-                        </div>
-                        <span className="text-sm font-bold text-green-600">+2.1%</span>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Топ конкуренты</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 bg-slate-200 rounded-full h-2">
-                          <div className="bg-blue-500 h-2 rounded-full" style={{width: '80%'}}></div>
-                        </div>
-                        <span className="text-sm font-bold text-blue-600">+7.3%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
 
             {/* North Star блок */}
-            <Card className="p-6 border-2 border-dashed border-emerald-300 bg-emerald-50">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="Star" size={20} className="text-emerald-600" />
+            <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50">
+              <CardTitle className="flex items-center gap-2 mb-4">
+                <Icon name="Star" size={16} className="text-emerald-600" />
                 North Star Метрика
               </CardTitle>
               
-              <div className="text-center py-8">
-                <Icon name="Plus" size={48} className="text-emerald-400 mb-4 mx-auto" />
-                <div className="text-lg font-semibold text-emerald-800 mb-2">
+              <div className="text-center py-4">
+                <Icon name="Plus" size={24} className="text-emerald-400 mb-2 mx-auto" />
+                <div className="text-sm font-semibold text-emerald-800 mb-1">
                   Выберите ключевую метрику
                 </div>
-                <div className="text-sm text-emerald-600 mb-6">
-                  Добавьте главный показатель для отслеживания успеха вашего бизнеса
+                <div className="text-xs text-emerald-600 mb-3">
+                  Добавьте главный показатель для отслеживания успеха
                 </div>
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  <Icon name="Plus" size={16} className="mr-2" />
+                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
+                  <Icon name="Plus" size={12} className="mr-1" />
                   Add (Free)
                 </Button>
-              </div>
-
-              <div className="mt-6 p-4 bg-white rounded-lg border border-emerald-200">
-                <h4 className="font-medium text-emerald-800 mb-2">Популярные метрики:</h4>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="text-emerald-700 border-emerald-300">MRR</Badge>
-                  <Badge variant="outline" className="text-emerald-700 border-emerald-300">LTV</Badge>
-                  <Badge variant="outline" className="text-emerald-700 border-emerald-300">Конверсия</Badge>
-                  <Badge variant="outline" className="text-emerald-700 border-emerald-300">Retention</Badge>
-                </div>
               </div>
             </Card>
           </div>
@@ -770,7 +764,7 @@ const Index = () => {
             <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
               <Icon name="Heart" size={24} className="text-blue-600" />
               <div>
-                <h2 className="text-xl font-bold text-blue-900">Анализ лояльности клиентов</h2>
+                <h2 className="text-xl font-bold text-blue-900">Анализ клиентского поведения</h2>
                 <p className="text-sm text-blue-700">Показатели приверженности и долгосрочного взаимодействия</p>
               </div>
             </div>
