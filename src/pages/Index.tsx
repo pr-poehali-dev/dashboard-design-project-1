@@ -643,6 +643,90 @@ const Index = () => {
                 </div>
               </div>
             </Card>
+
+            <Card className="p-6">
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="Crown" size={20} />
+                  Самые доходные клиенты
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-1">Методология расчета:</div>
+                    <div>Анализ основан на общей сумме покупок клиентов. Сегментация проводится по демографическим данным: пол, возраст, доход, наличие детей и животных.</div>
+                  </div>
+                </div>
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 border border-yellow-200">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-slate-600">Средние траты VIP-клиентов</span>
+                    <Badge className="bg-yellow-600 text-white">+248% к среднему</Badge>
+                  </div>
+                  <div className="text-2xl font-bold text-amber-700 mb-1">
+                    47,200₽
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    Средний клиент тратит: 13,600₽
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Портрет самых доходных клиентов</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm">👩 Женщины 35-45 лет</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-slate-900">68%</div>
+                        <div className="text-xs text-slate-600">доля группы</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm">💰 Доход 150k+ в месяц</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-slate-900">82%</div>
+                        <div className="text-xs text-slate-600">имеют высокий доход</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm">👶 С детьми (1-2 ребенка)</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-slate-900">74%</div>
+                        <div className="text-xs text-slate-600">имеют детей</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm">🐕 Владельцы животных</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-slate-900">45%</div>
+                        <div className="text-xs text-slate-600">имеют питомцев</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-200">
+                  <div className="text-center">
+                    <div className="text-sm text-slate-600 mb-1">Составляют от общей базы</div>
+                    <div className="text-xl font-bold text-emerald-700">12%</div>
+                    <div className="text-xs text-slate-500">но приносят 58% выручки</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
