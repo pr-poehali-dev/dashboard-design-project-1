@@ -247,7 +247,7 @@ const Index = () => {
       {/* Main Dashboard */}
       <Tabs defaultValue="key-insights" className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-4 mb-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-11 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
             <TabsTrigger 
               value="key-insights" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-amber-500 data-[state=active]:text-white transition-all duration-200 h-auto"
@@ -318,6 +318,14 @@ const Index = () => {
             >
               <Icon name="MapPin" size={18} />
               <span className="text-xs font-medium">География</span>
+            </TabsTrigger>
+
+            <TabsTrigger 
+              value="settings" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-slate-700 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="Settings" size={18} />
+              <span className="text-xs font-medium">Настройки</span>
             </TabsTrigger>
           </TabsList>
         </div>
@@ -2158,6 +2166,196 @@ const Index = () => {
               ))}
             </div>
           </Card>
+        </TabsContent>
+
+        {/* Настройки */}
+        <TabsContent value="settings" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl border-l-4 border-slate-500">
+            <Icon name="Settings" size={24} className="text-slate-600" />
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">Настройки</h2>
+              <p className="text-sm text-slate-700">Конфигурация уведомлений и автоматизации</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Подписки на уведомления */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Bell" size={20} />
+                Подписки на ключевые инсайты
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Настройка уведомлений</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
+                      <div className="flex items-center gap-3">
+                        <Icon name="Calendar" size={16} className="text-blue-600" />
+                        <div>
+                          <div className="font-medium">Ежедневные отчёты</div>
+                          <div className="text-sm text-slate-600">Сводка изменений в 09:00</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs">09:00</Badge>
+                        <Button size="sm" variant="outline" className="text-xs">
+                          <Icon name="Check" size={12} className="mr-1" />
+                          Включено
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
+                      <div className="flex items-center gap-3">
+                        <Icon name="CalendarWeek" size={16} className="text-green-600" />
+                        <div>
+                          <div className="font-medium">Еженедельные сводки</div>
+                          <div className="text-sm text-slate-600">Детальный анализ по понедельникам</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs">Пн 10:00</Badge>
+                        <Button size="sm" variant="outline" className="text-xs">
+                          <Icon name="Check" size={12} className="mr-1" />
+                          Включено
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-dashed">
+                      <div className="flex items-center gap-3">
+                        <Icon name="CalendarDays" size={16} className="text-purple-600" />
+                        <div>
+                          <div className="font-medium">Ежемесячные отчёты</div>
+                          <div className="text-sm text-slate-600">Глубокая аналитика 1 числа</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs text-slate-400">1 число</Badge>
+                        <Button size="sm" variant="outline" className="text-xs text-slate-400">
+                          <Icon name="X" size={12} className="mr-1" />
+                          Выключено
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                  <h4 className="font-semibold text-amber-800 mb-2">📧 Email-адреса для уведомлений</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-green-600 text-white text-xs">Активен</Badge>
+                      <span className="text-sm">director@company.ru</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-green-600 text-white text-xs">Активен</Badge>
+                      <span className="text-sm">analytics@company.ru</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="text-xs">Не активен</Badge>
+                      <span className="text-sm text-slate-400">marketing@company.ru</span>
+                    </div>
+                  </div>
+                  <Button size="sm" className="mt-3 bg-amber-600 hover:bg-amber-700 text-white text-xs">
+                    <Icon name="Plus" size={12} className="mr-1" />
+                    Добавить email
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Автоматические задачи */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Zap" size={20} />
+                Автоматические задачи подразделениям
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-green-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Активные автоматизации</h4>
+                  <div className="space-y-3">
+                    <div className="bg-white rounded-lg p-3 border-l-4 border-red-500">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-sm">📉 Снижение новых клиентов > 5%</span>
+                        <Badge className="bg-red-600 text-white text-xs">Активно</Badge>
+                      </div>
+                      <div className="text-xs text-slate-600 mb-2">
+                        → Задача команде маркетинга: разработать план увеличения привлечения
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="Users" size={12} className="text-slate-400" />
+                        <span className="text-xs text-slate-500">Отдел маркетинга</span>
+                        <Badge variant="outline" className="text-xs">Высокий приоритет</Badge>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-lg p-3 border-l-4 border-orange-500">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-sm">💰 Снижение выручки > 10%</span>
+                        <Badge className="bg-orange-600 text-white text-xs">Активно</Badge>
+                      </div>
+                      <div className="text-xs text-slate-600 mb-2">
+                        → Задача performance-команде: провести аудит эффективности каналов
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="TrendingUp" size={12} className="text-slate-400" />
+                        <span className="text-xs text-slate-500">Performance-отдел</span>
+                        <Badge variant="outline" className="text-xs">Высокий приоритет</Badge>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-lg p-3 border-l-4 border-blue-500">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-sm">🎯 LTV снижается > 15%</span>
+                        <Badge className="bg-blue-600 text-white text-xs">Активно</Badge>
+                      </div>
+                      <div className="text-xs text-slate-600 mb-2">
+                        → Задача команде продукта: запустить программу удержания клиентов
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="Package" size={12} className="text-slate-400" />
+                        <span className="text-xs text-slate-500">Продуктовая команда</span>
+                        <Badge variant="outline" className="text-xs">Средний приоритет</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Настройка новой автоматизации</h4>
+                  <Button className="w-full bg-slate-700 hover:bg-slate-800 text-white text-sm">
+                    <Icon name="Plus" size={16} className="mr-2" />
+                    Создать правило автоматизации
+                  </Button>
+                  <div className="text-xs text-slate-500 mt-2 text-center">
+                    Создавайте правила для автоматической отправки задач при изменении ключевых метрик
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                  <h4 className="font-semibold text-yellow-800 mb-2">⚡ Статистика автоматизации</h4>
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div>
+                      <div className="text-lg font-bold text-slate-900">47</div>
+                      <div className="text-xs text-slate-600">задач создано</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-slate-900">34</div>
+                      <div className="text-xs text-slate-600">выполнено</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-slate-900">89%</div>
+                      <div className="text-xs text-slate-600">эффективность</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </div>
