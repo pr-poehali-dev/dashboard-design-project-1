@@ -764,6 +764,297 @@ const Index = () => {
               </div>
             </Card>
           </div>
+
+          {/* Блоки лояльности, перенесенные из вкладки "Лояльность" */}
+          <div className="border-t border-slate-200 pt-6 mt-8">
+            <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
+              <Icon name="Heart" size={24} className="text-blue-600" />
+              <div>
+                <h2 className="text-xl font-bold text-blue-900">Анализ лояльности клиентов</h2>
+                <p className="text-sm text-blue-700">Показатели приверженности и долгосрочного взаимодействия</p>
+              </div>
+            </div>
+            
+            {/* Ключевые метрики лояльности */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              {/* Частота покупок */}
+              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center justify-between text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <Icon name="RotateCcw" size={16} />
+                      Частота покупок
+                    </div>
+                    <div className="relative group">
+                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                        <div className="font-semibold mb-1">Методология расчета:</div>
+                        <div>Среднее количество покупок на одного клиента за выбранный период, рассчитанное на основе данных эквайринга.</div>
+                      </div>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-blue-700">
+                        {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].value}
+                      </span>
+                      <Badge variant="default" className="bg-blue-600 text-xs">
+                        {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].change}
+                      </Badge>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <Badge variant="outline" className="text-xs">
+                        {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].vsCompetitors.value} {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].vsCompetitors.description}
+                      </Badge>
+                    </div>
+                    
+                    {/* Мини график */}
+                    <div className="flex items-end gap-1 h-8">
+                      {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].trend.map((point, index) => {
+                        const maxValue = Math.max(...purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].trend);
+                        const normalizedHeight = (point / maxValue) * 100;
+                        return (
+                          <div
+                            key={index}
+                            className="bg-gradient-to-t from-blue-500 to-indigo-300 rounded-t-sm"
+                            style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="text-xs text-slate-500">
+                      {selectedPeriod === 'week' ? 'покупок в неделю' : 
+                       selectedPeriod === 'month' ? 'покупок в месяц' : 
+                       selectedPeriod === 'quarter' ? 'покупок в квартал' : 'покупок в год'}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Life Time */}
+              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center justify-between text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Clock" size={16} />
+                      Life Time
+                    </div>
+                    <div className="relative group">
+                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                        <div className="font-semibold mb-1">Методология расчета:</div>
+                        <div>Средний период от первой до последней покупки клиента, рассчитанный на основе исторических данных транзакций.</div>
+                      </div>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-purple-700">
+                        {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].value}
+                      </span>
+                      <Badge variant="default" className="bg-purple-600 text-xs">
+                        {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].change}
+                      </Badge>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <Badge variant="outline" className="text-xs">
+                        {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].vsCompetitors.value} {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].vsCompetitors.description}
+                      </Badge>
+                    </div>
+                    
+                    {/* Мини график */}
+                    <div className="flex items-end gap-1 h-8">
+                      {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].trend.map((point, index) => {
+                        const maxValue = Math.max(...lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].trend);
+                        const normalizedHeight = (point / maxValue) * 100;
+                        return (
+                          <div
+                            key={index}
+                            className="bg-gradient-to-t from-purple-500 to-violet-300 rounded-t-sm"
+                            style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="text-xs text-slate-500">
+                      средний срок жизни клиента
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* LTV */}
+              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center justify-between text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <Icon name="DollarSign" size={16} />
+                      LTV
+                    </div>
+                    <div className="relative group">
+                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                        <div className="font-semibold mb-1">Методология расчета:</div>
+                        <div>Lifetime Value - общая выручка от клиента за весь период взаимодействия, рассчитанная как произведение среднего чека на частоту покупок и срок жизни.</div>
+                      </div>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-emerald-700">
+                        {ltvData[selectedPeriod as keyof typeof ltvData].value}
+                      </span>
+                      <Badge variant="default" className="bg-emerald-600 text-xs">
+                        {ltvData[selectedPeriod as keyof typeof ltvData].change}
+                      </Badge>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <Badge variant="outline" className="text-xs">
+                        {ltvData[selectedPeriod as keyof typeof ltvData].vsCompetitors.value} {ltvData[selectedPeriod as keyof typeof ltvData].vsCompetitors.description}
+                      </Badge>
+                    </div>
+                    
+                    {/* Мини график */}
+                    <div className="flex items-end gap-1 h-8">
+                      {ltvData[selectedPeriod as keyof typeof ltvData].trend.map((point, index) => {
+                        const maxValue = Math.max(...ltvData[selectedPeriod as keyof typeof ltvData].trend);
+                        const normalizedHeight = (point / maxValue) * 100;
+                        return (
+                          <div
+                            key={index}
+                            className="bg-gradient-to-t from-emerald-500 to-green-300 rounded-t-sm"
+                            style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="text-xs text-slate-500">
+                      выручка на одного клиента
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Детальная аналитика лояльности */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              {/* Развернутый анализ частоты */}
+              <Card className="p-6">
+                <CardTitle className="flex items-center gap-2 mb-6">
+                  <Icon name="BarChart3" size={20} />
+                  Детализация частоты покупок
+                </CardTitle>
+                
+                <div className="space-y-4">
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <div className="text-sm text-slate-600 mb-2">Текущий период ({selectedPeriod === 'week' ? 'неделя' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'})</div>
+                    <div className="text-2xl font-bold text-blue-700 mb-1">
+                      {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].value} покупок
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      Каждый клиент в среднем совершает {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].value} покупки за выбранный период
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-slate-50 rounded-lg">
+                      <div className="text-lg font-bold text-slate-900">
+                        {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].vsCompetitors.value}
+                      </div>
+                      <div className="text-xs text-slate-600">преимущество</div>
+                    </div>
+                    <div className="text-center p-3 bg-slate-50 rounded-lg">
+                      <div className="text-lg font-bold text-slate-900">
+                        {purchaseFrequencyData[selectedPeriod as keyof typeof purchaseFrequencyData].change}
+                      </div>
+                      <div className="text-xs text-slate-600">рост к прошлому</div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Развернутый анализ LTV */}
+              <Card className="p-6">
+                <CardTitle className="flex items-center gap-2 mb-6">
+                  <Icon name="TrendingUp" size={20} />
+                  Анализ жизненной ценности
+                </CardTitle>
+                
+                <div className="space-y-4">
+                  <div className="bg-emerald-50 rounded-lg p-4">
+                    <div className="text-sm text-slate-600 mb-2">Lifetime Value</div>
+                    <div className="text-2xl font-bold text-emerald-700 mb-1">
+                      {ltvData[selectedPeriod as keyof typeof ltvData].value}
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      Средняя выручка с одного клиента за период {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].value}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-slate-50 rounded-lg">
+                      <div className="text-lg font-bold text-slate-900">
+                        {ltvData[selectedPeriod as keyof typeof ltvData].vsCompetitors.value}
+                      </div>
+                      <div className="text-xs text-slate-600">vs конкуренты</div>
+                    </div>
+                    <div className="text-center p-3 bg-slate-50 rounded-lg">
+                      <div className="text-lg font-bold text-slate-900">
+                        {lifeTimeData[selectedPeriod as keyof typeof lifeTimeData].value}
+                      </div>
+                      <div className="text-xs text-slate-600">время жизни</div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            {/* Сводка по лояльности */}
+            <Card className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Award" size={20} />
+                Индекс лояльности клиентов
+              </CardTitle>
+              
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-indigo-600 mb-2">89%</div>
+                  <div className="text-sm text-slate-600 font-medium">Общий индекс лояльности</div>
+                  <div className="text-xs text-slate-500 mt-1">+12% к прошлому периоду</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600 mb-2">76%</div>
+                  <div className="text-sm text-slate-600 font-medium">Возвращающиеся клиенты</div>
+                  <div className="text-xs text-slate-500 mt-1">+8% к прошлому периоду</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">4.7</div>
+                  <div className="text-sm text-slate-600 font-medium">NPS Score</div>
+                  <div className="text-xs text-slate-500 mt-1">+0.3 к прошлому периоду</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-green-600 mb-2">68%</div>
+                  <div className="text-sm text-slate-600 font-medium">Рекомендующие клиенты</div>
+                  <div className="text-xs text-slate-500 mt-1">+15% к прошлому периоду</div>
+                </div>
+              </div>
+            </Card>
+          </div>
         </TabsContent>
 
         {/* Лояльность */}
@@ -772,11 +1063,13 @@ const Index = () => {
             <Icon name="Heart" size={24} className="text-blue-600" />
             <div>
               <h2 className="text-xl font-bold text-blue-900">Анализ лояльности клиентов</h2>
-              <p className="text-sm text-blue-700">Показатели приверженности и долгосрочного взаимодействия</p>
+              <p className="text-sm text-blue-700">Вкладка временно пуста - контент перенесён в раздел "Клиенты"</p>
             </div>
           </div>
-          {/* Ключевые метрики лояльности */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        </TabsContent>
+
+        {/* Кошелек клиента */}
+        <TabsContent value="wallet" className="space-y-6">
             {/* Частота покупок */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
               <CardHeader className="pb-2">
