@@ -579,9 +579,18 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Количество покупок */}
             <Card className="p-6">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="ShoppingCart" size={20} />
-                Количество покупок
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="ShoppingCart" size={20} />
+                  Количество покупок
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-1">Методология расчета:</div>
+                    <div>Данные строятся на основе эквайринга - подсчитываются все успешные транзакции за выбранный период с группировкой по дате.</div>
+                  </div>
+                </div>
               </CardTitle>
               
               <div className="space-y-4">
@@ -613,9 +622,18 @@ const Index = () => {
 
             {/* Количество уникальных покупателей */}
             <Card className="p-6">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="UserCheck" size={20} />
-                Уникальные покупатели
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="UserCheck" size={20} />
+                  Уникальные покупатели
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-1">Методология расчета:</div>
+                    <div>Данные строятся на основе эквайринга с агрегацией по единому идентификатору клиента (номер карты, телефон, email) для исключения дублирования.</div>
+                  </div>
+                </div>
               </CardTitle>
               
               <div className="space-y-4">
@@ -649,9 +667,18 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Новые клиенты */}
             <Card className="p-6">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="UserPlus" size={20} />
-                Новые клиенты
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="UserPlus" size={20} />
+                  Новые клиенты
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-1">Методология расчета:</div>
+                    <div>Новые клиенты определяются как уникальные идентификаторы, совершившие первую покупку в текущем периоде. Сравнение с рынком основано на отраслевых данных аналогичных компаний.</div>
+                  </div>
+                </div>
               </CardTitle>
               
               <div className="space-y-4">
