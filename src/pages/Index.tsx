@@ -655,26 +655,87 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <h4 className="font-semibold text-slate-800 mb-3">Динамика роста за 7 дней</h4>
-                  <div className="flex items-end gap-1 h-16 mb-3">
-                    {[2180, 2540, 2380, 2650, 2420, 2713, 2850].map((value, index) => {
-                      const maxValue = Math.max(2180, 2540, 2380, 2650, 2420, 2713, 2850);
-                      const normalizedHeight = (value / maxValue) * 100;
-                      return (
-                        <div key={index} className="flex-1 flex flex-col items-center">
-                          <div
-                            className="bg-gradient-to-t from-orange-500 to-orange-300 rounded-t-sm w-full"
-                            style={{ height: `${Math.max(normalizedHeight, 20)}%` }}
-                            title={`День ${index + 1}: ${value}`}
-                          />
+                <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200 shadow-lg">
+                  <h4 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full animate-pulse"></div>
+                    Динамика роста за 7 дней
+                    <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse"></div>
+                  </h4>
+                  
+                  {/* Интерактивный график с анимацией */}
+                  <div className="relative">
+                    {/* Фоновая сетка */}
+                    <div className="absolute inset-0 h-20 w-full">
+                      {Array.from({length: 4}).map((_, i) => (
+                        <div key={i} className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" style={{top: `${i * 25}%`}}></div>
+                      ))}
+                    </div>
+                    
+                    {/* График с liquid эффектом */}
+                    <div className="relative flex items-end gap-2 h-20 mb-4">
+                      {[2180, 2540, 2380, 2650, 2420, 2713, 2850].map((value, index) => {
+                        const maxValue = Math.max(2180, 2540, 2380, 2650, 2420, 2713, 2850);
+                        const normalizedHeight = (value / maxValue) * 100;
+                        const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+                        
+                        return (
+                          <div key={index} className="flex-1 relative group cursor-pointer">
+                            {/* Анимированная колонка */}
+                            <div className="relative overflow-hidden rounded-full bg-gradient-to-t from-slate-200 to-slate-100 w-full transition-all duration-700 hover:scale-110">
+                              <div
+                                className={`
+                                  w-full transition-all duration-1000 ease-out rounded-full
+                                  ${index === 6 ? 'bg-gradient-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-lg shadow-emerald-500/50' : 
+                                    index === 0 ? 'bg-gradient-to-t from-purple-500 via-purple-400 to-purple-300 shadow-lg shadow-purple-500/30' :
+                                    'bg-gradient-to-t from-blue-500 via-cyan-400 to-cyan-300 shadow-lg shadow-blue-500/30'}
+                                  animate-pulse
+                                `}
+                                style={{ 
+                                  height: `${Math.max(normalizedHeight, 15)}%`,
+                                  animationDelay: `${index * 200}ms`
+                                }}
+                              >
+                                {/* Блестящий эффект */}
+                                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
+                                
+                                {/* Эффект волны */}
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-white/20 via-white/40 to-white/20 rounded-full animate-pulse"></div>
+                              </div>
+                            </div>
+                            
+                            {/* Tooltip при наведении */}
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+                              <div className="bg-slate-800 text-white text-xs px-3 py-2 rounded-lg shadow-lg whitespace-nowrap">
+                                <div className="font-bold">{value.toLocaleString()} клиентов</div>
+                                <div className="text-slate-300">{dayNames[index]}</div>
+                                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-slate-800 rotate-45"></div>
+                              </div>
+                            </div>
+                            
+                            {/* День недели */}
+                            <div className="mt-2 text-center">
+                              <div className={`text-xs font-medium transition-colors duration-300 ${index === 6 ? 'text-emerald-600' : 'text-slate-600'}`}>
+                                {dayNames[index]}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Статистика изменения */}
+                    <div className="flex justify-between items-center mt-4 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-white/40">
+                      <div className="flex items-center gap-2">
+                        <Icon name="TrendingUp" size={14} className="text-emerald-600" />
+                        <span className="text-sm font-medium text-slate-700">Рост за неделю</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold text-emerald-600">+30.7%</span>
+                        <div className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">
+                          +670 клиентов
                         </div>
-                      );
-                    })}
-                  </div>
-                  <div className="flex justify-between text-xs text-slate-600">
-                    <span>7 дней назад</span>
-                    <span>сегодня</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
