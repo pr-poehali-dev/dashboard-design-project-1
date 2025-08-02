@@ -867,7 +867,139 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Коэффициент удержания клиентов */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Icon name="UserCheck" size={20} />
+                  Коэффициент удержания клиентов
+                </div>
+                <div className="relative group">
+                  <Icon name="HelpCircle" size={16} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                  <div className="absolute right-0 top-6 w-80 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                    <div className="font-semibold mb-2">Методология расчета Retention Rate:</div>
+                    <div className="mb-2">
+                      <strong>Формула:</strong> (Количество клиентов в конце периода - Новые клиенты) / Количество клиентов в начале периода × 100%
+                    </div>
+                    <div className="mb-2">
+                      <strong>Пример:</strong> (5000 - 500) / 4500 × 100% = 100%
+                    </div>
+                    <div>
+                      Показывает долю клиентов, которые продолжают совершать покупки в текущем периоде относительно предыдущего.
+                    </div>
+                  </div>
+                </div>
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-indigo-50 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-slate-600">Retention Rate за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}</span>
+                    <Badge className="bg-indigo-600 text-white">
+                      {selectedPeriod === 'week' ? '+2.1%' : selectedPeriod === 'month' ? '+3.4%' : selectedPeriod === 'quarter' ? '+1.8%' : '+4.2%'}
+                    </Badge>
+                  </div>
+                  <div className="text-2xl font-bold text-indigo-700 mb-1">
+                    {selectedPeriod === 'week' ? '87.3%' : selectedPeriod === 'month' ? '82.5%' : selectedPeriod === 'quarter' ? '76.8%' : '68.2%'}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    {selectedPeriod === 'week' ? '4,328 из 4,958 клиентов вернулись' : 
+                     selectedPeriod === 'month' ? '4,125 из 5,000 клиентов активны' :
+                     selectedPeriod === 'quarter' ? '3,840 из 5,000 клиентов сохранены' : 
+                     '3,410 из 5,000 клиентов удержаны'}
+                  </div>
+                </div>
 
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Сравнение с отраслевыми бенчмарками</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Наша компания</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 bg-slate-200 rounded-full h-2">
+                          <div className="bg-indigo-500 h-2 rounded-full" style={{width: selectedPeriod === 'week' ? '87%' : selectedPeriod === 'month' ? '83%' : selectedPeriod === 'quarter' ? '77%' : '68%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-indigo-600">
+                          {selectedPeriod === 'week' ? '87.3%' : selectedPeriod === 'month' ? '82.5%' : selectedPeriod === 'quarter' ? '76.8%' : '68.2%'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Средний по отрасли</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 bg-slate-200 rounded-full h-2">
+                          <div className="bg-orange-500 h-2 rounded-full" style={{width: selectedPeriod === 'week' ? '75%' : selectedPeriod === 'month' ? '68%' : selectedPeriod === 'quarter' ? '58%' : '45%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-orange-600">
+                          {selectedPeriod === 'week' ? '75.2%' : selectedPeriod === 'month' ? '68.1%' : selectedPeriod === 'quarter' ? '58.4%' : '45.3%'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Лучшие в отрасли</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 bg-slate-200 rounded-full h-2">
+                          <div className="bg-green-500 h-2 rounded-full" style={{width: selectedPeriod === 'week' ? '92%' : selectedPeriod === 'month' ? '89%' : selectedPeriod === 'quarter' ? '84%' : '76%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-green-600">
+                          {selectedPeriod === 'week' ? '92.1%' : selectedPeriod === 'month' ? '89.3%' : selectedPeriod === 'quarter' ? '84.7%' : '76.5%'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-slate-800 mb-3">Динамика удержания за 7 периодов</h4>
+                  <div className="flex items-end gap-1 h-16 mb-3">
+                    {(selectedPeriod === 'week' ? [82.1, 83.5, 85.2, 86.1, 87.0, 87.3, 87.3] :
+                      selectedPeriod === 'month' ? [76.8, 78.2, 79.5, 80.8, 81.9, 82.2, 82.5] :
+                      selectedPeriod === 'quarter' ? [71.2, 72.8, 74.1, 75.3, 76.0, 76.5, 76.8] :
+                      [62.1, 63.8, 65.2, 66.7, 67.5, 68.0, 68.2]).map((value, index) => {
+                      const maxValue = selectedPeriod === 'week' ? 87.3 : selectedPeriod === 'month' ? 82.5 : selectedPeriod === 'quarter' ? 76.8 : 68.2;
+                      const normalizedHeight = (value / maxValue) * 100;
+                      return (
+                        <div key={index} className="flex-1 flex flex-col items-center">
+                          <div
+                            className="bg-gradient-to-t from-indigo-500 to-indigo-300 rounded-t-sm w-full"
+                            style={{ height: `${Math.max(normalizedHeight, 20)}%` }}
+                            title={`Период ${index + 1}: ${value}%`}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-600">
+                    <span>7 периодов назад</span>
+                    <span>текущий период</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-200">
+                    <div className="text-center">
+                      <div className="text-sm text-slate-600 mb-1">Преимущество</div>
+                      <div className="text-lg font-bold text-emerald-700">
+                        +{selectedPeriod === 'week' ? '12.1' : selectedPeriod === 'month' ? '14.4' : selectedPeriod === 'quarter' ? '18.4' : '22.9'}%
+                      </div>
+                      <div className="text-xs text-slate-500">vs средний по отрасли</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-200">
+                    <div className="text-center">
+                      <div className="text-sm text-slate-600 mb-1">До лидера</div>
+                      <div className="text-lg font-bold text-purple-700">
+                        -{selectedPeriod === 'week' ? '4.8' : selectedPeriod === 'month' ? '6.8' : selectedPeriod === 'quarter' ? '7.9' : '8.3'}%
+                      </div>
+                      <div className="text-xs text-slate-500">разрыв с лучшими</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
 
             {/* North Star блок */}
             <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50">
