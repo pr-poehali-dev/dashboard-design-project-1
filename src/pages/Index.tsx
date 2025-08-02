@@ -589,6 +589,40 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Главные выводы по клиентской базе */}
+          <Card className="p-5 bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-indigo-200 mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Icon name="Lightbulb" size={18} className="text-indigo-600" />
+              <h3 className="font-bold text-indigo-800">Ключевые изменения клиентского портфеля</h3>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-emerald-700">Качество клиентов растёт:</span>
+                  <span className="text-slate-700 ml-1">LTV увеличился на 8.7%, средний чек +18.5%, при этом количество покупок снизилось на 7.2% — клиенты покупают реже, но существенно больше</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-blue-700">Усиливается ядро лояльных:</span>
+                  <span className="text-slate-700 ml-1">Коэффициент удержания вырос до 82.5% (+3.4%), при этом 12% VIP-клиентов генерируют 58% выручки — концентрация на премиум-сегменте окупается</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-amber-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-amber-700">Риск оттока новых клиентов:</span>
+                  <span className="text-slate-700 ml-1">Приток новых клиентов растёт (+30.7% за неделю), но их доля в общей базе 18.4% — необходимо усилить onboarding для конвертации в постоянных</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+
           {/* Новые клиенты - первый блок */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <Card className="p-6">
