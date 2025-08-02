@@ -953,27 +953,132 @@ const Index = () => {
 
                 <div className="bg-blue-50 rounded-lg p-4">
                   <h4 className="font-semibold text-slate-800 mb-3">Динамика удержания за 7 периодов</h4>
-                  <div className="flex items-end gap-1 h-16 mb-3">
-                    {(selectedPeriod === 'week' ? [82.1, 83.5, 85.2, 86.1, 87.0, 87.3, 87.3] :
-                      selectedPeriod === 'month' ? [76.8, 78.2, 79.5, 80.8, 81.9, 82.2, 82.5] :
-                      selectedPeriod === 'quarter' ? [71.2, 72.8, 74.1, 75.3, 76.0, 76.5, 76.8] :
-                      [62.1, 63.8, 65.2, 66.7, 67.5, 68.0, 68.2]).map((value, index) => {
-                      const maxValue = selectedPeriod === 'week' ? 87.3 : selectedPeriod === 'month' ? 82.5 : selectedPeriod === 'quarter' ? 76.8 : 68.2;
-                      const normalizedHeight = (value / maxValue) * 100;
-                      return (
-                        <div key={index} className="flex-1 flex flex-col items-center">
-                          <div
-                            className="bg-gradient-to-t from-indigo-500 to-indigo-300 rounded-t-sm w-full"
-                            style={{ height: `${Math.max(normalizedHeight, 20)}%` }}
-                            title={`Период ${index + 1}: ${value}%`}
-                          />
-                        </div>
-                      );
-                    })}
+                  
+                  {/* Линейный график */}
+                  <div className="relative h-32 mb-4">
+                    {/* Сетка фона */}
+                    <div className="absolute inset-0">
+                      {/* Горизонтальные линии */}
+                      <div className="absolute top-0 left-0 right-0 h-px bg-slate-200"></div>
+                      <div className="absolute top-1/4 left-0 right-0 h-px bg-slate-100"></div>
+                      <div className="absolute top-2/4 left-0 right-0 h-px bg-slate-200"></div>
+                      <div className="absolute top-3/4 left-0 right-0 h-px bg-slate-100"></div>
+                      <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-200"></div>
+                      
+                      {/* Вертикальные линии */}
+                      {Array.from({length: 8}).map((_, i) => (
+                        <div key={i} className="absolute top-0 bottom-0 w-px bg-slate-100" style={{left: `${(i / 7) * 100}%`}}></div>
+                      ))}
+                    </div>
+                    
+                    {/* Y-ось с метками */}
+                    <div className="absolute -left-8 top-0 bottom-0 flex flex-col justify-between text-xs text-slate-500">
+                      <span>{selectedPeriod === 'week' ? '90%' : selectedPeriod === 'month' ? '85%' : selectedPeriod === 'quarter' ? '80%' : '70%'}</span>
+                      <span>{selectedPeriod === 'week' ? '85%' : selectedPeriod === 'month' ? '80%' : selectedPeriod === 'quarter' ? '75%' : '65%'}</span>
+                      <span>{selectedPeriod === 'week' ? '80%' : selectedPeriod === 'month' ? '75%' : selectedPeriod === 'quarter' ? '70%' : '60%'}</span>
+                    </div>
+                    
+                    {/* График */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 120" preserveAspectRatio="none">
+                      {/* Линия тренда */}
+                      <path
+                        d={(() => {
+                          const data = selectedPeriod === 'week' ? [82.1, 83.5, 85.2, 86.1, 87.0, 87.3, 87.3] :
+                                    selectedPeriod === 'month' ? [76.8, 78.2, 79.5, 80.8, 81.9, 82.2, 82.5] :
+                                    selectedPeriod === 'quarter' ? [71.2, 72.8, 74.1, 75.3, 76.0, 76.5, 76.8] :
+                                    [62.1, 63.8, 65.2, 66.7, 67.5, 68.0, 68.2];
+                          const minValue = selectedPeriod === 'week' ? 80 : selectedPeriod === 'month' ? 75 : selectedPeriod === 'quarter' ? 70 : 60;
+                          const maxValue = selectedPeriod === 'week' ? 90 : selectedPeriod === 'month' ? 85 : selectedPeriod === 'quarter' ? 80 : 70;
+                          
+                          return data.map((value, index) => {
+                            const x = (index / 6) * 300;
+                            const y = 120 - ((value - minValue) / (maxValue - minValue)) * 120;
+                            return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
+                          }).join(' ');
+                        })()}
+                        stroke="rgb(99 102 241)"
+                        strokeWidth="2"
+                        fill="none"
+                        className="drop-shadow-sm"
+                      />
+                      
+                      {/* Градиентная заливка под линией */}
+                      <defs>
+                        <linearGradient id="retentionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" style={{stopColor: 'rgb(99 102 241)', stopOpacity: 0.3}} />
+                          <stop offset="100%" style={{stopColor: 'rgb(99 102 241)', stopOpacity: 0.05}} />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        d={(() => {
+                          const data = selectedPeriod === 'week' ? [82.1, 83.5, 85.2, 86.1, 87.0, 87.3, 87.3] :
+                                    selectedPeriod === 'month' ? [76.8, 78.2, 79.5, 80.8, 81.9, 82.2, 82.5] :
+                                    selectedPeriod === 'quarter' ? [71.2, 72.8, 74.1, 75.3, 76.0, 76.5, 76.8] :
+                                    [62.1, 63.8, 65.2, 66.7, 67.5, 68.0, 68.2];
+                          const minValue = selectedPeriod === 'week' ? 80 : selectedPeriod === 'month' ? 75 : selectedPeriod === 'quarter' ? 70 : 60;
+                          const maxValue = selectedPeriod === 'week' ? 90 : selectedPeriod === 'month' ? 85 : selectedPeriod === 'quarter' ? 80 : 70;
+                          
+                          const path = data.map((value, index) => {
+                            const x = (index / 6) * 300;
+                            const y = 120 - ((value - minValue) / (maxValue - minValue)) * 120;
+                            return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
+                          }).join(' ');
+                          
+                          return `${path} L 300 120 L 0 120 Z`;
+                        })()}
+                        fill="url(#retentionGradient)"
+                      />
+                      
+                      {/* Точки на графике */}
+                      {(selectedPeriod === 'week' ? [82.1, 83.5, 85.2, 86.1, 87.0, 87.3, 87.3] :
+                        selectedPeriod === 'month' ? [76.8, 78.2, 79.5, 80.8, 81.9, 82.2, 82.5] :
+                        selectedPeriod === 'quarter' ? [71.2, 72.8, 74.1, 75.3, 76.0, 76.5, 76.8] :
+                        [62.1, 63.8, 65.2, 66.7, 67.5, 68.0, 68.2]).map((value, index) => {
+                        const minValue = selectedPeriod === 'week' ? 80 : selectedPeriod === 'month' ? 75 : selectedPeriod === 'quarter' ? 70 : 60;
+                        const maxValue = selectedPeriod === 'week' ? 90 : selectedPeriod === 'month' ? 85 : selectedPeriod === 'quarter' ? 80 : 70;
+                        const x = (index / 6) * 300;
+                        const y = 120 - ((value - minValue) / (maxValue - minValue)) * 120;
+                        
+                        return (
+                          <g key={index}>
+                            {/* Точка с тенью */}
+                            <circle cx={x} cy={y} r="3" fill="white" stroke="rgb(99 102 241)" strokeWidth="2" className="drop-shadow-sm" />
+                            {/* Hover эффект */}
+                            <circle cx={x} cy={y} r="8" fill="transparent" className="hover:fill-indigo-100 hover:fill-opacity-50 cursor-pointer">
+                              <title>{`Период ${index + 1}: ${value}%`}</title>
+                            </circle>
+                          </g>
+                        );
+                      })}
+                    </svg>
                   </div>
-                  <div className="flex justify-between text-xs text-slate-600">
-                    <span>7 периодов назад</span>
-                    <span>текущий период</span>
+                  
+                  {/* X-ось с метками */}
+                  <div className="flex justify-between text-xs text-slate-600 mb-2">
+                    <span>7 {selectedPeriod === 'week' ? 'нед' : selectedPeriod === 'month' ? 'мес' : selectedPeriod === 'quarter' ? 'кв' : 'лет'} назад</span>
+                    <span>6</span>
+                    <span>5</span>
+                    <span>4</span>
+                    <span>3</span>
+                    <span>2</span>
+                    <span>1</span>
+                    <span>текущий</span>
+                  </div>
+                  
+                  {/* Дополнительная информация */}
+                  <div className="flex items-center justify-between pt-2 border-t border-blue-200">
+                    <div className="flex items-center gap-4 text-xs">
+                      <div className="flex items-center gap-1">
+                        <div className="w-3 h-0.5 bg-indigo-500 rounded"></div>
+                        <span className="text-slate-600">Retention Rate</span>
+                      </div>
+                      <span className="text-slate-500">
+                        Тренд: {selectedPeriod === 'week' ? '+5.2%' : selectedPeriod === 'month' ? '+5.7%' : selectedPeriod === 'quarter' ? '+5.6%' : '+6.1%'} за период
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Лучший результат: {selectedPeriod === 'week' ? '87.3%' : selectedPeriod === 'month' ? '82.5%' : selectedPeriod === 'quarter' ? '76.8%' : '68.2%'}
+                    </div>
                   </div>
                 </div>
 
