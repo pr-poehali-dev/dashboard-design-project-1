@@ -1541,17 +1541,40 @@ const Index = () => {
               <p className="text-sm text-orange-700">Анализ доли трат и позиции в сегменте</p>
             </div>
           </div>
-        </TabsContent>
 
-        {/* Кошелек клиента */}
-        <TabsContent value="wallet" className="space-y-6">
-          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl border-l-4 border-orange-500">
-            <Icon name="Wallet" size={24} className="text-orange-600" />
-            <div>
-              <h2 className="text-xl font-bold text-orange-900">Кошелек клиента</h2>
-              <p className="text-sm text-orange-700">Анализ доли трат и позиции в сегменте</p>
+          {/* Главные выводы по кошельку клиента */}
+          <Card className="p-5 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Icon name="Target" size={18} className="text-amber-600" />
+              <h3 className="font-bold text-amber-800">Ключевые изменения позиции в кошельке клиента</h3>
             </div>
-          </div>
+            
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-green-700">Растёт доля премиум-трат:</span>
+                  <span className="text-slate-700 ml-1">40% клиентских расходов приходится на рестораны премиум-класса (+12% за период), при этом фастфуд снижается до 30% — сдвиг к качественному потреблению</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-orange-700">Укрепляется позиция компании:</span>
+                  <span className="text-slate-700 ml-1">Наша доля в кошельке клиента составляет 23.5% от всех трат в сегменте "питание вне дома" (+3.2% за период) — опережаем конкурентов по захвату большей части бюджета</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-purple-700">Возможность роста доли:</span>
+                  <span className="text-slate-700 ml-1">Средний клиент тратит 30,000₽/месяц на питание вне дома, из них только 7,050₽ у нас — есть потенциал увеличить долю до 35% через персонализацию и расширение предложения</span>
+                </div>
+              </div>
+            </div>
+          </Card>
           {/* Ключевые метрики кошелька */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Траты в сегменте */}
