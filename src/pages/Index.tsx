@@ -171,24 +171,32 @@ const Index = () => {
     week: { 
       absolute: { current: "24", previous: "18", change: "+33%" },
       percentage: { current: "2.8%", previous: "2.1%", change: "+0.7%" },
+      amount: { current: "57,200₽", previous: "42,800₽", change: "+34%" },
+      avgReturn: { current: "2,383₽", previous: "2,378₽" },
       trend: [18, 19, 21, 22, 24, 23, 24],
       vsCompetitors: { value: "-0.4%", description: "ниже конкурентов" }
     },
     month: { 
       absolute: { current: "142", previous: "128", change: "+11%" },
       percentage: { current: "3.2%", previous: "3.8%", change: "-0.6%" },
+      amount: { current: "338,400₽", previous: "304,600₽", change: "+11%" },
+      avgReturn: { current: "2,384₽", previous: "2,380₽" },
       trend: [135, 138, 140, 141, 142, 143, 142],
       vsCompetitors: { value: "-0.8%", description: "ниже конкурентов" }
     },
     quarter: { 
       absolute: { current: "485", previous: "520", change: "-7%" },
       percentage: { current: "2.9%", previous: "3.4%", change: "-0.5%" },
+      amount: { current: "1,156,200₽", previous: "1,238,000₽", change: "-7%" },
+      avgReturn: { current: "2,384₽", previous: "2,381₽" },
       trend: [520, 510, 500, 490, 485, 480, 485],
       vsCompetitors: { value: "-1.2%", description: "ниже конкурентов" }
     },
     year: { 
       absolute: { current: "1,680", previous: "1,850", change: "-9%" },
       percentage: { current: "2.6%", previous: "3.1%", change: "-0.5%" },
+      amount: { current: "4,005,600₽", previous: "4,407,500₽", change: "-9%" },
+      avgReturn: { current: "2,384₽", previous: "2,382₽" },
       trend: [1850, 1800, 1750, 1700, 1680, 1670, 1680],
       vsCompetitors: { value: "-1.5%", description: "ниже конкурентов" }
     }
@@ -1489,6 +1497,66 @@ const Index = () => {
                 </CardContent>
               </Card>
 
+              {/* Возвраты */}
+              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center justify-between text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <Icon name="RotateCcw" size={16} />
+                      Возвраты
+                    </div>
+                    <div className="relative group">
+                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                        <div className="font-semibold mb-1">Методология расчета:</div>
+                        <div>Количество, доля и суммы возвращенных товаров от общего количества продаж за период.</div>
+                      </div>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-red-700">
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
+                      </span>
+                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
+                      </Badge>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <Badge variant="outline" className="text-xs">
+                        {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value} {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.description}
+                      </Badge>
+                    </div>
+                    
+                    {/* Информация о суммах возвратов */}
+                    <div className="bg-red-50 rounded-lg p-3">
+                      <div className="text-xs text-slate-600 mb-2">Суммы возвратов:</div>
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-slate-700">Текущий период:</span>
+                          <span className="font-bold text-red-600">{returnData[selectedPeriod as keyof typeof returnData].amount.current}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-slate-700">Прошлый период:</span>
+                          <span className="font-medium text-slate-500">{returnData[selectedPeriod as keyof typeof returnData].amount.previous}</span>
+                        </div>
+                        <div className="flex items-center justify-between border-t border-red-200 pt-1 mt-2">
+                          <span className="text-xs text-slate-600">Средний возврат:</span>
+                          <span className="font-medium text-red-700">{returnData[selectedPeriod as keyof typeof returnData].avgReturn.current}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-xs text-slate-500">
+                      штук возвращено • {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от продаж
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Life Time */}
               <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
                 <CardHeader className="pb-2">
@@ -1601,72 +1669,7 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              {/* Возврат */}
-              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
-                <CardHeader className="pb-2">
-                  <CardTitle className="flex items-center justify-between text-sm font-medium">
-                    <div className="flex items-center gap-2">
-                      <Icon name="RotateCcw" size={16} />
-                      Возврат
-                    </div>
-                    <div className="relative group">
-                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
-                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                        <div className="font-semibold mb-1">Методология расчета:</div>
-                        <div>Количество и доля возвращенных товаров от общего количества продаж за период.</div>
-                      </div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-red-700">
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
-                      </span>
-                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
-                      </Badge>
-                    </div>
 
-                    <div className="text-xs text-slate-600">
-                      <div className="flex items-center justify-between mb-1">
-                        <span>Текущий период:</span>
-                        <span className="font-medium text-red-600">{returnData[selectedPeriod as keyof typeof returnData].percentage.current}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span>Прошлый период:</span>
-                        <span className="font-medium text-slate-500">{returnData[selectedPeriod as keyof typeof returnData].percentage.previous}</span>
-                      </div>
-                    </div>
-
-                    <div className="text-xs text-slate-600">
-                      <Badge variant="outline" className="text-xs">
-                        {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value} {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.description}
-                      </Badge>
-                    </div>
-                    
-                    {/* Мини график */}
-                    <div className="flex items-end gap-1 h-8">
-                      {returnData[selectedPeriod as keyof typeof returnData].trend.map((point, index) => {
-                        const maxValue = Math.max(...returnData[selectedPeriod as keyof typeof returnData].trend);
-                        const normalizedHeight = (point / maxValue) * 100;
-                        return (
-                          <div
-                            key={index}
-                            className="bg-gradient-to-t from-red-500 to-pink-300 rounded-t-sm"
-                            style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
-                          />
-                        );
-                      })}
-                    </div>
-
-                    <div className="text-xs text-slate-500">
-                      штук возвращено
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Детальная аналитика лояльности */}
