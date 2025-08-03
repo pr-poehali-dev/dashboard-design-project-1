@@ -2350,7 +2350,7 @@ const Index = () => {
                   <span className="text-sm font-medium text-slate-700">Рост премиум-сегмента</span>
                 </div>
                 <div className="text-lg font-bold text-green-600">+6.2%</div>
-                <div className="text-xs text-slate-600">клиенты с доходом >300k</div>
+                <div className="text-xs text-slate-600">клиенты с доходом &gt;300k</div>
               </div>
               
               <div className="bg-white p-4 rounded-lg border border-purple-200">
