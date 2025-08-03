@@ -3145,7 +3145,40 @@ const Index = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold mb-3">Возрастные группы</h4>
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold">Возрастные группы</h4>
+                    <div className="flex items-center gap-2">
+                      <Icon name="Settings" size={14} className="text-slate-500" />
+                      <select 
+                        className="text-xs bg-white border border-slate-200 rounded px-2 py-1 text-slate-700"
+                        onChange={(e) => {
+                          // В реальной реализации здесь был бы обработчик изменения когорт
+                          console.log('Когорта изменена:', e.target.value);
+                        }}
+                      >
+                        <option value="standard">Стандартные когорты</option>
+                        <option value="marketing">Маркетинговые когорты</option>
+                        <option value="custom">Пользовательские когорты</option>
+                        <option value="decade">По десятилетиям</option>
+                        <option value="generation">По поколениям</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Информационная панель настроек когорт */}
+                  <div className="bg-blue-50 rounded-lg p-3 mb-4 border border-blue-100">
+                    <div className="text-xs text-blue-700 mb-2 flex items-center gap-2">
+                      <Icon name="Info" size={12} />
+                      <span className="font-medium">Настройки когорт</span>
+                    </div>
+                    <div className="text-xs text-slate-600">
+                      <div className="mb-1"><strong>Стандартные:</strong> 18-25, 26-35, 36-45, 46-55, 55+ лет</div>
+                      <div className="mb-1"><strong>Маркетинговые:</strong> 18-24, 25-34, 35-44, 45-54, 55-64, 65+ лет</div>
+                      <div className="mb-1"><strong>По поколениям:</strong> Gen Z, Millennials, Gen X, Baby Boomers</div>
+                      <div><strong>По десятилетиям:</strong> 18-27, 28-37, 38-47, 48-57, 58+ лет</div>
+                    </div>
+                  </div>
+
                   <div className="space-y-3">
                     {ageGroups.map((group, index) => (
                       <div key={index} className="flex items-center justify-between">
@@ -3158,6 +3191,56 @@ const Index = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Дополнительные метрики для выбранной когорты */}
+                  <div className="mt-4 bg-slate-50 rounded-lg p-3">
+                    <div className="text-xs font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Icon name="BarChart3" size={12} />
+                      Детализация по выбранной когорте
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="bg-white rounded p-2 text-center">
+                        <div className="font-bold text-slate-900">34.2%</div>
+                        <div className="text-slate-600">Доминирующая группа</div>
+                      </div>
+                      <div className="bg-white rounded p-2 text-center">
+                        <div className="font-bold text-slate-900">±2.8%</div>
+                        <div className="text-slate-600">Изменение за месяц</div>
+                      </div>
+                      <div className="bg-white rounded p-2 text-center">
+                        <div className="font-bold text-slate-900">3,240₽</div>
+                        <div className="text-slate-600">Средний чек</div>
+                      </div>
+                      <div className="bg-white rounded p-2 text-center">
+                        <div className="font-bold text-slate-900">87%</div>
+                        <div className="text-slate-600">Retention Rate</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Быстрые пресеты когорт */}
+                  <div className="mt-3">
+                    <div className="text-xs font-medium text-slate-700 mb-2">Быстрые пресеты:</div>
+                    <div className="flex flex-wrap gap-1">
+                      {[
+                        { label: 'Gen Z (18-26)', value: 'genz' },
+                        { label: 'Миллениалы (27-42)', value: 'millennials' },
+                        { label: 'Gen X (43-58)', value: 'genx' },
+                        { label: 'Бумеры (59+)', value: 'boomers' }
+                      ].map((preset, index) => (
+                        <button
+                          key={index}
+                          className="text-xs px-2 py-1 bg-white border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                          onClick={() => {
+                            // В реальной реализации здесь был бы обработчик смены пресета
+                            console.log('Пресет выбран:', preset.value);
+                          }}
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
