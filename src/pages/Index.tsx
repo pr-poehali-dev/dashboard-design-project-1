@@ -470,88 +470,88 @@ const Index = () => {
       {/* Main Dashboard */}
       <Tabs defaultValue="key-insights" className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-4 mb-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-13 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
+          <TabsList className="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-13 xl:grid-cols-13 w-full gap-1 bg-slate-50 p-2 rounded-lg h-auto overflow-x-auto">
             <TabsTrigger 
               value="key-insights" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-amber-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-amber-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="TrendingUp" size={18} />
-              <span className="text-xs font-medium">Ключевое</span>
+              <Icon name="TrendingUp" size={16} />
+              <span className="text-xs font-medium truncate">Ключевое</span>
             </TabsTrigger>
             <TabsTrigger 
               value="market" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-red-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-red-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="BarChart2" size={18} />
-              <span className="text-xs font-medium">Рынок</span>
+              <Icon name="BarChart2" size={16} />
+              <span className="text-xs font-medium truncate">Рынок</span>
             </TabsTrigger>
             <TabsTrigger 
               value="clients" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-emerald-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-emerald-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="Users" size={18} />
-              <span className="text-xs font-medium">Клиенты</span>
+              <Icon name="Users" size={16} />
+              <span className="text-xs font-medium truncate">Клиенты</span>
             </TabsTrigger>
 
             <TabsTrigger 
               value="wallet" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-orange-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-orange-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="Wallet" size={18} />
-              <span className="text-xs font-medium">Кошелек</span>
+              <Icon name="Wallet" size={16} />
+              <span className="text-xs font-medium truncate">Кошелек</span>
             </TabsTrigger>
 
             <TabsTrigger 
               value="demographics" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-green-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-green-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="Users" size={18} />
-              <span className="text-xs font-medium">Портрет</span>
+              <Icon name="Users" size={16} />
+              <span className="text-xs font-medium truncate">Портрет</span>
             </TabsTrigger>
             <TabsTrigger 
               value="finances" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-emerald-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-emerald-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="DollarSign" size={18} />
-              <span className="text-xs font-medium">Финансы</span>
+              <Icon name="DollarSign" size={16} />
+              <span className="text-xs font-medium truncate">Финансы</span>
             </TabsTrigger>
             <TabsTrigger 
               value="purchases" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-pink-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-pink-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="ShoppingCart" size={18} />
-              <span className="text-xs font-medium">Покупки</span>
+              <Icon name="ShoppingCart" size={16} />
+              <span className="text-xs font-medium truncate">Покупки</span>
             </TabsTrigger>
             <TabsTrigger 
               value="flows" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-teal-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-teal-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="ArrowRightLeft" size={18} />
-              <span className="text-xs font-medium">Перетоки</span>
+              <Icon name="ArrowRightLeft" size={16} />
+              <span className="text-xs font-medium truncate">Перетоки</span>
             </TabsTrigger>
 
             <TabsTrigger 
               value="geography" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-indigo-500 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="MapPin" size={18} />
-              <span className="text-xs font-medium">География</span>
+              <Icon name="MapPin" size={16} />
+              <span className="text-xs font-medium truncate">География</span>
             </TabsTrigger>
 
             <TabsTrigger 
               value="settings" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-slate-700 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-slate-700 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="Settings" size={18} />
-              <span className="text-xs font-medium">Настройки</span>
+              <Icon name="Settings" size={16} />
+              <span className="text-xs font-medium truncate">Настройки</span>
             </TabsTrigger>
 
             <TabsTrigger 
               value="metrics" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-600 data-[state=active]:text-white transition-all duration-200 h-auto"
+              className="flex flex-col items-center gap-1 p-2 data-[state=active]:bg-indigo-600 data-[state=active]:text-white transition-all duration-200 h-auto min-w-0"
             >
-              <Icon name="BarChart3" size={18} />
-              <span className="text-xs font-medium">Метрики</span>
+              <Icon name="Gauge" size={16} />
+              <span className="text-xs font-medium truncate">Метрики</span>
             </TabsTrigger>
           </TabsList>
         </div>
