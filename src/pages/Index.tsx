@@ -500,19 +500,13 @@ const Index = () => {
               <Icon name="Wallet" size={18} />
               <span className="text-xs font-medium">Кошелек</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="overview" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-purple-500 data-[state=active]:text-white transition-all duration-200 h-auto"
-            >
-              <Icon name="BarChart3" size={18} />
-              <span className="text-xs font-medium">Обзор</span>
-            </TabsTrigger>
+
             <TabsTrigger 
               value="demographics" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-green-500 data-[state=active]:text-white transition-all duration-200 h-auto"
             >
               <Icon name="Users" size={18} />
-              <span className="text-xs font-medium">Портрет аудитории</span>
+              <span className="text-xs font-medium">Портрет</span>
             </TabsTrigger>
             <TabsTrigger 
               value="finances" 
@@ -563,6 +557,68 @@ const Index = () => {
               <p className="text-sm text-amber-700">Значимые отклонения и гипотезы их возникновения</p>
             </div>
           </div>
+
+          {/* Статистика использования отчёта - Максимально видимый блок */}
+          <Card className="p-6 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 shadow-lg mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-blue-600 rounded-lg">
+                <Icon name="BarChart3" size={24} className="text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-blue-900">Статистика использования отчёта "Аналитика клиентов"</h3>
+                <p className="text-sm text-blue-700">Показывает кто принимает решения на основе данных</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              <div className="text-center p-4 bg-white rounded-lg border border-blue-200 shadow-sm">
+                <div className="text-3xl font-bold text-blue-600 mb-2">1,247</div>
+                <div className="text-sm text-slate-600 mb-1">просмотров за месяц</div>
+                <div className="text-xs text-green-600">+18% к прошлому месяцу</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border border-blue-200 shadow-sm">
+                <div className="text-3xl font-bold text-green-600 mb-2">89%</div>
+                <div className="text-sm text-slate-600 mb-1">активных пользователей</div>
+                <div className="text-xs text-green-600">+5% к прошлому месяцу</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border border-blue-200 shadow-sm">
+                <div className="text-3xl font-bold text-purple-600 mb-2">15.2м</div>
+                <div className="text-sm text-slate-600 mb-1">среднее время сессии</div>
+                <div className="text-xs text-green-600">+2.3м к прошлому месяцу</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border border-blue-200 shadow-sm">
+                <div className="text-3xl font-bold text-orange-600 mb-2">342</div>
+                <div className="text-sm text-slate-600 mb-1">экспортов данных</div>
+                <div className="text-xs text-green-600">+28% к прошлому месяцу</div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-4 border border-blue-200">
+              <h4 className="font-semibold text-slate-800 mb-3">Использование по отделам:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                  <span className="text-sm font-medium">Маркетинг</span>
+                  <span className="text-sm text-slate-600">47%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-green-500 rounded"></div>
+                  <span className="text-sm font-medium">Финансы</span>
+                  <span className="text-sm text-slate-600">28%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-purple-500 rounded"></div>
+                  <span className="text-sm font-medium">Коммерция</span>
+                  <span className="text-sm text-slate-600">19%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                  <span className="text-sm font-medium">Другие</span>
+                  <span className="text-sm text-slate-600">6%</span>
+                </div>
+              </div>
+            </div>
+          </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[80vh]">
             {/* Ключевые отклонения - занимает половину экрана */}
@@ -2641,102 +2697,7 @@ const Index = () => {
           </Card>
         </TabsContent>
 
-        {/* Обзор */}
-        <TabsContent value="overview" className="space-y-6">
-          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-l-4 border-purple-500">
-            <Icon name="BarChart3" size={24} className="text-purple-600" />
-            <div>
-              <h2 className="text-xl font-bold text-purple-900">Общий обзор</h2>
-              <p className="text-sm text-purple-700">Ключевые метрики и сводная аналитика</p>
-            </div>
-          </div>
-          {/* Топ метрики с динамикой */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-
-            {/* Расходы */}
-            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="Wallet" size={16} />
-                  Кошелек клиента
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-red-700">
-                      {expenseData[selectedPeriod as keyof typeof expenseData].value}
-                    </span>
-                    <Badge variant="destructive" className="text-xs">
-                      {expenseData[selectedPeriod as keyof typeof expenseData].change}
-                    </Badge>
-                  </div>
-                  
-                  <div className="text-xs text-slate-600">
-                    <Badge variant="outline" className="text-xs">
-                      {expenseData[selectedPeriod as keyof typeof expenseData].vsCompetitors.value} выше конкурентов
-                    </Badge>
-                  </div>
-                  
-                  {/* Мини график */}
-                  <div className="flex items-end gap-1 h-8">
-                    {expenseData[selectedPeriod as keyof typeof expenseData].trend.map((point, index) => (
-                      <div
-                        key={index}
-                        className="bg-gradient-to-t from-red-500 to-pink-300 rounded-t-sm"
-                        style={{ height: `${(point / 100) * 100}%`, width: '10px' }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-
-
-            {/* Кредитная нагрузка */}
-            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-orange-50 to-yellow-100 border-0 shadow-lg">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="CreditCard" size={16} />
-                  Кредитная нагрузка
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-orange-700">
-                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].value}
-                    </span>
-                    <Badge variant="default" className="bg-green-600 text-xs">
-                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].change}
-                    </Badge>
-                  </div>
-
-                  <div className="text-xs text-slate-600">
-                    <Badge variant="outline" className="text-xs">
-                      {creditLoadData[selectedPeriod as keyof typeof creditLoadData].vsCompetitors.value} {creditLoadData[selectedPeriod as keyof typeof creditLoadData].vsCompetitors.description}
-                    </Badge>
-                  </div>
-                  
-                  {/* Мини график */}
-                  <div className="flex items-end gap-1 h-8">
-                    {creditLoadData[selectedPeriod as keyof typeof creditLoadData].trend.map((point, index) => (
-                      <div
-                        key={index}
-                        className="bg-gradient-to-t from-orange-500 to-yellow-300 rounded-t-sm"
-                        style={{ height: `${(point / 30) * 100}%`, width: '10px' }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-
-        </TabsContent>
 
         {/* Демография */}
         <TabsContent value="demographics" className="space-y-6">
