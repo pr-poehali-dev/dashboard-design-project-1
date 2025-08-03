@@ -1404,96 +1404,71 @@ const Index = () => {
               </div>
             </Card>
 
-            {/* Ключевая метрика возвратов */}
-            <Card className="p-6 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="RotateCcw" size={20} className="text-red-600" />
-                Ключевая метрика: Возвраты
-              </CardTitle>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Основные показатели */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Блок возвратов */}
+              <Card className="p-4 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200">
+                <CardTitle className="flex items-center gap-2 mb-4">
+                  <Icon name="RotateCcw" size={16} className="text-red-600" />
+                  Возвраты
+                </CardTitle>
+                
                 <div className="space-y-4">
-                  <div className="bg-white rounded-lg p-4 border-2 border-red-200">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-3xl font-bold text-red-700">
+                  <div className="bg-white rounded-lg p-3 border border-red-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-2xl font-bold text-red-700">
                         {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
                       </span>
-                      <Badge variant="default" className={`text-sm ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
+                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
                         {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
                       </Badge>
                     </div>
                     <div className="text-sm text-slate-600">
-                      Количество возвратов за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                      Количество за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
                     </div>
-                    <div className="text-xs text-slate-500 mt-2">
+                    <div className="text-xs text-slate-500">
                       {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от общих продаж
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="text-center p-3 bg-white rounded-lg border">
-                      <div className="text-lg font-bold text-slate-900">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="text-center p-2 bg-white rounded border">
+                      <div className="text-sm font-bold text-slate-900">
                         {returnData[selectedPeriod as keyof typeof returnData].percentage.previous}
                       </div>
-                      <div className="text-xs text-slate-600">прошлый период</div>
+                      <div className="text-xs text-slate-600">прошлый</div>
                     </div>
-                    <div className="text-center p-3 bg-white rounded-lg border">
-                      <div className="text-lg font-bold text-green-700">
+                    <div className="text-center p-2 bg-white rounded border">
+                      <div className="text-sm font-bold text-green-700">
                         {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value}
                       </div>
-                      <div className="text-xs text-slate-600">vs конкуренты</div>
+                      <div className="text-xs text-slate-600">vs рынок</div>
                     </div>
                   </div>
                 </div>
+              </Card>
 
-                {/* Суммы возвратов */}
-                <div className="space-y-4">
-                  <div className="bg-red-100 rounded-lg p-4 border-2 border-red-300">
-                    <div className="text-sm font-medium text-red-800 mb-3">Суммы возвратов:</div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-700">Текущий:</span>
-                        <span className="font-bold text-red-700">{returnData[selectedPeriod as keyof typeof returnData].amount.current}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-700">Прошлый:</span>
-                        <span className="font-medium text-slate-600">{returnData[selectedPeriod as keyof typeof returnData].amount.previous}</span>
-                      </div>
-                      <div className="border-t border-red-300 pt-2 mt-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-red-800">Изменение:</span>
-                          <span className={`font-bold ${returnData[selectedPeriod as keyof typeof returnData].amount.change.startsWith('+') ? 'text-red-600' : 'text-green-600'}`}>
-                            {returnData[selectedPeriod as keyof typeof returnData].amount.change}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+              {/* North Star блок */}
+              <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50">
+                <CardTitle className="flex items-center gap-2 mb-4">
+                  <Icon name="Star" size={16} className="text-emerald-600" />
+                  North Star Метрика
+                </CardTitle>
+                
+                <div className="text-center py-4">
+                  <Icon name="Plus" size={24} className="text-emerald-400 mb-2 mx-auto" />
+                  <div className="text-sm font-semibold text-emerald-800 mb-1">
+                    Выберите ключевую метрику
                   </div>
-
-                  <div className="bg-white rounded-lg p-4 border">
-                    <div className="text-sm font-medium text-slate-700 mb-2">Средний размер возврата:</div>
-                    <div className="text-2xl font-bold text-red-600">
-                      {returnData[selectedPeriod as keyof typeof returnData].avgReturn.current}
-                    </div>
-                    <div className="text-xs text-slate-500 mt-1">
-                      за один возвращенный товар
-                    </div>
+                  <div className="text-xs text-emerald-600 mb-3">
+                    Добавьте главный показатель для отслеживания успеха
                   </div>
+                  <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
+                    <Icon name="Plus" size={12} className="mr-1" />
+                    Add (Free)
+                  </Button>
                 </div>
-              </div>
-
-              {/* Почему это ключевая метрика */}
-              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Target" size={16} className="text-amber-600" />
-                  <span className="font-semibold text-amber-800">Почему возвраты — ключевая метрика:</span>
-                </div>
-                <div className="text-sm text-slate-700">
-                  Показатель качества товаров, сервиса и удовлетворённости клиентов. Снижение возвратов напрямую влияет на прибыль и лояльность.
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
 
           </div>
 
