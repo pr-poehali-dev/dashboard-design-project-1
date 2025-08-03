@@ -593,6 +593,25 @@ const Index = () => {
     ]
   };
 
+  // Продукты лидеры и аутсайдеры
+  const productLeaders = [
+    { name: "Смартфон iPhone 15 Pro", sales: 1240, amount: "148,800,000₽", category: "Электроника", trend: "+28%" },
+    { name: "Кроссовки Nike Air Max", sales: 890, amount: "89,000,000₽", category: "Обувь", trend: "+15%" },
+    { name: "Ноутбук MacBook Air M2", sales: 650, amount: "97,500,000₽", category: "Компьютеры", trend: "+22%" },
+    { name: "Куртка зимняя Columbia", sales: 580, amount: "46,400,000₽", category: "Одежда", trend: "+18%" },
+    { name: "Наушники AirPods Pro", sales: 750, amount: "37,500,000₽", category: "Аксессуары", trend: "+35%" },
+    { name: "Планшет iPad Air", sales: 420, amount: "33,600,000₽", category: "Электроника", trend: "+12%" }
+  ];
+
+  const productOutsiders = [
+    { name: "Чехол для телефона кожаный", sales: 15, amount: "45,000₽", category: "Аксессуары", trend: "-8%" },
+    { name: "Блокнот премиум класса", sales: 23, amount: "92,000₽", category: "Канцелярия", trend: "-12%" },
+    { name: "Зарядка беспроводная старая модель", sales: 18, amount: "54,000₽", category: "Электроника", trend: "-25%" },
+    { name: "Ремень кожаный классический", sales: 31, amount: "155,000₽", category: "Аксессуары", trend: "-5%" },
+    { name: "Кошелек женский vintage", sales: 12, amount: "84,000₽", category: "Аксессуары", trend: "-18%" },
+    { name: "Футболка базовая белая", sales: 38, amount: "76,000₽", category: "Одежда", trend: "-3%" }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -3968,6 +3987,127 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Продукты лидеры */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Trophy" size={20} className="text-yellow-600" />
+              Продукты лидеры
+            </CardTitle>
+            
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600 mb-4">
+                Продукты максимально востребованные у данной компании за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+              </p>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {productLeaders.map((product, index) => (
+                  <Card key={index} className="p-4 hover:shadow-md transition-all duration-200 border-l-4 border-yellow-500 bg-gradient-to-r from-yellow-50 to-orange-50">
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-slate-800 mb-1">{product.name}</h4>
+                          <Badge variant="outline" className="text-xs text-slate-600">{product.category}</Badge>
+                        </div>
+                        <Badge variant={product.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs ml-2">
+                          {product.trend}
+                        </Badge>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-slate-900">{product.sales.toLocaleString()}</div>
+                          <div className="text-xs text-slate-600">количество продаж</div>
+                        </div>
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-green-700">{product.amount}</div>
+                          <div className="text-xs text-slate-600">сумма продаж</div>
+                        </div>
+                      </div>
+
+                      {/* Индикатор успешности */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 bg-slate-200 rounded-full h-2">
+                          <div 
+                            className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-500"
+                            style={{ width: `${Math.min((product.sales / 1240) * 100, 100)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-slate-500">
+                          {Math.round((product.sales / 1240) * 100)}% от лидера
+                        </span>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </Card>
+
+          {/* Продукты аутсайдеры */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="TrendingDown" size={20} className="text-red-600" />
+              Продукты аутсайдеры
+            </CardTitle>
+            
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600 mb-4">
+                Продукты минимально востребованные у данной компании за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+              </p>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {productOutsiders.map((product, index) => (
+                  <Card key={index} className="p-4 hover:shadow-md transition-all duration-200 border-l-4 border-red-500 bg-gradient-to-r from-red-50 to-pink-50">
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-slate-800 mb-1">{product.name}</h4>
+                          <Badge variant="outline" className="text-xs text-slate-600">{product.category}</Badge>
+                        </div>
+                        <Badge variant={product.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs ml-2">
+                          {product.trend}
+                        </Badge>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-slate-900">{product.sales.toLocaleString()}</div>
+                          <div className="text-xs text-slate-600">количество продаж</div>
+                        </div>
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-red-700">{product.amount}</div>
+                          <div className="text-xs text-slate-600">сумма продаж</div>
+                        </div>
+                      </div>
+
+                      {/* Индикатор низкой активности */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 bg-slate-200 rounded-full h-2">
+                          <div 
+                            className="bg-gradient-to-r from-red-500 to-pink-500 h-2 rounded-full transition-all duration-500"
+                            style={{ width: `${Math.max((product.sales / 38) * 100, 5)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-slate-500">
+                          {Math.round((product.sales / 38) * 100)}% от среднего аутсайдера
+                        </span>
+                      </div>
+
+                      {/* Рекомендации */}
+                      <div className="bg-red-100 rounded-lg p-2 border border-red-200">
+                        <div className="text-xs text-red-700 flex items-center gap-1">
+                          <Icon name="AlertTriangle" size={12} />
+                          <span className="font-medium">Рекомендация:</span>
+                          {product.sales < 20 ? 'Рассмотреть снятие с производства' : 
+                           product.sales < 30 ? 'Провести маркетинговую кампанию' : 'Оптимизировать цену'}
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </Card>
         </TabsContent>
 
         {/* Перетоки */}
