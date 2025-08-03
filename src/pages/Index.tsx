@@ -1438,7 +1438,7 @@ const Index = () => {
             </div>
             
             {/* Ключевые метрики лояльности */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               {/* Частота покупок */}
               <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
                 <CardHeader className="pb-2">
@@ -1497,65 +1497,6 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              {/* Возвраты */}
-              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
-                <CardHeader className="pb-2">
-                  <CardTitle className="flex items-center justify-between text-sm font-medium">
-                    <div className="flex items-center gap-2">
-                      <Icon name="RotateCcw" size={16} />
-                      Возвраты
-                    </div>
-                    <div className="relative group">
-                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
-                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                        <div className="font-semibold mb-1">Методология расчета:</div>
-                        <div>Количество, доля и суммы возвращенных товаров от общего количества продаж за период.</div>
-                      </div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-red-700">
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
-                      </span>
-                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
-                      </Badge>
-                    </div>
-
-                    <div className="text-xs text-slate-600">
-                      <Badge variant="outline" className="text-xs">
-                        {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value} {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.description}
-                      </Badge>
-                    </div>
-                    
-                    {/* Информация о суммах возвратов */}
-                    <div className="bg-red-50 rounded-lg p-3">
-                      <div className="text-xs text-slate-600 mb-2">Суммы возвратов:</div>
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-slate-700">Текущий период:</span>
-                          <span className="font-bold text-red-600">{returnData[selectedPeriod as keyof typeof returnData].amount.current}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-slate-700">Прошлый период:</span>
-                          <span className="font-medium text-slate-500">{returnData[selectedPeriod as keyof typeof returnData].amount.previous}</span>
-                        </div>
-                        <div className="flex items-center justify-between border-t border-red-200 pt-1 mt-2">
-                          <span className="text-xs text-slate-600">Средний возврат:</span>
-                          <span className="font-medium text-red-700">{returnData[selectedPeriod as keyof typeof returnData].avgReturn.current}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="text-xs text-slate-500">
-                      штук возвращено • {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от продаж
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
 
               {/* Life Time */}
               <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-purple-50 to-violet-100 border-0 shadow-lg">
@@ -1745,36 +1686,93 @@ const Index = () => {
               </Card>
             </div>
 
-            {/* Сводка по лояльности - North Star Метрика (уменьшенная) */}
-            <Card className="p-4 bg-gradient-to-br from-indigo-50 to-purple-50">
-              <CardTitle className="flex items-center gap-2 mb-4 text-sm">
-                <Icon name="Award" size={16} />
-                North Star Метрика
+            {/* Ключевая метрика возвратов */}
+            <Card className="p-6 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="RotateCcw" size={20} className="text-red-600" />
+                Ключевая метрика: Возвраты
               </CardTitle>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div className="text-center">
-                  <div className="text-xl font-bold text-indigo-600 mb-1">89%</div>
-                  <div className="text-xs text-slate-600 font-medium">Индекс лояльности</div>
-                  <div className="text-xs text-slate-500">+12%</div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Основные показатели */}
+                <div className="space-y-4">
+                  <div className="bg-white rounded-lg p-4 border-2 border-red-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-3xl font-bold text-red-700">
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
+                      </span>
+                      <Badge variant="default" className={`text-sm ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
+                      </Badge>
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      Количество возвратов за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-2">
+                      {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от общих продаж
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="text-center p-3 bg-white rounded-lg border">
+                      <div className="text-lg font-bold text-slate-900">
+                        {returnData[selectedPeriod as keyof typeof returnData].percentage.previous}
+                      </div>
+                      <div className="text-xs text-slate-600">прошлый период</div>
+                    </div>
+                    <div className="text-center p-3 bg-white rounded-lg border">
+                      <div className="text-lg font-bold text-green-700">
+                        {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value}
+                      </div>
+                      <div className="text-xs text-slate-600">vs конкуренты</div>
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="text-center">
-                  <div className="text-xl font-bold text-purple-600 mb-1">76%</div>
-                  <div className="text-xs text-slate-600 font-medium">Возвращающиеся</div>
-                  <div className="text-xs text-slate-500">+8%</div>
+
+                {/* Суммы возвратов */}
+                <div className="space-y-4">
+                  <div className="bg-red-100 rounded-lg p-4 border-2 border-red-300">
+                    <div className="text-sm font-medium text-red-800 mb-3">Суммы возвратов:</div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Текущий:</span>
+                        <span className="font-bold text-red-700">{returnData[selectedPeriod as keyof typeof returnData].amount.current}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Прошлый:</span>
+                        <span className="font-medium text-slate-600">{returnData[selectedPeriod as keyof typeof returnData].amount.previous}</span>
+                      </div>
+                      <div className="border-t border-red-300 pt-2 mt-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-red-800">Изменение:</span>
+                          <span className={`font-bold ${returnData[selectedPeriod as keyof typeof returnData].amount.change.startsWith('+') ? 'text-red-600' : 'text-green-600'}`}>
+                            {returnData[selectedPeriod as keyof typeof returnData].amount.change}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-lg p-4 border">
+                    <div className="text-sm font-medium text-slate-700 mb-2">Средний размер возврата:</div>
+                    <div className="text-2xl font-bold text-red-600">
+                      {returnData[selectedPeriod as keyof typeof returnData].avgReturn.current}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      за один возвращенный товар
+                    </div>
+                  </div>
                 </div>
-                
-                <div className="text-center">
-                  <div className="text-xl font-bold text-blue-600 mb-1">4.7</div>
-                  <div className="text-xs text-slate-600 font-medium">NPS Score</div>
-                  <div className="text-xs text-slate-500">+0.3</div>
+              </div>
+
+              {/* Почему это ключевая метрика */}
+              <div className="mt-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="Target" size={16} className="text-amber-600" />
+                  <span className="font-semibold text-amber-800">Почему возвраты — ключевая метрика:</span>
                 </div>
-                
-                <div className="text-center">
-                  <div className="text-xl font-bold text-green-600 mb-1">68%</div>
-                  <div className="text-xs text-slate-600 font-medium">Рекомендующие</div>
-                  <div className="text-xs text-slate-500">+15%</div>
+                <div className="text-sm text-slate-700">
+                  Показатель качества товаров, сервиса и удовлетворённости клиентов. Снижение возвратов напрямую влияет на прибыль и лояльность.
                 </div>
               </div>
             </Card>
