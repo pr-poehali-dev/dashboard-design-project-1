@@ -2095,7 +2095,7 @@ const Index = () => {
                   <Icon name="TrendingUp" size={20} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-purple-900">Когорты доходов ваших клиентов</h3>
+                  <h3 className="text-lg font-bold text-purple-900">Когорты доходов клиентов</h3>
                   <p className="text-sm text-purple-700 mt-1">Распределение клиентов по уровню дохода с динамикой</p>
                 </div>
               </CardTitle>
@@ -2107,238 +2107,217 @@ const Index = () => {
 
             {/* Заголовки таблицы */}
             <div className="bg-white rounded-lg border border-purple-200 overflow-hidden">
-              <div className="grid grid-cols-5 gap-4 p-4 bg-purple-100 border-b border-purple-200 font-semibold text-purple-900 text-sm">
+              <div className="grid grid-cols-4 gap-3 p-3 bg-purple-100 border-b border-purple-200 font-semibold text-purple-900 text-sm">
                 <div>Диапазон дохода</div>
-                <div className="text-center">Количество клиентов</div>
-                <div className="text-center">Доля от общего</div>
-                <div className="text-center">Изменение количества</div>
-                <div className="text-center">Изменение доли</div>
+                <div className="text-center">Клиенты / Доля</div>
+                <div className="text-center">Покупки за период</div>
+                <div className="text-center">Изменения</div>
               </div>
 
               {/* Строки данных когорт */}
               <div className="divide-y divide-purple-100">
                 {/* До 20 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">До 20 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">2 847</span>
+                    <div className="font-semibold text-slate-900">2 847</div>
+                    <div className="text-xs text-slate-600">18.2%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">18.2%</span>
+                    <div className="font-medium text-slate-900">8 547</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-red-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowDown" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowDown" size={12} />
                       -156 (-5.2%)
-                    </span>
-                  </div>
-                  <div className="text-center text-red-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowDown" size={14} />
-                      -0.8%
-                    </span>
+                    </div>
+                    <div className="text-xs text-red-600">доля: -0.8%</div>
                   </div>
                 </div>
 
                 {/* 20 000 - 50 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">20 000 - 50 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">4 523</span>
+                    <div className="font-semibold text-slate-900">4 523</div>
+                    <div className="text-xs text-slate-600">28.9%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">28.9%</span>
+                    <div className="font-medium text-slate-900">13 672</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +89 (+2.0%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.3%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.3%</div>
                   </div>
                 </div>
 
                 {/* 50 000 - 100 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">50 000 - 100 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">3 682</span>
+                    <div className="font-semibold text-slate-900">3 682</div>
+                    <div className="text-xs text-slate-600">23.5%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">23.5%</span>
+                    <div className="font-medium text-slate-900">11 256</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +247 (+7.2%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +1.4%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +1.4%</div>
                   </div>
                 </div>
 
                 {/* 100 000 - 300 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">100 000 - 300 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">2 156</span>
+                    <div className="font-semibold text-slate-900">2 156</div>
+                    <div className="text-xs text-slate-600">13.8%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">13.8%</span>
+                    <div className="font-medium text-slate-900">6 823</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +134 (+6.6%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.9%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.9%</div>
                   </div>
                 </div>
 
                 {/* 300 000 - 600 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">300 000 - 600 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">1 289</span>
+                    <div className="font-semibold text-slate-900">1 289</div>
+                    <div className="text-xs text-slate-600">8.2%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">8.2%</span>
+                    <div className="font-medium text-slate-900">4 142</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +78 (+6.4%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.5%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.5%</div>
                   </div>
                 </div>
 
                 {/* 600 000 - 900 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">600 000 - 900 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">547</span>
+                    <div className="font-semibold text-slate-900">547</div>
+                    <div className="text-xs text-slate-600">3.5%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">3.5%</span>
+                    <div className="font-medium text-slate-900">1 892</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +29 (+5.6%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.2%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.2%</div>
                   </div>
                 </div>
 
                 {/* 900 000 - 1 200 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">900 000 - 1 200 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">287</span>
+                    <div className="font-semibold text-slate-900">287</div>
+                    <div className="text-xs text-slate-600">1.8%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">1.8%</span>
+                    <div className="font-medium text-slate-900">1 023</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +15 (+5.5%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.1%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.1%</div>
                   </div>
                 </div>
 
                 {/* 1 200 000 - 1 500 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors">
                   <div className="font-medium text-slate-900">1 200 000 - 1 500 000 ₽</div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">143</span>
+                    <div className="font-semibold text-slate-900">143</div>
+                    <div className="text-xs text-slate-600">0.9%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-slate-900">0.9%</span>
+                    <div className="font-medium text-slate-900">534</div>
+                    <div className="text-xs text-slate-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +8 (+5.9%)
-                    </span>
-                  </div>
-                  <div className="text-center text-slate-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      0.0%
-                    </span>
+                    </div>
+                    <div className="text-xs text-slate-600">доля: 0.0%</div>
                   </div>
                 </div>
 
                 {/* Более 1 500 000 ₽ */}
-                <div className="grid grid-cols-5 gap-4 p-4 hover:bg-purple-25 transition-colors bg-gradient-to-r from-amber-25 to-yellow-25">
+                <div className="grid grid-cols-4 gap-3 p-3 hover:bg-purple-25 transition-colors bg-gradient-to-r from-amber-25 to-yellow-25">
                   <div className="font-medium text-slate-900 flex items-center gap-2">
                     Более 1 500 000 ₽
                     <Icon name="Crown" size={16} className="text-amber-600" />
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-amber-700">189</span>
+                    <div className="font-semibold text-amber-700">189</div>
+                    <div className="text-xs text-amber-600">1.2%</div>
                   </div>
                   <div className="text-center">
-                    <span className="font-semibold text-amber-700">1.2%</span>
+                    <div className="font-medium text-amber-700">723</div>
+                    <div className="text-xs text-amber-600">покупок</div>
                   </div>
                   <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
+                    <div className="flex items-center justify-center gap-1 text-sm">
+                      <Icon name="ArrowUp" size={12} />
                       +12 (+6.8%)
-                    </span>
-                  </div>
-                  <div className="text-center text-green-600 font-medium">
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="ArrowUp" size={14} />
-                      +0.1%
-                    </span>
+                    </div>
+                    <div className="text-xs text-green-600">доля: +0.1%</div>
                   </div>
                 </div>
               </div>
 
               {/* Итоговая строка */}
-              <div className="grid grid-cols-5 gap-4 p-4 bg-purple-100 border-t-2 border-purple-300 font-bold text-purple-900">
+              <div className="grid grid-cols-4 gap-3 p-3 bg-purple-100 border-t-2 border-purple-300 font-bold text-purple-900">
                 <div>ИТОГО</div>
-                <div className="text-center">15 663</div>
-                <div className="text-center">100.0%</div>
-                <div className="text-center text-green-600">
-                  <span className="flex items-center justify-center gap-1">
-                    <Icon name="ArrowUp" size={14} />
-                    +456 (+3.0%)
-                  </span>
+                <div className="text-center">
+                  <div>15 663</div>
+                  <div className="text-xs font-normal">100.0%</div>
                 </div>
-                <div className="text-center">—</div>
+                <div className="text-center">
+                  <div>47 612</div>
+                  <div className="text-xs font-normal">покупок</div>
+                </div>
+                <div className="text-center text-green-600">
+                  <div className="flex items-center justify-center gap-1">
+                    <Icon name="ArrowUp" size={12} />
+                    +456 (+3.0%)
+                  </div>
+                  <div className="text-xs font-normal">—</div>
+                </div>
               </div>
             </div>
 
