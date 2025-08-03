@@ -2363,7 +2363,7 @@ const Index = () => {
           {/* Детальный анализ кошелька */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Структура трат в сегменте */}
-            <Card className="p-6">
+            <Card className="p-6 w-full">
               <CardTitle className="flex items-center gap-2 mb-6">
                 <Icon name="BarChart4" size={20} />
                 Структура трат в сегменте
@@ -2428,77 +2428,99 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Детализированная структура трат */}
+                {/* Детализированная структура трат - горизонтальная */}
                 <div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-4">Структура трат по категориям</h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-amber-500 rounded-full"></div>
-                        <div>
-                          <span className="text-sm font-medium text-slate-900">Рестораны премиум-класса</span>
-                          <div className="text-xs text-slate-600">Средний чек: 4,200₽</div>
+                  
+                  {/* Горизонтальные полосы трат */}
+                  <div className="space-y-4">
+                    {/* Рестораны премиум */}
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-100 p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-amber-500 rounded-full"></div>
+                          <span className="font-medium text-slate-900">Рестораны премиум-класса</span>
+                          <span className="text-xs text-slate-600 bg-white px-2 py-1 rounded">средний чек: 4,200₽</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '12,000₽' : selectedPeriod === 'week' ? '3,000₽' : selectedPeriod === 'quarter' ? '37,000₽' : '154,000₽'}</div>
+                          <div className="text-xs text-amber-600 font-medium">42% от трат</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '12,000₽' : selectedPeriod === 'week' ? '3,000₽' : selectedPeriod === 'quarter' ? '37,000₽' : '154,000₽'}</div>
-                        <div className="text-xs text-amber-600 font-medium">42% от трат</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border border-red-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                        <div>
-                          <span className="text-sm font-medium text-slate-900">Фастфуд и сети</span>
-                          <div className="text-xs text-slate-600">Средний чек: 650₽</div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '8,500₽' : selectedPeriod === 'week' ? '2,125₽' : selectedPeriod === 'quarter' ? '25,500₽' : '102,000₽'}</div>
-                        <div className="text-xs text-red-600 font-medium">28% от трат</div>
+                      <div className="w-full bg-amber-200 rounded-full h-2">
+                        <div className="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full" style={{width: '42%'}}></div>
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                        <div>
-                          <span className="text-sm font-medium text-slate-900">Кафе и бары</span>
-                          <div className="text-xs text-slate-600">Средний чек: 1,850₽</div>
+                    {/* Фастфуд */}
+                    <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border border-red-100 p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                          <span className="font-medium text-slate-900">Фастфуд и сети</span>
+                          <span className="text-xs text-slate-600 bg-white px-2 py-1 rounded">средний чек: 650₽</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '8,500₽' : selectedPeriod === 'week' ? '2,125₽' : selectedPeriod === 'quarter' ? '25,500₽' : '102,000₽'}</div>
+                          <div className="text-xs text-red-600 font-medium">28% от трат</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '5,200₽' : selectedPeriod === 'week' ? '1,300₽' : selectedPeriod === 'quarter' ? '15,600₽' : '62,400₽'}</div>
-                        <div className="text-xs text-blue-600 font-medium">17% от трат</div>
+                      <div className="w-full bg-red-200 rounded-full h-2">
+                        <div className="bg-gradient-to-r from-red-500 to-pink-500 h-2 rounded-full" style={{width: '28%'}}></div>
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                        <div>
-                          <span className="text-sm font-medium text-slate-900">Доставка еды</span>
-                          <div className="text-xs text-slate-600">Средний чек: 1,120₽</div>
+                    {/* Кафе и бары */}
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100 p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                          <span className="font-medium text-slate-900">Кафе и бары</span>
+                          <span className="text-xs text-slate-600 bg-white px-2 py-1 rounded">средний чек: 1,850₽</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '5,200₽' : selectedPeriod === 'week' ? '1,300₽' : selectedPeriod === 'quarter' ? '15,600₽' : '62,400₽'}</div>
+                          <div className="text-xs text-blue-600 font-medium">17% от трат</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '2,800₽' : selectedPeriod === 'week' ? '700₽' : selectedPeriod === 'quarter' ? '8,400₽' : '33,600₽'}</div>
-                        <div className="text-xs text-green-600 font-medium">9% от трат</div>
+                      <div className="w-full bg-blue-200 rounded-full h-2">
+                        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style={{width: '17%'}}></div>
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg border border-purple-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
-                        <div>
-                          <span className="text-sm font-medium text-slate-900">Прочие категории</span>
-                          <div className="text-xs text-slate-600">Кофейни, стрит-фуд</div>
+                    {/* Доставка еды */}
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-100 p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                          <span className="font-medium text-slate-900">Доставка еды</span>
+                          <span className="text-xs text-slate-600 bg-white px-2 py-1 rounded">средний чек: 1,120₽</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '2,800₽' : selectedPeriod === 'week' ? '700₽' : selectedPeriod === 'quarter' ? '8,400₽' : '33,600₽'}</div>
+                          <div className="text-xs text-green-600 font-medium">9% от трат</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '1,500₽' : selectedPeriod === 'week' ? '375₽' : selectedPeriod === 'quarter' ? '4,500₽' : '18,000₽'}</div>
-                        <div className="text-xs text-purple-600 font-medium">4% от трат</div>
+                      <div className="w-full bg-green-200 rounded-full h-2">
+                        <div className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style={{width: '9%'}}></div>
+                      </div>
+                    </div>
+
+                    {/* Прочие категории */}
+                    <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg border border-purple-100 p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+                          <span className="font-medium text-slate-900">Прочие категории</span>
+                          <span className="text-xs text-slate-600 bg-white px-2 py-1 rounded">кофейни, стрит-фуд</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '1,500₽' : selectedPeriod === 'week' ? '375₽' : selectedPeriod === 'quarter' ? '4,500₽' : '18,000₽'}</div>
+                          <div className="text-xs text-purple-600 font-medium">4% от трат</div>
+                        </div>
+                      </div>
+                      <div className="w-full bg-purple-200 rounded-full h-2">
+                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 h-2 rounded-full" style={{width: '4%'}}></div>
                       </div>
                     </div>
                   </div>
