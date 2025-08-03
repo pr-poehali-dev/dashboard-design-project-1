@@ -194,6 +194,53 @@ const Index = () => {
     }
   };
 
+  // Данные рынка
+  const marketShareData = {
+    week: {
+      ourShare: { value: "12.8%", change: "+0.3%", trend: [12.2, 12.3, 12.5, 12.6, 12.7, 12.8, 12.8] },
+      totalMarketSize: { value: "2.8 млрд ₽", change: "+2.1%", trend: [2.65, 2.68, 2.72, 2.75, 2.77, 2.80, 2.80] },
+      position: { value: "3-е место", change: "без изменений", competitors: ["Конкурент A (18.5%)", "Конкурент B (15.2%)", "Мы (12.8%)", "Конкурент C (11.4%)"] }
+    },
+    month: {
+      ourShare: { value: "13.2%", change: "+0.8%", trend: [12.1, 12.4, 12.7, 13.0, 13.1, 13.2, 13.2] },
+      totalMarketSize: { value: "11.5 млрд ₽", change: "+3.4%", trend: [10.8, 11.0, 11.2, 11.3, 11.4, 11.5, 11.5] },
+      position: { value: "3-е место", change: "↑ с 4-го места", competitors: ["Конкурент A (18.1%)", "Конкурент B (14.8%)", "Мы (13.2%)", "Конкурент C (11.9%)"] }
+    },
+    quarter: {
+      ourShare: { value: "13.7%", change: "+1.5%", trend: [11.8, 12.2, 12.8, 13.2, 13.5, 13.7, 13.7] },
+      totalMarketSize: { value: "34.2 млрд ₽", change: "+5.2%", trend: [31.5, 32.0, 32.8, 33.5, 34.0, 34.2, 34.2] },
+      position: { value: "2-е место", change: "↑ с 3-го места", competitors: ["Конкурент A (17.3%)", "Мы (13.7%)", "Конкурент B (13.1%)", "Конкурент C (12.4%)"] }
+    },
+    year: {
+      ourShare: { value: "14.1%", change: "+2.3%", trend: [11.2, 11.8, 12.5, 13.1, 13.6, 14.1, 14.1] },
+      totalMarketSize: { value: "142.8 млрд ₽", change: "+7.8%", trend: [125, 130, 135, 138, 141, 142.8, 142.8] },
+      position: { value: "2-е место", change: "↑ с 4-го места", competitors: ["Конкурент A (16.8%)", "Мы (14.1%)", "Конкурент B (12.9%)", "Конкурент C (12.1%)"] }
+    }
+  };
+
+  const marketGrowthData = {
+    week: {
+      overallGrowth: { value: "+2.1%", description: "рост рынка", trend: [1.5, 1.7, 1.9, 2.0, 2.1, 2.1, 2.1] },
+      ourGrowth: { value: "+2.4%", description: "наш рост", trend: [1.8, 2.0, 2.2, 2.3, 2.4, 2.4, 2.4] },
+      forecast: { value: "+2.3%", description: "прогноз на неделю", segment: "Питание вне дома" }
+    },
+    month: {
+      overallGrowth: { value: "+3.4%", description: "рост рынка", trend: [2.8, 3.0, 3.2, 3.3, 3.4, 3.4, 3.4] },
+      ourGrowth: { value: "+4.2%", description: "наш рост", trend: [3.5, 3.7, 3.9, 4.0, 4.1, 4.2, 4.2] },
+      forecast: { value: "+3.8%", description: "прогноз на месяц", segment: "Питание вне дома" }
+    },
+    quarter: {
+      overallGrowth: { value: "+5.2%", description: "рост рынка", trend: [4.1, 4.5, 4.8, 5.0, 5.1, 5.2, 5.2] },
+      ourGrowth: { value: "+6.8%", description: "наш рост", trend: [5.2, 5.8, 6.2, 6.5, 6.7, 6.8, 6.8] },
+      forecast: { value: "+5.8%", description: "прогноз на квартал", segment: "Питание вне дома" }
+    },
+    year: {
+      overallGrowth: { value: "+7.8%", description: "рост рынка", trend: [5.5, 6.2, 6.8, 7.2, 7.5, 7.8, 7.8] },
+      ourGrowth: { value: "+11.2%", description: "наш рост", trend: [7.8, 8.5, 9.2, 10.1, 10.8, 11.2, 11.2] },
+      forecast: { value: "+8.5%", description: "прогноз на год", segment: "Питание вне дома" }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -247,13 +294,20 @@ const Index = () => {
       {/* Main Dashboard */}
       <Tabs defaultValue="key-insights" className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-4 mb-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-11 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-12 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
             <TabsTrigger 
               value="key-insights" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-amber-500 data-[state=active]:text-white transition-all duration-200 h-auto"
             >
               <Icon name="TrendingUp" size={18} />
               <span className="text-xs font-medium">Ключевое</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="market" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-red-500 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="BarChart2" size={18} />
+              <span className="text-xs font-medium">Рынок</span>
             </TabsTrigger>
             <TabsTrigger 
               value="clients" 
@@ -1885,6 +1939,220 @@ const Index = () => {
           </Card>
         </TabsContent>
 
+        {/* Рынок */}
+        <TabsContent value="market" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-xl border-l-4 border-red-500">
+            <Icon name="BarChart2" size={24} className="text-red-600" />
+            <div>
+              <h2 className="text-xl font-bold text-red-900">Рыночная позиция</h2>
+              <p className="text-sm text-red-700">Анализ доли рынка и темпов роста сегмента</p>
+            </div>
+          </div>
+
+          {/* Рыночная доля */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <Card className="p-6 bg-gradient-to-br from-red-50 to-orange-50">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="PieChart" size={20} className="text-red-600" />
+                Рыночная доля
+              </CardTitle>
+              
+              <div className="space-y-6">
+                {/* Основные показатели */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-white rounded-lg border">
+                    <div className="text-3xl font-bold text-red-600 mb-2">
+                      {marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.value}
+                    </div>
+                    <div className="text-sm text-slate-600 font-medium">Наша доля</div>
+                    <div className="text-xs text-red-600 mt-1">
+                      {marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.change}
+                    </div>
+                  </div>
+                  
+                  <div className="text-center p-4 bg-white rounded-lg border">
+                    <div className="text-3xl font-bold text-slate-700 mb-2">
+                      {marketShareData[selectedPeriod as keyof typeof marketShareData].totalMarketSize.value}
+                    </div>
+                    <div className="text-sm text-slate-600 font-medium">Размер рынка</div>
+                    <div className="text-xs text-green-600 mt-1">
+                      {marketShareData[selectedPeriod as keyof typeof marketShareData].totalMarketSize.change}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Позиция среди конкурентов */}
+                <div className="bg-white rounded-lg p-4 border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon name="Trophy" size={16} className="text-amber-500" />
+                    <span className="font-semibold text-slate-700">Позиция: {marketShareData[selectedPeriod as keyof typeof marketShareData].position.value}</span>
+                    <Badge variant="outline" className="text-xs">
+                      {marketShareData[selectedPeriod as keyof typeof marketShareData].position.change}
+                    </Badge>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    {marketShareData[selectedPeriod as keyof typeof marketShareData].position.competitors.map((competitor, index) => (
+                      <div key={index} className={`flex items-center justify-between p-2 rounded text-sm ${index === 1 ? 'bg-red-50 border border-red-200' : 'bg-slate-50'}`}>
+                        <span className={`${index === 1 ? 'font-semibold text-red-700' : 'text-slate-600'}`}>
+                          {index + 1}. {competitor.split(' (')[0]}
+                        </span>
+                        <span className={`font-medium ${index === 1 ? 'text-red-600' : 'text-slate-500'}`}>
+                          {competitor.match(/\((.*?)\)/)?.[1]}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Тренд доли */}
+                <div className="bg-white rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-slate-700 mb-3">Динамика доли рынка</div>
+                  <div className="flex items-end gap-1 h-12">
+                    {marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.trend.map((point, index) => {
+                      const maxValue = Math.max(...marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.trend);
+                      const normalizedHeight = (point / maxValue) * 100;
+                      return (
+                        <div
+                          key={index}
+                          className="bg-gradient-to-t from-red-500 to-pink-400 rounded-t-sm"
+                          style={{ height: `${Math.max(normalizedHeight, 15)}%`, width: '12px' }}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-2">
+                    Рост {marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.change} за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Темпы роста рынка */}
+            <Card className="p-6 bg-gradient-to-br from-purple-50 to-indigo-50">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="TrendingUp" size={20} className="text-purple-600" />
+                Темпы роста рынка
+              </CardTitle>
+              
+              <div className="space-y-6">
+                {/* Сравнение роста */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="text-center p-4 bg-white rounded-lg border">
+                    <div className="text-3xl font-bold text-purple-600 mb-2">
+                      {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value}
+                    </div>
+                    <div className="text-sm text-slate-600 font-medium">Рост всего рынка</div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.description}
+                    </div>
+                  </div>
+                  
+                  <div className="text-center p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                    <div className="text-3xl font-bold text-green-600 mb-2">
+                      {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.value}
+                    </div>
+                    <div className="text-sm text-slate-600 font-medium">Наш рост</div>
+                    <div className="text-xs text-green-600 mt-1 font-medium">
+                      Опережаем рынок на {(parseFloat(marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.value) - parseFloat(marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value)).toFixed(1)}%
+                    </div>
+                  </div>
+                </div>
+
+                {/* Прогноз */}
+                <div className="bg-white rounded-lg p-4 border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon name="Crystal" size={16} className="text-indigo-500" />
+                    <span className="font-semibold text-slate-700">Прогноз роста</span>
+                  </div>
+                  <div className="text-2xl font-bold text-indigo-600 mb-2">
+                    {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].forecast.value}
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].forecast.description}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-2">
+                    Сегмент: {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].forecast.segment}
+                  </div>
+                </div>
+
+                {/* Тренд роста рынка */}
+                <div className="bg-white rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-slate-700 mb-3">Динамика роста рынка vs наш рост</div>
+                  <div className="space-y-3">
+                    <div>
+                      <div className="text-xs text-slate-500 mb-1">Рост рынка</div>
+                      <div className="flex items-end gap-1 h-8">
+                        {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.trend.map((point, index) => {
+                          const maxValue = Math.max(...marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.trend);
+                          const normalizedHeight = (point / maxValue) * 100;
+                          return (
+                            <div
+                              key={index}
+                              className="bg-gradient-to-t from-purple-500 to-purple-300 rounded-t-sm"
+                              style={{ height: `${Math.max(normalizedHeight, 15)}%`, width: '10px' }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="text-xs text-slate-500 mb-1">Наш рост</div>
+                      <div className="flex items-end gap-1 h-8">
+                        {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.trend.map((point, index) => {
+                          const maxValue = Math.max(...marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.trend);
+                          const normalizedHeight = (point / maxValue) * 100;
+                          return (
+                            <div
+                              key={index}
+                              className="bg-gradient-to-t from-green-500 to-green-300 rounded-t-sm"
+                              style={{ height: `${Math.max(normalizedHeight, 15)}%`, width: '10px' }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Ключевые выводы по рынку */}
+          <Card className="p-5 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200">
+            <div className="flex items-center gap-2 mb-3">
+              <Icon name="Target" size={18} className="text-red-600" />
+              <h3 className="font-bold text-red-800">Ключевые изменения рыночной позиции</h3>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-green-700">Опережаем рынок по росту:</span>
+                  <span className="text-slate-700 ml-1">Наш рост {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.value} против {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value} по рынку — опережение на {(parseFloat(marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].ourGrowth.value) - parseFloat(marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value)).toFixed(1)}% позволяет увеличивать долю рынка</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-blue-700">Укрепляем позиции среди лидеров:</span>
+                  <span className="text-slate-700 ml-1">Поднялись с {selectedPeriod === 'year' ? '4-го' : '3-го'} на {marketShareData[selectedPeriod as keyof typeof marketShareData].position.value}, доля выросла до {marketShareData[selectedPeriod as keyof typeof marketShareData].ourShare.value} — стратегия работает эффективнее конкурентов</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div>
+                  <span className="font-semibold text-purple-700">Растущий рынок создаёт возможности:</span>
+                  <span className="text-slate-700 ml-1">Сегмент "питание вне дома" растёт на {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value} ({marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].totalMarketSize?.value || marketShareData[selectedPeriod as keyof typeof marketShareData].totalMarketSize.value}) — есть пространство для дальнейшего роста без прямой конкуренции за существующих клиентов</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
 
         {/* Обзор */}
         <TabsContent value="overview" className="space-y-6">
