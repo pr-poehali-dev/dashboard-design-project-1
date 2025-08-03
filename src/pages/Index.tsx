@@ -492,13 +492,7 @@ const Index = () => {
               <Icon name="Users" size={18} />
               <span className="text-xs font-medium">Клиенты</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="loyalty" 
-              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-200 h-auto"
-            >
-              <Icon name="Heart" size={18} />
-              <span className="text-xs font-medium">Лояльность</span>
-            </TabsTrigger>
+
             <TabsTrigger 
               value="wallet" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-orange-500 data-[state=active]:text-white transition-all duration-200 h-auto"
@@ -1786,16 +1780,7 @@ const Index = () => {
           </div>
         </TabsContent>
 
-        {/* Лояльность */}
-        <TabsContent value="loyalty" className="space-y-6">
-          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
-            <Icon name="Heart" size={24} className="text-blue-600" />
-            <div>
-              <h2 className="text-xl font-bold text-blue-900">Анализ лояльности клиентов</h2>
-              <p className="text-sm text-blue-700">Вкладка временно пуста - контент перенесён в раздел "Клиенты"</p>
-            </div>
-          </div>
-        </TabsContent>
+
 
         {/* Кошелек клиента */}
         <TabsContent value="wallet" className="space-y-6">
