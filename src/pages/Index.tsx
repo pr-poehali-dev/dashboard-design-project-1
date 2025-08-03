@@ -3959,6 +3959,395 @@ const Index = () => {
               </div>
             </Card>
           </div>
+
+          {/* Дополнительные демографические блоки */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Образование */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="GraduationCap" size={20} className="text-blue-600" />
+                Образование
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Преобладающий уровень</div>
+                  <div className="text-2xl font-bold text-blue-700 mb-1">Высшее</div>
+                  <div className="text-sm text-green-600 font-medium">67% клиентской базы</div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Распределение по уровням образования */}
+                  <div className="bg-slate-50 rounded-lg p-3">
+                    <div className="text-sm font-medium text-slate-700 mb-3">Распределение по уровням</div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Высшее образование</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-blue-500 h-2 rounded-full" style={{width: '67%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">67%</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Среднее специальное</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-indigo-500 h-2 rounded-full" style={{width: '22%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">22%</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Среднее общее</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-purple-500 h-2 rounded-full" style={{width: '8%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">8%</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Ученые степени</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-amber-500 h-2 rounded-full" style={{width: '3%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">3%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Специализация */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-100">
+                    <div className="text-sm font-medium text-blue-700 mb-2 flex items-center gap-2">
+                      <Icon name="BookOpen" size={14} />
+                      Популярные специализации
+                    </div>
+                    <div className="space-y-1 text-xs text-slate-600">
+                      <div className="flex justify-between">
+                        <span>Экономика и управление</span>
+                        <span className="font-medium">28%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>IT и инженерия</span>
+                        <span className="font-medium">24%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Гуманитарные науки</span>
+                        <span className="font-medium">19%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Медицина и фармация</span>
+                        <span className="font-medium">16%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Прочие</span>
+                        <span className="font-medium">13%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Условия проживания */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Home" size={20} className="text-emerald-600" />
+                Условия проживания
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-emerald-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Тип жилья</div>
+                  <div className="text-2xl font-bold text-emerald-700 mb-1">Собственная квартира</div>
+                  <div className="text-sm text-green-600 font-medium">78% клиентов</div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Типы жилья */}
+                  <div className="bg-slate-50 rounded-lg p-3">
+                    <div className="text-sm font-medium text-slate-700 mb-3">Распределение по типам жилья</div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Собственная квартира</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-emerald-500 h-2 rounded-full" style={{width: '78%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">78%</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Частный дом</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-green-500 h-2 rounded-full" style={{width: '12%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">12%</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Съемная квартира</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-blue-500 h-2 rounded-full" style={{width: '8%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">8%</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-700">Прочее</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 bg-slate-200 rounded-full h-2">
+                            <div className="bg-slate-500 h-2 rounded-full" style={{width: '2%'}}></div>
+                          </div>
+                          <span className="text-sm font-bold text-slate-900">2%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Инфраструктура района */}
+                  <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-3 border border-emerald-100">
+                    <div className="text-sm font-medium text-emerald-700 mb-2 flex items-center gap-2">
+                      <Icon name="MapPin" size={14} />
+                      Инфраструктура района
+                    </div>
+                    <div className="space-y-1 text-xs text-slate-600">
+                      <div className="flex justify-between">
+                        <span>Развитая транспортная сеть</span>
+                        <span className="font-medium text-green-600">89%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Торговые центры в радиусе 3км</span>
+                        <span className="font-medium text-green-600">74%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Медицинские учреждения</span>
+                        <span className="font-medium text-green-600">82%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Образовательные учреждения</span>
+                        <span className="font-medium text-green-600">76%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Спортивные объекты</span>
+                        <span className="font-medium text-yellow-600">45%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Интерактивный конструктор портрета */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Sliders" size={20} className="text-violet-600" />
+              Конструктор портрета клиента
+            </CardTitle>
+            
+            <div className="space-y-6">
+              <div className="bg-violet-50 rounded-lg p-4 border border-violet-100">
+                <div className="text-sm text-violet-700 mb-2">Выберите характеристики для анализа портрета</div>
+                <div className="text-xs text-slate-600">Система автоматически покажет статистику и инсайты по выбранным параметрам</div>
+              </div>
+
+              {/* Фильтры портрета */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Пол */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Пол</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="male">Мужчины</option>
+                    <option value="female">Женщины</option>
+                  </select>
+                </div>
+
+                {/* Возраст */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Возраст</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все возрасты</option>
+                    <option value="18-25">18-25 лет</option>
+                    <option value="26-35">26-35 лет</option>
+                    <option value="36-45">36-45 лет</option>
+                    <option value="46-55">46-55 лет</option>
+                    <option value="55+">55+ лет</option>
+                  </select>
+                </div>
+
+                {/* Наличие детей */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Наличие детей</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="with-children">С детьми</option>
+                    <option value="no-children">Без детей</option>
+                  </select>
+                </div>
+
+                {/* Наличие автомобиля */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Наличие автомобиля</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="has-car">Есть автомобиль</option>
+                    <option value="no-car">Нет автомобиля</option>
+                  </select>
+                </div>
+
+                {/* Наличие недвижимости */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Наличие недвижимости</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="has-property">Есть недвижимость</option>
+                    <option value="no-property">Нет недвижимости</option>
+                  </select>
+                </div>
+
+                {/* Выезды за границу */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Выезды за границу</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="travels">Путешествует</option>
+                    <option value="no-travels">Не путешествует</option>
+                  </select>
+                </div>
+
+                {/* Покупки вне маркетплейсов */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Покупки вне маркетплейсов</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="offline-buyer">Покупает офлайн</option>
+                    <option value="online-only">Только онлайн</option>
+                  </select>
+                </div>
+
+                {/* Частота покупок у конкурентов */}
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Покупки у конкурентов</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="loyal">Только у нас</option>
+                    <option value="multi-brand">Мультибрендовые</option>
+                    <option value="competitor-focused">В основном у конкурентов</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Результаты анализа портрета */}
+              <div className="bg-slate-50 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Icon name="BarChart3" size={18} className="text-slate-600" />
+                  <h4 className="font-semibold text-slate-900">Результаты анализа выбранного портрета</h4>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="bg-white rounded-lg p-4 border border-slate-200">
+                    <div className="text-sm text-slate-600 mb-1">Размер сегмента</div>
+                    <div className="text-2xl font-bold text-slate-900">15,234</div>
+                    <div className="text-sm text-green-600">12.8% от базы</div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 border border-slate-200">
+                    <div className="text-sm text-slate-600 mb-1">Средний чек</div>
+                    <div className="text-2xl font-bold text-slate-900">3,450₽</div>
+                    <div className="text-sm text-green-600">+21% к среднему</div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 border border-slate-200">
+                    <div className="text-sm text-slate-600 mb-1">LTV</div>
+                    <div className="text-2xl font-bold text-slate-900">28,900₽</div>
+                    <div className="text-sm text-green-600">+15% к среднему</div>
+                  </div>
+                </div>
+
+                {/* Ключевые характеристики сегмента */}
+                <div className="bg-white rounded-lg p-4 border border-slate-200">
+                  <div className="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                    <Icon name="Users" size={14} />
+                    Ключевые характеристики выбранного сегмента
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Средний возраст:</span>
+                        <span className="font-medium">32 года</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Преобладающий пол:</span>
+                        <span className="font-medium">Женщины (68%)</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">С детьми:</span>
+                        <span className="font-medium">72%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Есть автомобиль:</span>
+                        <span className="font-medium">84%</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Путешествуют:</span>
+                        <span className="font-medium">91%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Покупают офлайн:</span>
+                        <span className="font-medium">45%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Лояльность:</span>
+                        <span className="font-medium text-green-600">Высокая</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Чувствительность к цене:</span>
+                        <span className="font-medium text-orange-600">Средняя</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Рекомендации */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 mt-4">
+                  <div className="text-sm font-semibold text-green-800 mb-2 flex items-center gap-2">
+                    <Icon name="Lightbulb" size={14} />
+                    Рекомендации для работы с сегментом
+                  </div>
+                  <div className="space-y-1 text-sm text-green-700">
+                    <div className="flex items-start gap-2">
+                      <Icon name="CheckCircle" size={12} className="mt-0.5 flex-shrink-0" />
+                      <span>Фокус на семейные ценности и детские товары</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="CheckCircle" size={12} className="mt-0.5 flex-shrink-0" />
+                      <span>Предложения для автомобилистов и путешественников</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="CheckCircle" size={12} className="mt-0.5 flex-shrink-0" />
+                      <span>Программы лояльности с премиальными условиями</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </TabsContent>
 
         {/* Настройки */}
