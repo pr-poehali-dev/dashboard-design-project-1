@@ -202,6 +202,38 @@ const Index = () => {
     }
   };
 
+  // ТОП-5 возвращаемых товаров
+  const topReturnedProducts = {
+    week: [
+      { name: "Бургер Классик", current: 8, previous: 6, change: "+33%", reason: "переготовлен" },
+      { name: "Картофель фри", current: 5, previous: 4, change: "+25%", reason: "остыл" },
+      { name: "Салат Цезарь", current: 4, previous: 3, change: "+33%", reason: "не свежий" },
+      { name: "Пицца Маргарита", current: 3, previous: 5, change: "-40%", reason: "холодная" },
+      { name: "Кола 0.5л", current: 2, previous: 1, change: "+100%", reason: "без газа" }
+    ],
+    month: [
+      { name: "Бургер Классик", current: 42, previous: 38, change: "+11%", reason: "переготовлен" },
+      { name: "Картофель фри", current: 28, previous: 25, change: "+12%", reason: "остыл" },
+      { name: "Пицца Маргарита", current: 22, previous: 26, change: "-15%", reason: "холодная" },
+      { name: "Салат Цезарь", current: 18, previous: 15, change: "+20%", reason: "не свежий" },
+      { name: "Стейк средний", current: 14, previous: 12, change: "+17%", reason: "пережарен" }
+    ],
+    quarter: [
+      { name: "Бургер Классик", current: 145, previous: 156, change: "-7%", reason: "переготовлен" },
+      { name: "Картофель фри", current: 98, previous: 104, change: "-6%", reason: "остыл" },
+      { name: "Пицца Маргарита", current: 76, previous: 89, change: "-15%", reason: "холодная" },
+      { name: "Салат Цезарь", current: 62, previous: 68, change: "-9%", reason: "не свежий" },
+      { name: "Стейк средний", current: 48, previous: 52, change: "-8%", reason: "пережарен" }
+    ],
+    year: [
+      { name: "Бургер Классик", current: 504, previous: 555, change: "-9%", reason: "переготовлен" },
+      { name: "Картофель фри", current: 336, previous: 370, change: "-9%", reason: "остыл" },
+      { name: "Пицца Маргарита", current: 252, previous: 296, change: "-15%", reason: "холодная" },
+      { name: "Салат Цезарь", current: 218, previous: 240, change: "-9%", reason: "не свежий" },
+      { name: "Стейк средний", current: 168, previous: 185, change: "-9%", reason: "пережарен" }
+    ]
+  };
+
   // Данные кошелька клиента
   const walletData = {
     week: {
@@ -1442,6 +1474,27 @@ const Index = () => {
                         {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value}
                       </div>
                       <div className="text-xs text-slate-600">vs рынок</div>
+                    </div>
+                  </div>
+
+                  {/* ТОП-5 возвращаемых товаров */}
+                  <div className="bg-red-100 rounded-lg p-3 border border-red-200">
+                    <div className="text-xs font-semibold text-red-800 mb-2">ТОП-5 возвращаемых товаров:</div>
+                    <div className="space-y-1">
+                      {topReturnedProducts[selectedPeriod as keyof typeof topReturnedProducts].map((product, index) => (
+                        <div key={index} className="flex items-center justify-between text-xs">
+                          <div className="flex-1">
+                            <span className="font-medium text-slate-700">{index + 1}. {product.name}</span>
+                            <div className="text-slate-500">{product.reason}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-red-700">{product.current}</div>
+                            <div className={`text-xs ${product.change.startsWith('+') ? 'text-red-600' : 'text-green-600'}`}>
+                              {product.change}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
