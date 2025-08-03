@@ -1404,27 +1404,7 @@ const Index = () => {
               </div>
             </Card>
 
-            {/* North Star блок */}
-            <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50">
-              <CardTitle className="flex items-center gap-2 mb-4">
-                <Icon name="Star" size={16} className="text-emerald-600" />
-                North Star Метрика
-              </CardTitle>
-              
-              <div className="text-center py-4">
-                <Icon name="Plus" size={24} className="text-emerald-400 mb-2 mx-auto" />
-                <div className="text-sm font-semibold text-emerald-800 mb-1">
-                  Выберите ключевую метрику
-                </div>
-                <div className="text-xs text-emerald-600 mb-3">
-                  Добавьте главный показатель для отслеживания успеха
-                </div>
-                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
-                  <Icon name="Plus" size={12} className="mr-1" />
-                  Add (Free)
-                </Button>
-              </div>
-            </Card>
+
           </div>
 
           {/* Блоки лояльности, перенесенные из вкладки "Лояльность" */}
