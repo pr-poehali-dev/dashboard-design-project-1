@@ -470,7 +470,7 @@ const Index = () => {
       {/* Main Dashboard */}
       <Tabs defaultValue="key-insights" className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-4 mb-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-12 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-13 w-full gap-2 bg-slate-50 p-2 rounded-lg h-auto">
             <TabsTrigger 
               value="key-insights" 
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-amber-500 data-[state=active]:text-white transition-all duration-200 h-auto"
@@ -544,6 +544,14 @@ const Index = () => {
             >
               <Icon name="Settings" size={18} />
               <span className="text-xs font-medium">Настройки</span>
+            </TabsTrigger>
+
+            <TabsTrigger 
+              value="metrics" 
+              className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-600 data-[state=active]:text-white transition-all duration-200 h-auto"
+            >
+              <Icon name="BarChart3" size={18} />
+              <span className="text-xs font-medium">Метрики</span>
             </TabsTrigger>
           </TabsList>
         </div>
@@ -3658,6 +3666,531 @@ const Index = () => {
                 </div>
               </div>
             </Card>
+          </div>
+        </TabsContent>
+
+        {/* Метрики */}
+        <TabsContent value="metrics" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-l-4 border-indigo-500">
+            <Icon name="BarChart3" size={24} className="text-indigo-600" />
+            <div>
+              <h2 className="text-xl font-bold text-indigo-900">Метрики</h2>
+              <p className="text-sm text-indigo-700">Управление ключевыми показателями эффективности и их отображением</p>
+            </div>
+          </div>
+
+          {/* Легенда значков */}
+          <Card className="p-4 bg-amber-50 border border-amber-200">
+            <div className="flex items-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Icon name="Coins" size={16} className="text-amber-600" />
+                <span className="text-amber-700">Платная метрика</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icon name="Plug" size={16} className="text-blue-600" />
+                <span className="text-blue-700">Требует интеграцию</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icon name="Crown" size={16} className="text-purple-600" />
+                <span className="text-purple-700">Премиум-аналитика</span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Группа: Метрики привлечения и удержания клиентов */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Icon name="UserPlus" size={20} className="text-green-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Эффективность привлечения и удержания клиентов</h3>
+            </div>
+
+            <div className="space-y-3">
+              {/* CAC */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Стоимость привлечения клиента (CAC)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Ключевое, Рынок</div>
+              </div>
+
+              {/* Конверсия воронки */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Конверсия по воронке привлечения</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Покупки</div>
+              </div>
+
+              {/* Эффективность каналов */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Эффективность каналов привлечения</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Crown" size={14} className="text-purple-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Рынок, География</div>
+              </div>
+
+              {/* Customer Retention Rate */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Коэффициент удержания клиентов (CRR)</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Перетоки</div>
+              </div>
+
+              {/* Customer Churn Rate */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Коэффициент оттока клиентов (Churn Rate)</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Перетоки</div>
+              </div>
+
+              {/* Repeat Purchase Rate */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Доля повторных покупок</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Покупки, Кошелек</div>
+              </div>
+
+              {/* Purchase Frequency */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Частота покупок</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Покупки, Клиенты</div>
+              </div>
+
+              {/* Лояльностные программы */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Активность в лояльностных программах</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Портрет</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Группа: Лояльность и удовлетворенность */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <Icon name="Heart" size={20} className="text-blue-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Лояльность и удовлетворенность клиентов</h3>
+            </div>
+
+            <div className="space-y-3">
+              {/* CSAT */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Индекс удовлетворенности клиентов (CSAT)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Портрет</div>
+              </div>
+
+              {/* Положительные отзывы */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Процент положительных отзывов/оценок</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты</div>
+              </div>
+
+              {/* NPS */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Индекс рекомендаций (NPS)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Портрет</div>
+              </div>
+
+              {/* VOC */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Голос клиента (VOC) - анализ отзывов</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Crown" size={14} className="text-purple-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты</div>
+              </div>
+
+              {/* Анализ тональности */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Темы и тональность обратной связи</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Crown" size={14} className="text-purple-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты</div>
+              </div>
+
+              {/* Average Resolution Time */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Среднее время решения обращения</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Настройки</div>
+              </div>
+
+              {/* CES */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Индекс удовлетворенности обслуживанием (CES)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты</div>
+              </div>
+
+              {/* FCR */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Рейтинг решенных обращений (FCR)</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Настройки</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Группа: Операционная эффективность и рентабельность */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-orange-100 rounded-lg">
+                <Icon name="TrendingUp" size={20} className="text-orange-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Операционная эффективность и рентабельность</h3>
+            </div>
+
+            <div className="space-y-3">
+              {/* LTV */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Жизненная ценность клиента (LTV)</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Финансы, Клиенты</div>
+              </div>
+
+              {/* LTV:CAC */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Соотношение LTV:CAC</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Финансы, Ключевое</div>
+              </div>
+
+              {/* Маржинальность */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Маржинальность по клиентским сегментам</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Финансы, Кошелек</div>
+              </div>
+
+              {/* ROMI */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">ROMI (Return on Marketing Investment)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Финансы, Рынок</div>
+              </div>
+
+              {/* Конверсия воронки продаж */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Конверсия воронки продаж</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Покупки, Перетоки</div>
+              </div>
+
+              {/* CPL */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Средняя стоимость лида (CPL)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Рынок</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Группа: Портрет клиентов */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <Icon name="Users" size={20} className="text-purple-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Портрет клиентов (интегрирован во все разделы)</h3>
+            </div>
+
+            <div className="space-y-3">
+              {/* Демография */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Демография (возраст, пол, доход)</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Портрет, География</div>
+              </div>
+
+              {/* География */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Местоположение</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">География, Портрет</div>
+              </div>
+
+              {/* Образование */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Образование</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Портрет</div>
+              </div>
+
+              {/* Семейное положение */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Семейное положение</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Портрет</div>
+              </div>
+
+              {/* Психография */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Психография (ценности, интересы, образ жизни)</span>
+                    <Icon name="Coins" size={14} className="text-amber-600" />
+                    <Icon name="Crown" size={14} className="text-purple-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Портрет</div>
+              </div>
+
+              {/* Паттерны покупок */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Паттерны покупок (категории, частота, каналы)</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Покупки, Портрет</div>
+              </div>
+
+              {/* Ценовая чувствительность */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Чувствительность к цене</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Кошелек, Покупки</div>
+              </div>
+
+              {/* Лояльность к бренду */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Лояльность к бренду/каналу</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Портрет</div>
+              </div>
+
+              {/* Отзывчивость на промо */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Отзывчивость на промо</span>
+                    <Icon name="Plug" size={14} className="text-blue-600" />
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Покупки, Рынок</div>
+              </div>
+
+              {/* Уровень вовлеченности */}
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">Уровень вовлеченности</span>
+                  </div>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Портрет</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Текущие метрики из существующих вкладок */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-slate-100 rounded-lg">
+                <Icon name="Activity" size={20} className="text-slate-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Текущие метрики дашборда</h3>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <span className="font-medium">Средний чек</span>
+                </div>
+                <div className="text-sm text-slate-600">Кошелек, Покупки</div>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <span className="font-medium">Доля кошелька</span>
+                </div>
+                <div className="text-sm text-slate-600">Кошелек</div>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <span className="font-medium">Когорты доходов клиентов</span>
+                </div>
+                <div className="text-sm text-slate-600">Кошелек</div>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <span className="font-medium">Статистика использования отчета</span>
+                </div>
+                <div className="text-sm text-slate-600">Ключевое</div>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" checked className="w-4 h-4 text-indigo-600 rounded" />
+                  <span className="font-medium">Динамика клиентской базы</span>
+                </div>
+                <div className="text-sm text-slate-600">Клиенты, Перетоки</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Кнопки управления */}
+          <div className="flex items-center gap-4 pt-4">
+            <button className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              Сохранить настройки
+            </button>
+            <button className="px-6 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors">
+              Сбросить к умолчаниям
+            </button>
+            <button className="px-6 py-2 border border-green-300 text-green-700 rounded-lg hover:bg-green-50 transition-colors">
+              Экспорт конфигурации
+            </button>
           </div>
         </TabsContent>
       </Tabs>
