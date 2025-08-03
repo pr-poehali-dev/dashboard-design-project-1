@@ -3616,6 +3616,351 @@ const Index = () => {
           </Card>
         </TabsContent>
 
+        {/* Портрет */}
+        <TabsContent value="demographics" className="space-y-6">
+          <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
+            <Icon name="Users" size={24} className="text-green-600" />
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">Портрет клиента</h2>
+              <p className="text-slate-600">Поведенческая аналитика и профиль потребителей</p>
+            </div>
+          </div>
+
+          {/* Блоки поведенческой аналитики */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            
+            {/* Поведение при Покупке */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="ShoppingCart" size={20} className="text-blue-600" />
+                Поведение при Покупке
+              </CardTitle>
+              
+              <div className="space-y-4">
+                {/* Частота покупок */}
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Частота покупок</div>
+                  <div className="text-2xl font-bold text-blue-700 mb-1">
+                    {selectedPeriod === 'month' ? '8.3' : selectedPeriod === 'week' ? '2.1' : selectedPeriod === 'quarter' ? '24.9' : '99.6'} раз
+                  </div>
+                  <div className="text-sm text-green-600 font-medium">+12% к прошлому периоду</div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Средний чек */}
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium text-slate-700">Средний чек</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '2,850₽' : selectedPeriod === 'week' ? '720₽' : selectedPeriod === 'quarter' ? '8,550₽' : '34,200₽'}</div>
+                      <div className="text-xs text-green-600">+8.7%</div>
+                    </div>
+                  </div>
+
+                  {/* Предпочтительные каналы */}
+                  <div className="bg-slate-50 rounded-lg p-3">
+                    <div className="text-sm font-medium text-slate-700 mb-2">Предпочтительные каналы</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs">
+                        <span>Мобильное приложение</span>
+                        <span className="font-medium">68%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Веб-сайт</span>
+                        <span className="font-medium">22%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Офлайн магазины</span>
+                        <span className="font-medium">10%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Чувствительность к цене */}
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-3 border border-orange-100">
+                    <div className="text-sm font-medium text-orange-700 mb-2 flex items-center gap-2">
+                      <Icon name="TrendingDown" size={14} />
+                      Чувствительность к цене
+                    </div>
+                    <div className="text-xs text-slate-600 mb-2">Реакция на изменение цен</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-orange-700">Умеренная</span>
+                      <div className="w-16 bg-orange-200 rounded-full h-2">
+                        <div className="bg-orange-500 h-2 rounded-full" style={{width: '58%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Поведение при Потреблении */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Activity" size={20} className="text-purple-600" />
+                Поведение при Потреблении
+              </CardTitle>
+              
+              <div className="space-y-4">
+                {/* Интенсивность использования */}
+                <div className="bg-purple-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Интенсивность использования</div>
+                  <div className="text-2xl font-bold text-purple-700 mb-1">Высокая</div>
+                  <div className="text-sm text-green-600 font-medium">85% активных пользователей</div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Время использования */}
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium text-slate-700">Время использования</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '47' : selectedPeriod === 'week' ? '12' : selectedPeriod === 'quarter' ? '141' : '564'} мин/день</div>
+                      <div className="text-xs text-green-600">+15%</div>
+                    </div>
+                  </div>
+
+                  {/* Паттерны использования */}
+                  <div className="bg-slate-50 rounded-lg p-3">
+                    <div className="text-sm font-medium text-slate-700 mb-2">Паттерны использования</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs">
+                        <span>Утром (6-12)</span>
+                        <span className="font-medium">35%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Днем (12-18)</span>
+                        <span className="font-medium">40%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Вечером (18-24)</span>
+                        <span className="font-medium">25%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Сезонность */}
+                  <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-3 border border-indigo-100">
+                    <div className="text-sm font-medium text-indigo-700 mb-2 flex items-center gap-2">
+                      <Icon name="Calendar" size={14} />
+                      Сезонные паттерны
+                    </div>
+                    <div className="text-xs text-slate-600 mb-2">Пиковые периоды активности</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-indigo-700">Зима/Весна</span>
+                      <span className="text-xs text-indigo-600">+23% активности</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Цифровое Поведение */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Smartphone" size={20} className="text-emerald-600" />
+                Цифровое Поведение
+              </CardTitle>
+              
+              <div className="space-y-4">
+                {/* Конверсии */}
+                <div className="bg-emerald-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-2">Средняя конверсия</div>
+                  <div className="text-2xl font-bold text-emerald-700 mb-1">3.8%</div>
+                  <div className="text-sm text-green-600 font-medium">+0.5% к прошлому периоду</div>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Цифровые пути */}
+                  <div className="bg-slate-50 rounded-lg p-3">
+                    <div className="text-sm font-medium text-slate-700 mb-2">Основные пути к покупке</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs">
+                        <span>Поиск → Каталог → Покупка</span>
+                        <span className="font-medium">42%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Реклама → Лендинг → Покупка</span>
+                        <span className="font-medium">28%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Email → Каталог → Покупка</span>
+                        <span className="font-medium">18%</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span>Социальные сети → Покупка</span>
+                        <span className="font-medium">12%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Вовлеченность */}
+                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                    <span className="text-sm font-medium text-slate-700">Вовлеченность</span>
+                    <div className="text-right">
+                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '67%' : selectedPeriod === 'week' ? '72%' : selectedPeriod === 'quarter' ? '64%' : '69%'}</div>
+                      <div className="text-xs text-green-600">+5.2%</div>
+                    </div>
+                  </div>
+
+                  {/* Bounce Rate */}
+                  <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-lg p-3 border border-red-100">
+                    <div className="text-sm font-medium text-red-700 mb-2 flex items-center gap-2">
+                      <Icon name="MousePointerClick" size={14} />
+                      Показатель отказов
+                    </div>
+                    <div className="text-xs text-slate-600 mb-2">Процент пользователей, покинувших сайт</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-red-700">28.5%</span>
+                      <div className="w-16 bg-red-200 rounded-full h-2">
+                        <div className="bg-red-500 h-2 rounded-full" style={{width: '28.5%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Дополнительная аналитика */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Кросс-анализ поведения */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="BarChart3" size={20} className="text-indigo-600" />
+                Кросс-анализ поведения
+              </CardTitle>
+              
+              <div className="space-y-4">
+                <div className="bg-indigo-50 rounded-lg p-4">
+                  <div className="text-sm text-slate-600 mb-3">Корреляция между паттернами</div>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-700">Частота × Чек</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-12 bg-slate-200 rounded-full h-2">
+                          <div className="bg-indigo-500 h-2 rounded-full" style={{width: '74%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-indigo-700">0.74</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-700">Время × Конверсия</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-12 bg-slate-200 rounded-full h-2">
+                          <div className="bg-green-500 h-2 rounded-full" style={{width: '68%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-green-700">0.68</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-700">Канал × Лояльность</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-12 bg-slate-200 rounded-full h-2">
+                          <div className="bg-purple-500 h-2 rounded-full" style={{width: '56%'}}></div>
+                        </div>
+                        <span className="text-sm font-bold text-purple-700">0.56</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <div className="text-sm font-medium text-slate-700 mb-3 flex items-center gap-2">
+                    <Icon name="Lightbulb" size={14} />
+                    Ключевые инсайты
+                  </div>
+                  <div className="space-y-2 text-xs text-slate-600">
+                    <div className="flex items-start gap-2">
+                      <Icon name="TrendingUp" size={12} className="text-green-600 mt-0.5" />
+                      <span>Клиенты с высокой частотой покупок тратят на 40% больше</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="Clock" size={12} className="text-blue-600 mt-0.5" />
+                      <span>Пользователи с утренней активностью конвертируют лучше на 25%</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="Heart" size={12} className="text-red-600 mt-0.5" />
+                      <span>Мобильные пользователи более лояльны (+18% retention)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Сегментация по поведению */}
+            <Card className="p-6">
+              <CardTitle className="flex items-center gap-2 mb-6">
+                <Icon name="Target" size={20} className="text-orange-600" />
+                Поведенческие сегменты
+              </CardTitle>
+              
+              <div className="space-y-4">
+                {/* Высокоактивные */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="font-medium text-green-800">Высокоактивные</span>
+                    </div>
+                    <span className="text-sm font-bold text-green-700">24%</span>
+                  </div>
+                  <div className="text-xs text-slate-600 mb-2">Частые покупки, высокий чек, мобильные</div>
+                  <div className="w-full bg-green-200 rounded-full h-1">
+                    <div className="bg-green-500 h-1 rounded-full" style={{width: '24%'}}></div>
+                  </div>
+                </div>
+
+                {/* Умеренно-активные */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <span className="font-medium text-blue-800">Умеренно-активные</span>
+                    </div>
+                    <span className="text-sm font-bold text-blue-700">42%</span>
+                  </div>
+                  <div className="text-xs text-slate-600 mb-2">Регулярные покупки, средний чек, веб+мобильные</div>
+                  <div className="w-full bg-blue-200 rounded-full h-1">
+                    <div className="bg-blue-500 h-1 rounded-full" style={{width: '42%'}}></div>
+                  </div>
+                </div>
+
+                {/* Малоактивные */}
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 border border-yellow-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      <span className="font-medium text-yellow-800">Малоактивные</span>
+                    </div>
+                    <span className="text-sm font-bold text-yellow-700">26%</span>
+                  </div>
+                  <div className="text-xs text-slate-600 mb-2">Редкие покупки, низкий чек, веб-ориентированные</div>
+                  <div className="w-full bg-yellow-200 rounded-full h-1">
+                    <div className="bg-yellow-500 h-1 rounded-full" style={{width: '26%'}}></div>
+                  </div>
+                </div>
+
+                {/* Спящие */}
+                <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-lg p-4 border border-red-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span className="font-medium text-red-800">Спящие</span>
+                    </div>
+                    <span className="text-sm font-bold text-red-700">8%</span>
+                  </div>
+                  <div className="text-xs text-slate-600 mb-2">Нет активности >90 дней, требуют реактивации</div>
+                  <div className="w-full bg-red-200 rounded-full h-1">
+                    <div className="bg-red-500 h-1 rounded-full" style={{width: '8%'}}></div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </TabsContent>
+
         {/* Настройки */}
         <TabsContent value="settings" className="space-y-6">
           <div className="flex items-center gap-3 mb-6 p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl border-l-4 border-slate-500">
