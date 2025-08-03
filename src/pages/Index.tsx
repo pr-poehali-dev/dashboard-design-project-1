@@ -517,6 +517,82 @@ const Index = () => {
     }
   };
 
+  // Структура поступлений
+  const paymentStructureData = {
+    week: {
+      total: "2,850,000₽",
+      cardInternet: { amount: "1,254,000₽", share: 44.0 },
+      cardPOS: { amount: "855,000₽", share: 30.0 },
+      sbpInternet: { amount: "427,500₽", share: 15.0 },
+      sbpPOS: { amount: "171,000₽", share: 6.0 },
+      biometric: { amount: "85,500₽", share: 3.0 },
+      credit: { amount: "513,000₽", share: 18.0 },
+      installment: { amount: "228,000₽", share: 8.0 },
+      bnpl: { amount: "171,000₽", share: 6.0 }
+    },
+    month: {
+      total: "12,400,000₽",
+      cardInternet: { amount: "5,456,000₽", share: 44.0 },
+      cardPOS: { amount: "3,720,000₽", share: 30.0 },
+      sbpInternet: { amount: "1,860,000₽", share: 15.0 },
+      sbpPOS: { amount: "744,000₽", share: 6.0 },
+      biometric: { amount: "372,000₽", share: 3.0 },
+      credit: { amount: "2,232,000₽", share: 18.0 },
+      installment: { amount: "992,000₽", share: 8.0 },
+      bnpl: { amount: "744,000₽", share: 6.0 }
+    },
+    quarter: {
+      total: "38,700,000₽",
+      cardInternet: { amount: "17,028,000₽", share: 44.0 },
+      cardPOS: { amount: "11,610,000₽", share: 30.0 },
+      sbpInternet: { amount: "5,805,000₽", share: 15.0 },
+      sbpPOS: { amount: "2,322,000₽", share: 6.0 },
+      biometric: { amount: "1,161,000₽", share: 3.0 },
+      credit: { amount: "6,966,000₽", share: 18.0 },
+      installment: { amount: "3,096,000₽", share: 8.0 },
+      bnpl: { amount: "2,322,000₽", share: 6.0 }
+    },
+    year: {
+      total: "148,200,000₽",
+      cardInternet: { amount: "65,208,000₽", share: 44.0 },
+      cardPOS: { amount: "44,460,000₽", share: 30.0 },
+      sbpInternet: { amount: "22,230,000₽", share: 15.0 },
+      sbpPOS: { amount: "8,892,000₽", share: 6.0 },
+      biometric: { amount: "4,446,000₽", share: 3.0 },
+      credit: { amount: "26,676,000₽", share: 18.0 },
+      installment: { amount: "11,856,000₽", share: 8.0 },
+      bnpl: { amount: "8,892,000₽", share: 6.0 }
+    }
+  };
+
+  // Транзакционная активность
+  const transactionActivityData = {
+    paymentSystems: [
+      { name: "Visa", share: 42.8, amount: "5,308,800₽", change: "+2.1%" },
+      { name: "Mastercard", share: 28.5, amount: "3,534,000₽", change: "-1.5%" },
+      { name: "МИР", share: 24.3, amount: "3,013,200₽", change: "+8.7%" },
+      { name: "UnionPay", share: 3.2, amount: "396,800₽", change: "+15.2%" },
+      { name: "JCB", share: 0.9, amount: "111,600₽", change: "+5.8%" },
+      { name: "American Express", share: 0.3, amount: "37,200₽", change: "-2.1%" }
+    ],
+    cardTypes: [
+      { name: "Стандарт", share: 45.2, amount: "5,609,600₽", change: "+1.8%" },
+      { name: "Золотая", share: 28.7, amount: "3,560,400₽", change: "+3.2%" },
+      { name: "Зарплатная", share: 12.4, amount: "1,537,600₽", change: "+0.9%" },
+      { name: "Платиновая", share: 8.9, amount: "1,104,400₽", change: "+5.7%" },
+      { name: "Корпоративная", share: 3.8, amount: "471,200₽", change: "+2.4%" },
+      { name: "Премиум", share: 1.0, amount: "124,000₽", change: "+12.1%" }
+    ],
+    geography: [
+      { country: "Россия", share: 89.2, amount: "11,060,800₽", change: "+2.8%" },
+      { country: "Казахстан", share: 4.1, amount: "508,400₽", change: "+12.5%" },
+      { country: "Беларусь", share: 2.8, amount: "347,200₽", change: "+8.9%" },
+      { country: "Узбекистан", share: 1.9, amount: "235,600₽", change: "+18.7%" },
+      { country: "Китай", share: 1.2, amount: "148,800₽", change: "+25.4%" },
+      { country: "Армения", share: 0.8, amount: "99,200₽", change: "+15.8%" }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -3613,6 +3689,205 @@ const Index = () => {
                   </div>
                 </Card>
               ))}
+            </div>
+          </Card>
+
+          {/* Структура поступлений */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="CreditCard" size={20} className="text-blue-600" />
+              Структура поступлений
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Способы оплаты */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-slate-800 mb-3">Способы оплаты</h4>
+                
+                <div className="space-y-3">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-blue-800">Карточный эквайринг (интернет)</span>
+                      <Badge className="bg-blue-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].cardInternet.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-blue-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].cardInternet.amount}</div>
+                  </div>
+
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-green-800">Карточный эквайринг (торговый)</span>
+                      <Badge className="bg-green-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].cardPOS.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-green-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].cardPOS.amount}</div>
+                  </div>
+
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-purple-800">СБП (интернет-эквайринг)</span>
+                      <Badge className="bg-purple-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].sbpInternet.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-purple-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].sbpInternet.amount}</div>
+                  </div>
+
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-orange-800">СБП (торговый-эквайринг)</span>
+                      <Badge className="bg-orange-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].sbpPOS.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-orange-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].sbpPOS.amount}</div>
+                  </div>
+
+                  <div className="bg-pink-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-pink-800">Оплата биометрией</span>
+                      <Badge className="bg-pink-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].biometric.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-pink-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].biometric.amount}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Кредитные продукты */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-slate-800 mb-3">Кредитные продукты</h4>
+                
+                <div className="space-y-3">
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-red-800">Покупки с использованием кредита</span>
+                      <Badge className="bg-red-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].credit.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-red-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].credit.amount}</div>
+                  </div>
+
+                  <div className="bg-amber-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-amber-800">Покупки в рассрочку</span>
+                      <Badge className="bg-amber-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].installment.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-amber-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].installment.amount}</div>
+                  </div>
+
+                  <div className="bg-teal-50 p-4 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-teal-800">Покупки с BNPL</span>  
+                      <Badge className="bg-teal-600 text-white">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].bnpl.share}%</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-teal-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].bnpl.amount}</div>
+                  </div>
+
+                  {/* Общая сумма */}
+                  <div className="bg-slate-100 p-4 rounded-lg border-2 border-slate-300">
+                    <div className="text-center">
+                      <div className="text-sm text-slate-600 mb-1">Общая сумма поступлений</div>
+                      <div className="text-2xl font-bold text-slate-900">{paymentStructureData[selectedPeriod as keyof typeof paymentStructureData].total}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Транзакционная активность */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Activity" size={20} className="text-indigo-600" />
+              Транзакционная активность
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Платежные системы */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                  <Icon name="CreditCard" size={16} />
+                  Платежные системы
+                </h4>
+                
+                <div className="space-y-3">
+                  {transactionActivityData.paymentSystems.map((system, index) => (
+                    <div key={index} className="bg-slate-50 p-4 rounded-lg hover:bg-slate-100 transition-colors">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-medium text-slate-800">{system.name}</span>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline">{system.share}%</Badge>
+                          <Badge variant={system.change.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                            {system.change}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="text-lg font-bold text-slate-900">{system.amount}</div>
+                      <div className="w-full bg-slate-200 rounded-full h-2 mt-2">
+                        <div 
+                          className="bg-indigo-500 h-2 rounded-full transition-all duration-300" 
+                          style={{width: `${system.share}%`}}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Типы карт */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                  <Icon name="BadgeCheck" size={16} />
+                  Типы карт (по BIN)
+                </h4>
+                
+                <div className="space-y-3">
+                  {transactionActivityData.cardTypes.map((cardType, index) => (
+                    <div key={index} className="bg-slate-50 p-4 rounded-lg hover:bg-slate-100 transition-colors">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-medium text-slate-800">{cardType.name}</span>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline">{cardType.share}%</Badge>
+                          <Badge variant={cardType.change.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                            {cardType.change}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="text-lg font-bold text-slate-900">{cardType.amount}</div>
+                      <div className="w-full bg-slate-200 rounded-full h-2 mt-2">
+                        <div 
+                          className="bg-emerald-500 h-2 rounded-full transition-all duration-300" 
+                          style={{width: `${cardType.share}%`}}  
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* География банков-эмитентов */}
+              <div className="space-y-4">
+                <h4 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                  <Icon name="Globe" size={16} />
+                  География банков-эмитентов
+                </h4>
+                
+                <div className="space-y-3">
+                  {transactionActivityData.geography.map((geo, index) => (
+                    <div key={index} className="bg-slate-50 p-4 rounded-lg hover:bg-slate-100 transition-colors">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-medium text-slate-800">{geo.country}</span>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline">{geo.share}%</Badge>
+                          <Badge variant={geo.change.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                            {geo.change}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="text-lg font-bold text-slate-900">{geo.amount}</div>
+                      <div className="w-full bg-slate-200 rounded-full h-2 mt-2">
+                        <div 
+                          className="bg-purple-500 h-2 rounded-full transition-all duration-300" 
+                          style={{width: `${geo.share}%`}}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Card>
         </TabsContent>
