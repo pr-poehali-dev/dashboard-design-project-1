@@ -512,7 +512,7 @@ const Index = () => {
               className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-green-500 data-[state=active]:text-white transition-all duration-200 h-auto"
             >
               <Icon name="Users" size={18} />
-              <span className="text-xs font-medium">Демография</span>
+              <span className="text-xs font-medium">Портрет аудитории</span>
             </TabsTrigger>
             <TabsTrigger 
               value="finances" 
@@ -1991,6 +1991,46 @@ const Index = () => {
             </Card>
           </div>
 
+          {/* Средний чек */}
+          <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Receipt" size={20} />
+              Средний чек
+            </CardTitle>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-bold text-blue-700">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].value}
+                  </span>
+                  <Badge variant="default" className="bg-blue-600 text-xs">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
+                  </Badge>
+                </div>
+
+                <div className="text-xs text-slate-600">
+                  <Badge variant="outline" className="text-xs">
+                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.value} {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.description}
+                  </Badge>
+                </div>
+                
+                {/* Мини график */}
+                <div className="flex items-end gap-1 h-8">
+                  {averageCheckData[selectedPeriod as keyof typeof averageCheckData].trend.map((point, index) => {
+                    const normalizedHeight = ((point - 1800) / (2450 - 1800)) * 100;
+                    return (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-t from-blue-500 to-indigo-300 rounded-t-sm"
+                        style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </Card>
+
           {/* Детальный анализ кошелька */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Структура трат в сегменте */}
@@ -2612,44 +2652,7 @@ const Index = () => {
           </div>
           {/* Топ метрики с динамикой */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Доходы */}
-            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="TrendingUp" size={16} />
-                  Средний доход
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-emerald-700">
-                      {incomeData[selectedPeriod as keyof typeof incomeData].value}
-                    </span>
-                    <Badge variant="default" className="bg-emerald-600 text-xs">
-                      {incomeData[selectedPeriod as keyof typeof incomeData].change}
-                    </Badge>
-                  </div>
 
-                  <div className="text-xs text-slate-600">
-                    <Badge variant="outline" className="text-xs">
-                      {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.value} {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.description}
-                    </Badge>
-                  </div>
-                  
-                  {/* Мини график */}
-                  <div className="flex items-end gap-1 h-8">
-                    {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
-                      <div
-                        key={index}
-                        className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm"
-                        style={{ height: `${(point / 100) * 100}%`, width: '10px' }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Расходы */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
@@ -2690,47 +2693,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            {/* Средний чек */}
-            <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                  <Icon name="Receipt" size={16} />
-                  Средний чек
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-blue-700">
-                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].value}
-                    </span>
-                    <Badge variant="default" className="bg-blue-600 text-xs">
-                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].change}
-                    </Badge>
-                  </div>
 
-                  <div className="text-xs text-slate-600">
-                    <Badge variant="outline" className="text-xs">
-                      {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.value} {averageCheckData[selectedPeriod as keyof typeof averageCheckData].vsCompetitors.description}
-                    </Badge>
-                  </div>
-                  
-                  {/* Мини график */}
-                  <div className="flex items-end gap-1 h-8">
-                    {averageCheckData[selectedPeriod as keyof typeof averageCheckData].trend.map((point, index) => {
-                      const normalizedHeight = ((point - 1800) / (2450 - 1800)) * 100;
-                      return (
-                        <div
-                          key={index}
-                          className="bg-gradient-to-t from-blue-500 to-indigo-300 rounded-t-sm"
-                          style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Кредитная нагрузка */}
             <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-orange-50 to-yellow-100 border-0 shadow-lg">
@@ -2772,73 +2735,7 @@ const Index = () => {
             </Card>
           </div>
 
-          {/* Объединенная демография */}
-          <Card className="p-6">
-            <CardTitle className="flex items-center gap-2 mb-6">
-              <Icon name="Users" size={20} />
-              Демографический профиль аудитории
-            </CardTitle>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Мужчины */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="text-4xl">👨</div>
-                  <div>
-                    <div className="text-xl font-bold text-blue-600">45%</div>
-                    <div className="text-sm text-slate-600">Мужчины</div>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
-                  {genderAgeData.male.ageDistribution.map((age, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm">{age.range} лет</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-2 bg-slate-200 rounded-full">
-                          <div 
-                            className="h-full bg-blue-500 rounded-full transition-all duration-500"
-                            style={{ width: `${age.percentage}%` }}
-                          />
-                        </div>
-                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Женщины */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="text-4xl">👩</div>
-                  <div>
-                    <div className="text-xl font-bold text-pink-600">55%</div>
-                    <div className="text-sm text-slate-600">Женщины</div>
-                  </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
-                  {genderAgeData.female.ageDistribution.map((age, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm">{age.range} лет</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-2 bg-slate-200 rounded-full">
-                          <div 
-                            className="h-full bg-pink-500 rounded-full transition-all duration-500"
-                            style={{ width: `${age.percentage}%` }}
-                          />
-                        </div>
-                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Card>
         </TabsContent>
 
         {/* Демография */}
@@ -2928,6 +2825,43 @@ const Index = () => {
             </Card>
           </div>
 
+          {/* Доходы */}
+          <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-emerald-50 to-green-100 border-0 shadow-lg p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="TrendingUp" size={20} />
+              Средний доход
+            </CardTitle>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-bold text-emerald-700">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].value}
+                  </span>
+                  <Badge variant="default" className="bg-emerald-600 text-xs">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].change}
+                  </Badge>
+                </div>
+
+                <div className="text-xs text-slate-600">
+                  <Badge variant="outline" className="text-xs">
+                    {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.value} {incomeData[selectedPeriod as keyof typeof incomeData].vsCompetitors.description}
+                  </Badge>
+                </div>
+                
+                {/* Мини график */}
+                <div className="flex items-end gap-1 h-8">
+                  {incomeData[selectedPeriod as keyof typeof incomeData].trend.map((point, index) => (
+                    <div
+                      key={index}
+                      className="bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-t-sm"
+                      style={{ height: `${(point / 100) * 100}%`, width: '10px' }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+
           {/* Кредитная нагрузка */}
           <Card className="p-6">
             <CardTitle className="flex items-center gap-2 mb-6">
@@ -2951,6 +2885,74 @@ const Index = () => {
                   </div>
                 </Card>
               ))}
+            </div>
+          </Card>
+
+          {/* Демографический профиль аудитории */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Users" size={20} />
+              Демографический профиль аудитории
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Мужчины */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-4xl">👨</div>
+                  <div>
+                    <div className="text-xl font-bold text-blue-600">45%</div>
+                    <div className="text-sm text-slate-600">Мужчины</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
+                  {genderAgeData.male.ageDistribution.map((age, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <span className="text-sm">{age.range} лет</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-2 bg-slate-200 rounded-full">
+                          <div 
+                            className="h-full bg-blue-500 rounded-full transition-all duration-500"
+                            style={{ width: `${age.percentage}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Женщины */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-4xl">👩</div>
+                  <div>
+                    <div className="text-xl font-bold text-pink-600">55%</div>
+                    <div className="text-sm text-slate-600">Женщины</div>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm text-slate-700">Возрастное распределение:</h4>
+                  {genderAgeData.female.ageDistribution.map((age, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <span className="text-sm">{age.range} лет</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-2 bg-slate-200 rounded-full">
+                          <div 
+                            className="h-full bg-pink-500 rounded-full transition-all duration-500"
+                            style={{ width: `${age.percentage}%` }}
+                          />
+                        </div>
+                        <span className="text-xs font-medium w-8">{age.percentage}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Card>
         </TabsContent>
