@@ -3951,7 +3951,7 @@ const Index = () => {
                     </div>
                     <span className="text-sm font-bold text-red-700">8%</span>
                   </div>
-                  <div className="text-xs text-slate-600 mb-2">Нет активности >90 дней, требуют реактивации</div>
+                  <div className="text-xs text-slate-600 mb-2">Нет активности &gt;90 дней, требуют реактивации</div>
                   <div className="w-full bg-red-200 rounded-full h-1">
                     <div className="bg-red-500 h-1 rounded-full" style={{width: '8%'}}></div>
                   </div>
