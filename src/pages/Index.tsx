@@ -612,6 +612,70 @@ const Index = () => {
     { name: "Футболка базовая белая", sales: 38, amount: "76,000₽", category: "Одежда", trend: "-3%" }
   ];
 
+  // Продукты компаньоны
+  const productCompanions = [
+    {
+      bundle: "Смартфон + Аксессуары",
+      products: ["Смартфон iPhone 15", "Наушники AirPods", "Стекло защитное", "Чехол силиконовый"],
+      frequency: 420,
+      percentage: 68.5,
+      averageCheck: "87,300₽",
+      trend: "+24%",
+      icon: "Smartphone",
+      color: "blue"
+    },
+    {
+      bundle: "Ноутбук + Периферия",
+      products: ["Ноутбук MacBook", "Мышь беспроводная", "Сумка для ноутбука", "Подставка охлаждающая"],
+      frequency: 285,
+      percentage: 73.2,
+      averageCheck: "124,500₽",
+      trend: "+18%",
+      icon: "Laptop",
+      color: "green"
+    },
+    {
+      bundle: "Спортивная экипировка",
+      products: ["Кроссовки Nike", "Спортивный костюм", "Рюкзак спортивный", "Бутылка для воды"],
+      frequency: 195,
+      percentage: 58.7,
+      averageCheck: "28,400₽",
+      trend: "+12%",
+      icon: "Zap",
+      color: "orange"
+    },
+    {
+      bundle: "Зимний комплект",
+      products: ["Куртка зимняя", "Шапка", "Перчатки", "Шарф"],
+      frequency: 158,
+      percentage: 82.1,
+      averageCheck: "15,600₽",
+      trend: "+31%",
+      icon: "Snowflake",
+      color: "purple"
+    },
+    {
+      bundle: "Офисный набор",
+      products: ["Блокнот", "Ручка", "Папка", "Органайзер"],
+      frequency: 92,
+      percentage: 45.3,
+      averageCheck: "3,200₽",
+      trend: "+8%",
+      icon: "Briefcase",
+      color: "indigo"
+    },
+    {
+      bundle: "Автомобильный комплект",
+      products: ["Держатель для телефона", "Зарядка автомобильная", "Ароматизатор", "Салфетки"],
+      frequency: 134,
+      percentage: 61.4,
+      averageCheck: "4,800₽",
+      trend: "+15%",
+      icon: "Car",
+      color: "red"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -4106,6 +4170,126 @@ const Index = () => {
                   </Card>
                 ))}
               </div>
+            </div>
+          </Card>
+
+          {/* Продукты компаньоны */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Link" size={20} className="text-violet-600" />
+              Продукты компаньоны
+            </CardTitle>
+            
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600 mb-4">
+                Связки продуктов, покупаемых совместно в значительной части случаев. Важно для формирования пакетных предложений.
+              </p>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {productCompanions.map((companion, index) => (
+                  <Card key={index} className={`p-4 hover:shadow-lg transition-all duration-200 border-l-4 border-${companion.color}-500 bg-gradient-to-r from-${companion.color}-50 to-slate-50`}>
+                    <div className="space-y-4">
+                      {/* Заголовок связки */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg bg-${companion.color}-100`}>
+                            <Icon name={companion.icon as any} size={20} className={`text-${companion.color}-600`} />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-slate-800">{companion.bundle}</h4>
+                            <div className="text-xs text-slate-600">{companion.products.length} товара в связке</div>
+                          </div>
+                        </div>
+                        <Badge variant={companion.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                          {companion.trend}
+                        </Badge>
+                      </div>
+
+                      {/* Список продуктов */}
+                      <div className="bg-white rounded-lg p-3 border">
+                        <div className="space-y-2">
+                          {companion.products.map((product, productIndex) => (
+                            <div key={productIndex} className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full bg-${companion.color}-400`}></div>
+                              <span className="text-sm text-slate-700">{product}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Метрики связки */}
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-slate-900">{companion.frequency}</div>
+                          <div className="text-xs text-slate-600">пересечений</div>
+                        </div>
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-violet-700">{companion.percentage}%</div>
+                          <div className="text-xs text-slate-600">частота связки</div>
+                        </div>
+                        <div className="text-center p-3 bg-white rounded-lg border">
+                          <div className="text-lg font-bold text-green-700">{companion.averageCheck}</div>
+                          <div className="text-xs text-slate-600">средний чек</div>
+                        </div>
+                      </div>
+
+                      {/* Прогрессбар эффективности */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 bg-slate-200 rounded-full h-2">
+                          <div 
+                            className={`bg-gradient-to-r from-${companion.color}-500 to-${companion.color}-400 h-2 rounded-full transition-all duration-500`}
+                            style={{ width: `${companion.percentage}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-slate-500 font-medium">
+                          {companion.percentage > 70 ? 'Высокая связка' : 
+                           companion.percentage > 50 ? 'Средняя связка' : 'Слабая связка'}
+                        </span>
+                      </div>
+
+                      {/* Рекомендация по пакетному предложению */}
+                      <div className={`bg-${companion.color}-100 rounded-lg p-3 border border-${companion.color}-200`}>
+                        <div className={`text-xs text-${companion.color}-700 flex items-center gap-2`}>
+                          <Icon name="Lightbulb" size={12} />
+                          <span className="font-medium">Рекомендация:</span>
+                          {companion.percentage > 70 ? 'Создать выгодный пакет со скидкой' : 
+                           companion.percentage > 50 ? 'Предложить товары в комплекте' : 'Рассмотреть кросс-продажи'}
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Суммарная статистика */}
+              <Card className="mt-6 p-4 bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200">
+                <div className="text-center space-y-2">
+                  <h4 className="font-semibold text-violet-800 flex items-center justify-center gap-2">
+                    <Icon name="TrendingUp" size={16} />
+                    Общая эффективность связок
+                  </h4>
+                  <div className="grid grid-cols-3 gap-4 mt-4">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-violet-700">
+                        {productCompanions.reduce((sum, item) => sum + item.frequency, 0).toLocaleString()}
+                      </div>
+                      <div className="text-xs text-slate-600">всего пересечений</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-violet-700">
+                        {Math.round(productCompanions.reduce((sum, item) => sum + item.percentage, 0) / productCompanions.length)}%
+                      </div>
+                      <div className="text-xs text-slate-600">средняя частота</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-green-700">
+                        {Math.round(productCompanions.reduce((sum, item) => sum + parseFloat(item.averageCheck.replace(/[₽,]/g, '')), 0) / productCompanions.length / 1000)}K₽
+                      </div>
+                      <div className="text-xs text-slate-600">средний чек связок</div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
             </div>
           </Card>
         </TabsContent>
