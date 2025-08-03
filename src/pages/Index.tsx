@@ -2366,7 +2366,7 @@ const Index = () => {
             <Card className="p-6">
               <CardTitle className="flex items-center gap-2 mb-6">
                 <Icon name="BarChart4" size={20} />
-                Структура трат в сегменте "Питание вне дома"
+                Структура трат в сегменте
               </CardTitle>
               
               <div className="space-y-4">
