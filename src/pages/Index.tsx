@@ -166,6 +166,34 @@ const Index = () => {
     year: { value: "562,800₽", change: "+28.3%", trend: [420000, 450000, 480000, 520000, 550000, 562800, 562800], vsCompetitors: { value: "+52%", description: "выше конкурентов" } }
   };
 
+  // Данные возвратов
+  const returnData = {
+    week: { 
+      absolute: { current: "24", previous: "18", change: "+33%" },
+      percentage: { current: "2.8%", previous: "2.1%", change: "+0.7%" },
+      trend: [18, 19, 21, 22, 24, 23, 24],
+      vsCompetitors: { value: "-0.4%", description: "ниже конкурентов" }
+    },
+    month: { 
+      absolute: { current: "142", previous: "128", change: "+11%" },
+      percentage: { current: "3.2%", previous: "3.8%", change: "-0.6%" },
+      trend: [135, 138, 140, 141, 142, 143, 142],
+      vsCompetitors: { value: "-0.8%", description: "ниже конкурентов" }
+    },
+    quarter: { 
+      absolute: { current: "485", previous: "520", change: "-7%" },
+      percentage: { current: "2.9%", previous: "3.4%", change: "-0.5%" },
+      trend: [520, 510, 500, 490, 485, 480, 485],
+      vsCompetitors: { value: "-1.2%", description: "ниже конкурентов" }
+    },
+    year: { 
+      absolute: { current: "1,680", previous: "1,850", change: "-9%" },
+      percentage: { current: "2.6%", previous: "3.1%", change: "-0.5%" },
+      trend: [1850, 1800, 1750, 1700, 1680, 1670, 1680],
+      vsCompetitors: { value: "-1.5%", description: "ниже конкурентов" }
+    }
+  };
+
   // Данные кошелька клиента
   const walletData = {
     week: {
@@ -1402,7 +1430,7 @@ const Index = () => {
             </div>
             
             {/* Ключевые метрики лояльности */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               {/* Частота покупок */}
               <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-blue-50 to-indigo-100 border-0 shadow-lg">
                 <CardHeader className="pb-2">
@@ -1572,6 +1600,73 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Возврат */}
+              <Card className="hover-scale transition-all duration-300 bg-gradient-to-br from-red-50 to-pink-100 border-0 shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center justify-between text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <Icon name="RotateCcw" size={16} />
+                      Возврат
+                    </div>
+                    <div className="relative group">
+                      <Icon name="HelpCircle" size={14} className="text-slate-400 hover:text-slate-600 cursor-help" />
+                      <div className="absolute right-0 top-5 w-56 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                        <div className="font-semibold mb-1">Методология расчета:</div>
+                        <div>Количество и доля возвращенных товаров от общего количества продаж за период.</div>
+                      </div>
+                    </div>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-red-700">
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
+                      </span>
+                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
+                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
+                      </Badge>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <div className="flex items-center justify-between mb-1">
+                        <span>Текущий период:</span>
+                        <span className="font-medium text-red-600">{returnData[selectedPeriod as keyof typeof returnData].percentage.current}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Прошлый период:</span>
+                        <span className="font-medium text-slate-500">{returnData[selectedPeriod as keyof typeof returnData].percentage.previous}</span>
+                      </div>
+                    </div>
+
+                    <div className="text-xs text-slate-600">
+                      <Badge variant="outline" className="text-xs">
+                        {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value} {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.description}
+                      </Badge>
+                    </div>
+                    
+                    {/* Мини график */}
+                    <div className="flex items-end gap-1 h-8">
+                      {returnData[selectedPeriod as keyof typeof returnData].trend.map((point, index) => {
+                        const maxValue = Math.max(...returnData[selectedPeriod as keyof typeof returnData].trend);
+                        const normalizedHeight = (point / maxValue) * 100;
+                        return (
+                          <div
+                            key={index}
+                            className="bg-gradient-to-t from-red-500 to-pink-300 rounded-t-sm"
+                            style={{ height: `${Math.max(normalizedHeight, 10)}%`, width: '10px' }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    <div className="text-xs text-slate-500">
+                      штук возвращено
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Детальная аналитика лояльности */}
@@ -1647,36 +1742,36 @@ const Index = () => {
               </Card>
             </div>
 
-            {/* Сводка по лояльности */}
-            <Card className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50">
-              <CardTitle className="flex items-center gap-2 mb-6">
-                <Icon name="Award" size={20} />
-                Индекс лояльности клиентов
+            {/* Сводка по лояльности - North Star Метрика (уменьшенная) */}
+            <Card className="p-4 bg-gradient-to-br from-indigo-50 to-purple-50">
+              <CardTitle className="flex items-center gap-2 mb-4 text-sm">
+                <Icon name="Award" size={16} />
+                North Star Метрика
               </CardTitle>
               
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-indigo-600 mb-2">89%</div>
-                  <div className="text-sm text-slate-600 font-medium">Общий индекс лояльности</div>
-                  <div className="text-xs text-slate-500 mt-1">+12% к прошлому периоду</div>
+                  <div className="text-xl font-bold text-indigo-600 mb-1">89%</div>
+                  <div className="text-xs text-slate-600 font-medium">Индекс лояльности</div>
+                  <div className="text-xs text-slate-500">+12%</div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600 mb-2">76%</div>
-                  <div className="text-sm text-slate-600 font-medium">Возвращающиеся клиенты</div>
-                  <div className="text-xs text-slate-500 mt-1">+8% к прошлому периоду</div>
+                  <div className="text-xl font-bold text-purple-600 mb-1">76%</div>
+                  <div className="text-xs text-slate-600 font-medium">Возвращающиеся</div>
+                  <div className="text-xs text-slate-500">+8%</div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">4.7</div>
-                  <div className="text-sm text-slate-600 font-medium">NPS Score</div>
-                  <div className="text-xs text-slate-500 mt-1">+0.3 к прошлому периоду</div>
+                  <div className="text-xl font-bold text-blue-600 mb-1">4.7</div>
+                  <div className="text-xs text-slate-600 font-medium">NPS Score</div>
+                  <div className="text-xs text-slate-500">+0.3</div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600 mb-2">68%</div>
-                  <div className="text-sm text-slate-600 font-medium">Рекомендующие клиенты</div>
-                  <div className="text-xs text-slate-500 mt-1">+15% к прошлому периоду</div>
+                  <div className="text-xl font-bold text-green-600 mb-1">68%</div>
+                  <div className="text-xs text-slate-600 font-medium">Рекомендующие</div>
+                  <div className="text-xs text-slate-500">+15%</div>
                 </div>
               </div>
             </Card>
