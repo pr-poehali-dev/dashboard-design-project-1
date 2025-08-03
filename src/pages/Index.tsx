@@ -241,6 +241,114 @@ const Index = () => {
     }
   };
 
+  // Данные PAM, TAM, SAM, SOM
+  const marketSizeData = {
+    week: {
+      PAM: { 
+        value: "325 млн ₽", 
+        description: "Потенциально доступный рынок",
+        calculation: "8 000 клиентов × 1.015 рост × 40 000 ₽",
+        breakdown: { clients: "8 000", growth: "1.5%", price: "40 000 ₽" }
+      },
+      TAM: { 
+        value: "320 млн ₽", 
+        description: "Общий адресуемый рынок",
+        calculation: "8 000 клиентов × 40 000 ₽",
+        breakdown: { clients: "8 000", price: "40 000 ₽" }
+      },
+      SAM: { 
+        value: "96 млн ₽", 
+        description: "Обслуживаемый доступный рынок",
+        calculation: "8 000 × 30% (готовы покупать) × 40 000 ₽",
+        breakdown: { clients: "8 000", segment: "30%", price: "40 000 ₽" }
+      },
+      SOM: { 
+        value: "9.6 млн ₽", 
+        description: "Реально достижимый рынок",
+        calculation: "10% (наша доля) × 96 млн ₽",
+        breakdown: { share: "10%", sam: "96 млн ₽" }
+      }
+    },
+    month: {
+      PAM: { 
+        value: "1.3 млрд ₽", 
+        description: "Потенциально доступный рынок",
+        calculation: "32 000 клиентов × 1.034 рост × 39 500 ₽",
+        breakdown: { clients: "32 000", growth: "3.4%", price: "39 500 ₽" }
+      },
+      TAM: { 
+        value: "1.26 млрд ₽", 
+        description: "Общий адресуемый рынок",
+        calculation: "32 000 клиентов × 39 500 ₽",
+        breakdown: { clients: "32 000", price: "39 500 ₽" }
+      },
+      SAM: { 
+        value: "378 млн ₽", 
+        description: "Обслуживаемый доступный рынок",
+        calculation: "32 000 × 30% (готовы покупать) × 39 500 ₽",
+        breakdown: { clients: "32 000", segment: "30%", price: "39 500 ₽" }
+      },
+      SOM: { 
+        value: "37.8 млн ₽", 
+        description: "Реально достижимый рынок",
+        calculation: "10% (наша доля) × 378 млн ₽",
+        breakdown: { share: "10%", sam: "378 млн ₽" }
+      }
+    },
+    quarter: {
+      PAM: { 
+        value: "4.2 млрд ₽", 
+        description: "Потенциально доступный рынок",
+        calculation: "105 000 клиентов × 1.052 рост × 38 000 ₽",
+        breakdown: { clients: "105 000", growth: "5.2%", price: "38 000 ₽" }
+      },
+      TAM: { 
+        value: "3.99 млрд ₽", 
+        description: "Общий адресуемый рынок",
+        calculation: "105 000 клиентов × 38 000 ₽",
+        breakdown: { clients: "105 000", price: "38 000 ₽" }
+      },
+      SAM: { 
+        value: "1.2 млрд ₽", 
+        description: "Обслуживаемый доступный рынок",
+        calculation: "105 000 × 30% (готовы покупать) × 38 000 ₽",
+        breakdown: { clients: "105 000", segment: "30%", price: "38 000 ₽" }
+      },
+      SOM: { 
+        value: "120 млн ₽", 
+        description: "Реально достижимый рынок",
+        calculation: "10% (наша доля) × 1.2 млрд ₽",
+        breakdown: { share: "10%", sam: "1.2 млрд ₽" }
+      }
+    },
+    year: {
+      PAM: { 
+        value: "17.8 млрд ₽", 
+        description: "Потенциально доступный рынок",
+        calculation: "450 000 клиентов × 1.078 рост × 36 500 ₽",
+        breakdown: { clients: "450 000", growth: "7.8%", price: "36 500 ₽" }
+      },
+      TAM: { 
+        value: "16.4 млрд ₽", 
+        description: "Общий адресуемый рынок",
+        calculation: "450 000 клиентов × 36 500 ₽",
+        breakdown: { clients: "450 000", price: "36 500 ₽" }
+      },
+      SAM: { 
+        value: "4.9 млрд ₽", 
+        description: "Обслуживаемый доступный рынок",
+        calculation: "450 000 × 30% (готовы покупать) × 36 500 ₽",
+        breakdown: { clients: "450 000", segment: "30%", price: "36 500 ₽" }
+      },
+      SOM: { 
+        value: "490 млн ₽", 
+        description: "Реально достижимый рынок",
+        calculation: "10% (наша доля) × 4.9 млрд ₽",
+        breakdown: { share: "10%", sam: "4.9 млрд ₽" }
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       {/* Header */}
@@ -2148,6 +2256,257 @@ const Index = () => {
                 <div>
                   <span className="font-semibold text-purple-700">Растущий рынок создаёт возможности:</span>
                   <span className="text-slate-700 ml-1">Сегмент "питание вне дома" растёт на {marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].overallGrowth.value} ({marketGrowthData[selectedPeriod as keyof typeof marketGrowthData].totalMarketSize?.value || marketShareData[selectedPeriod as keyof typeof marketShareData].totalMarketSize.value}) — есть пространство для дальнейшего роста без прямой конкуренции за существующих клиентов</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Анализ рыночного потенциала PAM, TAM, SAM, SOM */}
+          <Card className="p-6 bg-gradient-to-br from-emerald-50 to-green-50">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="Calculator" size={20} className="text-emerald-600" />
+              Анализ рыночного потенциала
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* PAM и TAM */}
+              <div className="space-y-4">
+                {/* PAM */}
+                <div className="bg-white rounded-lg p-5 border-2 border-emerald-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                      PAM
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-emerald-800">Потенциально доступный рынок</h4>
+                      <p className="text-xs text-slate-600">Максимальный объём рынка с учётом роста</p>
+                    </div>
+                  </div>
+                  
+                  <div className="text-3xl font-bold text-emerald-700 mb-3">
+                    {marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.value}
+                  </div>
+                  
+                  <div className="bg-emerald-50 rounded-lg p-3 mb-3">
+                    <div className="text-sm font-medium text-emerald-800 mb-2">Формула расчёта:</div>
+                    <div className="text-sm text-emerald-700 font-mono">
+                      {marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.calculation}
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.breakdown.clients}</div>
+                      <div className="text-slate-500">клиентов</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.breakdown.growth}</div>
+                      <div className="text-slate-500">рост</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.breakdown.price}</div>
+                      <div className="text-slate-500">средн. чек</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* TAM */}
+                <div className="bg-white rounded-lg p-5 border-2 border-blue-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                      TAM
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-blue-800">Общий адресуемый рынок</h4>
+                      <p className="text-xs text-slate-600">Весь возможный рынок без ограничений</p>
+                    </div>
+                  </div>
+                  
+                  <div className="text-3xl font-bold text-blue-700 mb-3">
+                    {marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.value}
+                  </div>
+                  
+                  <div className="bg-blue-50 rounded-lg p-3 mb-3">
+                    <div className="text-sm font-medium text-blue-800 mb-2">Формула расчёта:</div>
+                    <div className="text-sm text-blue-700 font-mono">
+                      {marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.calculation}
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.breakdown.clients}</div>
+                      <div className="text-slate-500">клиентов</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.breakdown.price}</div>
+                      <div className="text-slate-500">средн. чек</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SAM и SOM */}
+              <div className="space-y-4">
+                {/* SAM */}
+                <div className="bg-white rounded-lg p-5 border-2 border-purple-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                      SAM
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-purple-800">Обслуживаемый доступный рынок</h4>
+                      <p className="text-xs text-slate-600">Часть TAM с учётом ограничений</p>
+                    </div>
+                  </div>
+                  
+                  <div className="text-3xl font-bold text-purple-700 mb-3">
+                    {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.value}
+                  </div>
+                  
+                  <div className="bg-purple-50 rounded-lg p-3 mb-3">
+                    <div className="text-sm font-medium text-purple-800 mb-2">Формула расчёта:</div>
+                    <div className="text-sm text-purple-700 font-mono">
+                      {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.calculation}
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.breakdown.clients}</div>
+                      <div className="text-slate-500">клиентов</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.breakdown.segment}</div>
+                      <div className="text-slate-500">готовы</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.breakdown.price}</div>
+                      <div className="text-slate-500">средн. чек</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SOM */}
+                <div className="bg-white rounded-lg p-5 border-2 border-orange-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 bg-orange-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                      SOM
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-orange-800">Реально достижимый рынок</h4>
+                      <p className="text-xs text-slate-600">Доля рынка при текущей стратегии</p>
+                    </div>
+                  </div>
+                  
+                  <div className="text-3xl font-bold text-orange-700 mb-3">
+                    {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.value}
+                  </div>
+                  
+                  <div className="bg-orange-50 rounded-lg p-3 mb-3">
+                    <div className="text-sm font-medium text-orange-800 mb-2">Формула расчёта:</div>
+                    <div className="text-sm text-orange-700 font-mono">
+                      {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.calculation}
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.breakdown.share}</div>
+                      <div className="text-slate-500">наша доля</div>
+                    </div>
+                    <div className="text-center p-2 bg-slate-50 rounded">
+                      <div className="font-semibold text-slate-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.breakdown.sam}</div>
+                      <div className="text-slate-500">от SAM</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Выводы и практическое применение */}
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Анализ воронки */}
+              <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <Icon name="Funnel" size={18} className="text-slate-600" />
+                  <h4 className="font-bold text-slate-800">Воронка рыночного потенциала</h4>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-emerald-100 rounded-lg">
+                    <span className="font-semibold text-emerald-800">PAM</span>
+                    <span className="text-emerald-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].PAM.value}</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-center">
+                    <Icon name="ArrowDown" size={16} className="text-slate-400" />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-blue-100 rounded-lg">
+                    <span className="font-semibold text-blue-800">TAM</span>
+                    <span className="text-blue-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.value}</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-center">
+                    <Icon name="ArrowDown" size={16} className="text-slate-400" />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-purple-100 rounded-lg">
+                    <span className="font-semibold text-purple-800">SAM</span>
+                    <span className="text-purple-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.value}</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-center">
+                    <Icon name="ArrowDown" size={16} className="text-slate-400" />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-orange-100 rounded-lg">
+                    <span className="font-semibold text-orange-800">SOM</span>
+                    <span className="text-orange-700">{marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.value}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Практическое применение */}
+              <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <Icon name="Target" size={18} className="text-emerald-600" />
+                  <h4 className="font-bold text-emerald-800">Практическое применение</h4>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-emerald-700">Оценка потенциала:</span>
+                      <p className="text-sm text-slate-700">SOM {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SOM.value} показывает реальные возможности роста при текущей стратегии</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-blue-700">Привлечение инвестиций:</span>
+                      <p className="text-sm text-slate-700">TAM {marketSizeData[selectedPeriod as keyof typeof marketSizeData].TAM.value} демонстрирует инвесторам общий размер возможностей</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-purple-700">Стратегическое планирование:</span>
+                      <p className="text-sm text-slate-700">SAM {marketSizeData[selectedPeriod as keyof typeof marketSizeData].SAM.value} помогает определить реалистичные цели роста</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-orange-700">Фокус маркетинга:</span>
+                      <p className="text-sm text-slate-700">30% готовых клиентов из TAM — ключевой сегмент для концентрации усилий</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
