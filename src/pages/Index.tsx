@@ -2369,44 +2369,159 @@ const Index = () => {
                 Структура трат в сегменте
               </CardTitle>
               
-              <div className="space-y-4">
-                <div className="bg-orange-50 rounded-lg p-4">
-                  <div className="text-sm text-slate-600 mb-2">Общие траты клиента в сегменте</div>
-                  <div className="text-2xl font-bold text-orange-700 mb-1">
-                    {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.value}
+              {/* Фильтры по когортам */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Доходная группа</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все группы</option>
+                    <option value="low">до 30 000 ₽</option>
+                    <option value="middle">30 000 - 80 000 ₽</option>
+                    <option value="high">80 000 - 150 000 ₽</option>
+                    <option value="premium">свыше 150 000 ₽</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Пол</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все</option>
+                    <option value="male">Мужчины</option>
+                    <option value="female">Женщины</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-slate-700 mb-2 block">Возраст</label>
+                  <select className="w-full p-2 border border-slate-200 rounded-lg bg-white text-sm">
+                    <option value="all">Все возрасты</option>
+                    <option value="18-25">18-25 лет</option>
+                    <option value="26-35">26-35 лет</option>
+                    <option value="36-45">36-45 лет</option>
+                    <option value="46-55">46-55 лет</option>
+                    <option value="55+">55+ лет</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {/* Общая статистика */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-orange-50 rounded-lg p-4">
+                    <div className="text-sm text-slate-600 mb-2">Общие траты в сегменте</div>
+                    <div className="text-2xl font-bold text-orange-700 mb-1">
+                      {walletData[selectedPeriod as keyof typeof walletData].segmentSpending.value}
+                    </div>
+                    <div className="text-sm text-green-600 font-medium">+12.3% к прошлому периоду</div>
                   </div>
-                  <div className="text-sm text-slate-600">
-                    Средний клиент тратит на питание вне дома за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <div className="text-sm text-slate-600 mb-2">Средний чек</div>
+                    <div className="text-2xl font-bold text-blue-700 mb-1">
+                      {selectedPeriod === 'month' ? '2,850₽' : selectedPeriod === 'week' ? '720₽' : selectedPeriod === 'quarter' ? '8,550₽' : '34,200₽'}
+                    </div>
+                    <div className="text-sm text-green-600 font-medium">+8.7% к прошлому периоду</div>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <div className="text-sm text-slate-600 mb-2">Частота покупок</div>
+                    <div className="text-2xl font-bold text-purple-700 mb-1">
+                      {selectedPeriod === 'month' ? '11.2' : selectedPeriod === 'week' ? '2.8' : selectedPeriod === 'quarter' ? '33.6' : '134.4'} раз
+                    </div>
+                    <div className="text-sm text-green-600 font-medium">+5.1% к прошлому периоду</div>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                    <span className="text-sm font-medium">Рестораны премиум</span>
-                    <div className="text-right">
-                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '12,000₽' : selectedPeriod === 'week' ? '3,000₽' : selectedPeriod === 'quarter' ? '37,000₽' : '154,000₽'}</div>
-                      <div className="text-xs text-slate-600">40%</div>
+                {/* Детализированная структура трат */}
+                <div>
+                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Структура трат по категориям</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-amber-500 rounded-full"></div>
+                        <div>
+                          <span className="text-sm font-medium text-slate-900">Рестораны премиум-класса</span>
+                          <div className="text-xs text-slate-600">Средний чек: 4,200₽</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '12,000₽' : selectedPeriod === 'week' ? '3,000₽' : selectedPeriod === 'quarter' ? '37,000₽' : '154,000₽'}</div>
+                        <div className="text-xs text-amber-600 font-medium">42% от трат</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border border-red-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                        <div>
+                          <span className="text-sm font-medium text-slate-900">Фастфуд и сети</span>
+                          <div className="text-xs text-slate-600">Средний чек: 650₽</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '8,500₽' : selectedPeriod === 'week' ? '2,125₽' : selectedPeriod === 'quarter' ? '25,500₽' : '102,000₽'}</div>
+                        <div className="text-xs text-red-600 font-medium">28% от трат</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                        <div>
+                          <span className="text-sm font-medium text-slate-900">Кафе и бары</span>
+                          <div className="text-xs text-slate-600">Средний чек: 1,850₽</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '5,200₽' : selectedPeriod === 'week' ? '1,300₽' : selectedPeriod === 'quarter' ? '15,600₽' : '62,400₽'}</div>
+                        <div className="text-xs text-blue-600 font-medium">17% от трат</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                        <div>
+                          <span className="text-sm font-medium text-slate-900">Доставка еды</span>
+                          <div className="text-xs text-slate-600">Средний чек: 1,120₽</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '2,800₽' : selectedPeriod === 'week' ? '700₽' : selectedPeriod === 'quarter' ? '8,400₽' : '33,600₽'}</div>
+                        <div className="text-xs text-green-600 font-medium">9% от трат</div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg border border-purple-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+                        <div>
+                          <span className="text-sm font-medium text-slate-900">Прочие категории</span>
+                          <div className="text-xs text-slate-600">Кофейни, стрит-фуд</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '1,500₽' : selectedPeriod === 'week' ? '375₽' : selectedPeriod === 'quarter' ? '4,500₽' : '18,000₽'}</div>
+                        <div className="text-xs text-purple-600 font-medium">4% от трат</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                    <span className="text-sm font-medium">Фастфуд сети</span>
-                    <div className="text-right">
-                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '9,000₽' : selectedPeriod === 'week' ? '2,250₽' : selectedPeriod === 'quarter' ? '27,750₽' : '115,500₽'}</div>
-                      <div className="text-xs text-slate-600">30%</div>
+                </div>
+
+                {/* Инсайты по когортам */}
+                <div className="bg-slate-50 rounded-lg p-4">
+                  <h4 className="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                    <Icon name="Lightbulb" size={16} />
+                    Ключевые инсайты по выбранной когорте
+                  </h4>
+                  <div className="space-y-2 text-sm text-slate-700">
+                    <div className="flex items-start gap-2">
+                      <Icon name="TrendingUp" size={14} className="text-green-600 mt-0.5" />
+                      <span>Клиенты с доходом 80-150к₽ тратят на 35% больше в премиум-ресторанах</span>
                     </div>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                    <span className="text-sm font-medium">Кафе и бары</span>
-                    <div className="text-right">
-                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '6,000₽' : selectedPeriod === 'week' ? '1,500₽' : selectedPeriod === 'quarter' ? '18,500₽' : '77,000₽'}</div>
-                      <div className="text-xs text-slate-600">20%</div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="Users" size={14} className="text-blue-600 mt-0.5" />
+                      <span>Женщины 26-35 лет чаще заказывают доставку еды (+42%)</span>
                     </div>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                    <span className="text-sm font-medium">Доставка еды</span>
-                    <div className="text-right">
-                      <div className="font-bold text-slate-900">{selectedPeriod === 'month' ? '3,000₽' : selectedPeriod === 'week' ? '750₽' : selectedPeriod === 'quarter' ? '9,250₽' : '38,500₽'}</div>
-                      <div className="text-xs text-slate-600">10%</div>
+                    <div className="flex items-start gap-2">
+                      <Icon name="Clock" size={14} className="text-orange-600 mt-0.5" />
+                      <span>Возрастная группа 36-45 лет предпочитает кафе и бары для деловых встреч</span>
                     </div>
                   </div>
                 </div>
