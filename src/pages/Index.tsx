@@ -3582,6 +3582,72 @@ const Index = () => {
               </div>
             </div>
           </Card>
+
+          {/* Основные категории расходов */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="ShoppingBag" size={20} />
+              Основные категории расходов
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {expenseCategories.map((category, index) => (
+                <Card key={index} className="p-4 hover-scale transition-all">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-3 h-3 rounded-full ${category.color}`} />
+                    <span className="font-medium">{category.name}</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg font-bold">{category.amount}</span>
+                      <Badge variant="outline">{category.percentage}%</Badge>
+                    </div>
+                    
+                    <div className="w-full h-2 bg-slate-200 rounded-full">
+                      <div 
+                        className={`h-full ${category.color} rounded-full transition-all duration-500`}
+                        style={{ width: `${category.percentage}%` }}
+                      />
+                    </div>
+                    
+                    <div className="text-sm text-slate-600">
+                      Средний чек: <span className="font-medium">{category.avgCheck}</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
+
+          {/* Анализ корзины покупок */}
+          <Card className="p-6">
+            <CardTitle className="flex items-center gap-2 mb-6">
+              <Icon name="ShoppingCart" size={20} />
+              Анализ корзины покупок
+            </CardTitle>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {basketAnalysis.map((item, index) => (
+                <Card key={index} className="p-4 bg-gradient-to-br from-slate-50 to-slate-100">
+                  <div className="text-center space-y-3">
+                    <h4 className="font-semibold text-slate-800">{item.category}</h4>
+                    
+                    <div className="text-2xl font-bold text-slate-900">{item.share}%</div>
+                    <div className="text-sm text-slate-600">доли в корзине</div>
+                    
+                    <Badge variant={item.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
+                      {item.trend}
+                    </Badge>
+                    
+                    <div className="text-xs text-slate-600">
+                      Среднее кол-во: <span className="font-medium">{item.avgItems} товаров</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </Card>
         </TabsContent>
 
         {/* Финансы */}
@@ -3901,71 +3967,7 @@ const Index = () => {
               <p className="text-sm text-pink-700">Анализ корзины, частота и предпочтения в покупках</p>
             </div>
           </div>
-          {/* Категории расходов */}
-          <Card className="p-6">
-            <CardTitle className="flex items-center gap-2 mb-6">
-              <Icon name="ShoppingBag" size={20} />
-              Основные категории расходов
-            </CardTitle>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {expenseCategories.map((category, index) => (
-                <Card key={index} className="p-4 hover-scale transition-all">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-3 h-3 rounded-full ${category.color}`} />
-                    <span className="font-medium">{category.name}</span>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold">{category.amount}</span>
-                      <Badge variant="outline">{category.percentage}%</Badge>
-                    </div>
-                    
-                    <div className="w-full h-2 bg-slate-200 rounded-full">
-                      <div 
-                        className={`h-full ${category.color} rounded-full transition-all duration-500`}
-                        style={{ width: `${category.percentage}%` }}
-                      />
-                    </div>
-                    
-                    <div className="text-sm text-slate-600">
-                      Средний чек: <span className="font-medium">{category.avgCheck}</span>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </Card>
 
-          {/* Анализ корзины */}
-          <Card className="p-6">
-            <CardTitle className="flex items-center gap-2 mb-6">
-              <Icon name="ShoppingCart" size={20} />
-              Анализ корзины покупок
-            </CardTitle>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {basketAnalysis.map((item, index) => (
-                <Card key={index} className="p-4 bg-gradient-to-br from-slate-50 to-slate-100">
-                  <div className="text-center space-y-3">
-                    <h4 className="font-semibold text-slate-800">{item.category}</h4>
-                    
-                    <div className="text-2xl font-bold text-slate-900">{item.share}%</div>
-                    <div className="text-sm text-slate-600">доли в корзине</div>
-                    
-                    <Badge variant={item.trend.startsWith('+') ? 'default' : 'destructive'} className="text-xs">
-                      {item.trend}
-                    </Badge>
-                    
-                    <div className="text-xs text-slate-600">
-                      Среднее кол-во: <span className="font-medium">{item.avgItems} товаров</span>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </Card>
         </TabsContent>
 
         {/* Перетоки */}
