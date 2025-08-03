@@ -10,6 +10,7 @@ import Icon from "@/components/ui/icon";
 const Index = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("month");
   const [selectedRegion, setSelectedRegion] = useState("all");
+  const [selectedCohort, setSelectedCohort] = useState("standard");
 
   // Демографические данные
   const demographicData = [
@@ -17,12 +18,111 @@ const Index = () => {
     { label: "Женщины", value: 55, color: "bg-pink-500" },
   ];
 
-  const ageGroups = [
-    { range: "18-25", count: 1250, percentage: 25 },
-    { range: "26-35", count: 2100, percentage: 42 },
-    { range: "36-45", count: 1050, percentage: 21 },
-    { range: "46+", count: 600, percentage: 12 },
-  ];
+  // Определения различных типов когорт
+  const cohortDefinitions = {
+    standard: {
+      name: "Стандартные когорты",
+      description: "18-25, 26-35, 36-45, 46-55, 55+ лет",
+      groups: [
+        { range: "18-25", count: 1250, percentage: 25 },
+        { range: "26-35", count: 2100, percentage: 42 },
+        { range: "36-45", count: 1050, percentage: 21 },
+        { range: "46+", count: 600, percentage: 12 },
+      ]
+    },
+    marketing: {
+      name: "Маркетинговые когорты", 
+      description: "18-24, 25-34, 35-44, 45-54, 55-64, 65+ лет",
+      groups: [
+        { range: "18-24", count: 980, percentage: 19.6 },
+        { range: "25-34", count: 1680, percentage: 33.6 },
+        { range: "35-44", count: 1200, percentage: 24.0 },
+        { range: "45-54", count: 720, percentage: 14.4 },
+        { range: "55-64", count: 320, percentage: 6.4 },
+        { range: "65+", count: 100, percentage: 2.0 },
+      ]
+    },
+    generation: {
+      name: "По поколениям",
+      description: "Gen Z, Millennials, Gen X, Baby Boomers",
+      groups: [
+        { range: "Gen Z (18-26)", count: 1400, percentage: 28 },
+        { range: "Millennials (27-42)", count: 2000, percentage: 40 },
+        { range: "Gen X (43-58)", count: 1200, percentage: 24 },
+        { range: "Baby Boomers (59+)", count: 400, percentage: 8 },
+      ]
+    },
+    decade: {
+      name: "По десятилетиям",
+      description: "18-27, 28-37, 38-47, 48-57, 58+ лет",
+      groups: [
+        { range: "18-27", count: 1350, percentage: 27 },
+        { range: "28-37", count: 1750, percentage: 35 },
+        { range: "38-47", count: 1000, percentage: 20 },
+        { range: "48-57", count: 650, percentage: 13 },
+        { range: "58+", count: 250, percentage: 5 },
+      ]
+    },
+    custom: {
+      name: "Пользовательские когорты",
+      description: "Настраиваемые диапазоны",
+      groups: [
+        { range: "18-22", count: 600, percentage: 12 },
+        { range: "23-30", count: 1500, percentage: 30 },
+        { range: "31-40", count: 1400, percentage: 28 },
+        { range: "41-50", count: 900, percentage: 18 },
+        { range: "51+", count: 600, percentage: 12 },
+      ]
+    }
+  };
+
+  // Функция для получения данных по выбранной когорте
+  const getAgeGroupsForCohort = (cohortType: string) => {
+    return cohortDefinitions[cohortType as keyof typeof cohortDefinitions]?.groups || cohortDefinitions.standard.groups;
+  };
+
+  // Функция для обработки изменения когорты
+  const handleCohortChange = (newCohort: string) => {
+    setSelectedCohort(newCohort);
+  };
+
+  // Функция для быстрого выбора пресета поколения
+  const handlePresetSelection = (preset: string) => {
+    setSelectedCohort('generation');
+    // В реальной реализации здесь можно добавить дополнительную логику фильтрации
+  };
+
+  // Функция для получения метрик выбранной когорты
+  const getCohortMetrics = () => {
+    const currentAgeGroups = getAgeGroupsForCohort(selectedCohort);
+    const dominantGroup = currentAgeGroups.reduce((prev, current) => 
+      (prev.percentage > current.percentage) ? prev : current
+    );
+    
+    // Симуляция изменения за месяц на основе типа когорты
+    const monthlyChange = selectedCohort === 'generation' ? '+3.2%' : 
+                         selectedCohort === 'marketing' ? '+1.8%' : 
+                         selectedCohort === 'decade' ? '+2.1%' : '±2.8%';
+    
+    // Симуляция среднего чека на основе когорты
+    const avgCheck = selectedCohort === 'generation' ? '3,890₽' :
+                     selectedCohort === 'marketing' ? '3,520₽' :
+                     selectedCohort === 'decade' ? '3,670₽' : '3,240₽';
+    
+    // Симуляция retention rate
+    const retentionRate = selectedCohort === 'generation' ? '92%' :
+                         selectedCohort === 'marketing' ? '85%' : 
+                         selectedCohort === 'decade' ? '89%' : '87%';
+
+    return {
+      dominantGroup: `${dominantGroup.percentage}%`,
+      monthlyChange,
+      avgCheck,
+      retentionRate
+    };
+  };
+
+  const ageGroups = getAgeGroupsForCohort(selectedCohort);
 
   const genderAgeData = {
     male: {
@@ -3151,10 +3251,8 @@ const Index = () => {
                       <Icon name="Settings" size={14} className="text-slate-500" />
                       <select 
                         className="text-xs bg-white border border-slate-200 rounded px-2 py-1 text-slate-700"
-                        onChange={(e) => {
-                          // В реальной реализации здесь был бы обработчик изменения когорт
-                          console.log('Когорта изменена:', e.target.value);
-                        }}
+                        value={selectedCohort}
+                        onChange={(e) => handleCohortChange(e.target.value)}
                       >
                         <option value="standard">Стандартные когорты</option>
                         <option value="marketing">Маркетинговые когорты</option>
@@ -3169,13 +3267,11 @@ const Index = () => {
                   <div className="bg-blue-50 rounded-lg p-3 mb-4 border border-blue-100">
                     <div className="text-xs text-blue-700 mb-2 flex items-center gap-2">
                       <Icon name="Info" size={12} />
-                      <span className="font-medium">Настройки когорт</span>
+                      <span className="font-medium">Выбранная когорта: {cohortDefinitions[selectedCohort as keyof typeof cohortDefinitions]?.name}</span>
                     </div>
                     <div className="text-xs text-slate-600">
-                      <div className="mb-1"><strong>Стандартные:</strong> 18-25, 26-35, 36-45, 46-55, 55+ лет</div>
-                      <div className="mb-1"><strong>Маркетинговые:</strong> 18-24, 25-34, 35-44, 45-54, 55-64, 65+ лет</div>
-                      <div className="mb-1"><strong>По поколениям:</strong> Gen Z, Millennials, Gen X, Baby Boomers</div>
-                      <div><strong>По десятилетиям:</strong> 18-27, 28-37, 38-47, 48-57, 58+ лет</div>
+                      <div><strong>Описание:</strong> {cohortDefinitions[selectedCohort as keyof typeof cohortDefinitions]?.description}</div>
+                      <div className="mt-1"><strong>Всего групп:</strong> {ageGroups.length}</div>
                     </div>
                   </div>
 
@@ -3201,19 +3297,19 @@ const Index = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-xs">
                       <div className="bg-white rounded p-2 text-center">
-                        <div className="font-bold text-slate-900">34.2%</div>
+                        <div className="font-bold text-slate-900">{getCohortMetrics().dominantGroup}</div>
                         <div className="text-slate-600">Доминирующая группа</div>
                       </div>
                       <div className="bg-white rounded p-2 text-center">
-                        <div className="font-bold text-slate-900">±2.8%</div>
+                        <div className="font-bold text-slate-900">{getCohortMetrics().monthlyChange}</div>
                         <div className="text-slate-600">Изменение за месяц</div>
                       </div>
                       <div className="bg-white rounded p-2 text-center">
-                        <div className="font-bold text-slate-900">3,240₽</div>
+                        <div className="font-bold text-slate-900">{getCohortMetrics().avgCheck}</div>
                         <div className="text-slate-600">Средний чек</div>
                       </div>
                       <div className="bg-white rounded p-2 text-center">
-                        <div className="font-bold text-slate-900">87%</div>
+                        <div className="font-bold text-slate-900">{getCohortMetrics().retentionRate}</div>
                         <div className="text-slate-600">Retention Rate</div>
                       </div>
                     </div>
@@ -3231,11 +3327,12 @@ const Index = () => {
                       ].map((preset, index) => (
                         <button
                           key={index}
-                          className="text-xs px-2 py-1 bg-white border border-slate-200 rounded hover:bg-blue-50 hover:border-blue-200 transition-colors"
-                          onClick={() => {
-                            // В реальной реализации здесь был бы обработчик смены пресета
-                            console.log('Пресет выбран:', preset.value);
-                          }}
+                          className={`text-xs px-2 py-1 border rounded transition-colors ${
+                            selectedCohort === 'generation' 
+                              ? 'bg-blue-100 border-blue-300 text-blue-700' 
+                              : 'bg-white border-slate-200 hover:bg-blue-50 hover:border-blue-200'
+                          }`}
+                          onClick={() => handlePresetSelection(preset.value)}
                         >
                           {preset.label}
                         </button>
