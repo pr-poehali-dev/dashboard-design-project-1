@@ -1436,92 +1436,90 @@ const Index = () => {
               </div>
             </Card>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Блок возвратов */}
-              <Card className="p-4 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200">
-                <CardTitle className="flex items-center gap-2 mb-4">
-                  <Icon name="RotateCcw" size={16} className="text-red-600" />
-                  Возвраты
-                </CardTitle>
-                
-                <div className="space-y-4">
-                  <div className="bg-white rounded-lg p-3 border border-red-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-2xl font-bold text-red-700">
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
-                      </span>
-                      <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
-                        {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
-                      </Badge>
-                    </div>
-                    <div className="text-sm text-slate-600">
-                      Количество за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
-                    </div>
-                    <div className="text-xs text-slate-500">
-                      {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от общих продаж
-                    </div>
+            {/* Блок возвратов */}
+            <Card className="p-4 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200 mb-6">
+              <CardTitle className="flex items-center gap-2 mb-4">
+                <Icon name="RotateCcw" size={16} className="text-red-600" />
+                Возвраты
+              </CardTitle>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="bg-white rounded-lg p-3 border border-red-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-2xl font-bold text-red-700">
+                      {returnData[selectedPeriod as keyof typeof returnData].absolute.current}
+                    </span>
+                    <Badge variant="default" className={`text-xs ${returnData[selectedPeriod as keyof typeof returnData].absolute.change.startsWith('+') ? 'bg-red-600' : 'bg-green-600'}`}>
+                      {returnData[selectedPeriod as keyof typeof returnData].absolute.change}
+                    </Badge>
+                  </div>
+                  <div className="text-sm text-slate-600">
+                    Количество за {selectedPeriod === 'week' ? 'неделю' : selectedPeriod === 'month' ? 'месяц' : selectedPeriod === 'quarter' ? 'квартал' : 'год'}
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    {returnData[selectedPeriod as keyof typeof returnData].percentage.current} от общих продаж
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="text-center p-2 bg-white rounded border">
+                  <div className="grid grid-cols-2 gap-2 mt-3">
+                    <div className="text-center p-2 bg-gray-50 rounded border">
                       <div className="text-sm font-bold text-slate-900">
                         {returnData[selectedPeriod as keyof typeof returnData].percentage.previous}
                       </div>
                       <div className="text-xs text-slate-600">прошлый</div>
                     </div>
-                    <div className="text-center p-2 bg-white rounded border">
+                    <div className="text-center p-2 bg-gray-50 rounded border">
                       <div className="text-sm font-bold text-green-700">
                         {returnData[selectedPeriod as keyof typeof returnData].vsCompetitors.value}
                       </div>
                       <div className="text-xs text-slate-600">vs рынок</div>
                     </div>
                   </div>
+                </div>
 
-                  {/* ТОП-5 возвращаемых товаров */}
-                  <div className="bg-red-100 rounded-lg p-3 border border-red-200">
-                    <div className="text-xs font-semibold text-red-800 mb-2">ТОП-5 возвращаемых товаров:</div>
-                    <div className="space-y-1">
-                      {topReturnedProducts[selectedPeriod as keyof typeof topReturnedProducts].map((product, index) => (
-                        <div key={index} className="flex items-center justify-between text-xs">
-                          <div className="flex-1">
-                            <span className="font-medium text-slate-700">{index + 1}. {product.name}</span>
-                            <div className="text-slate-500">{product.reason}</div>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-bold text-red-700">{product.current}</div>
-                            <div className={`text-xs ${product.change.startsWith('+') ? 'text-red-600' : 'text-green-600'}`}>
-                              {product.change}
-                            </div>
+                {/* ТОП-5 возвращаемых товаров */}
+                <div className="lg:col-span-2 bg-red-100 rounded-lg p-3 border border-red-200">
+                  <div className="text-xs font-semibold text-red-800 mb-3">ТОП-5 возвращаемых товаров:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {topReturnedProducts[selectedPeriod as keyof typeof topReturnedProducts].map((product, index) => (
+                      <div key={index} className="flex items-center justify-between text-xs bg-white rounded p-2 border border-red-150">
+                        <div className="flex-1">
+                          <span className="font-medium text-slate-700">{index + 1}. {product.name}</span>
+                          <div className="text-slate-500">{product.reason}</div>
+                        </div>
+                        <div className="text-right ml-2">
+                          <div className="font-bold text-red-700">{product.current}</div>
+                          <div className={`text-xs ${product.change.startsWith('+') ? 'text-red-600' : 'text-green-600'}`}>
+                            {product.change}
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </Card>
+              </div>
+            </Card>
 
-              {/* North Star блок */}
-              <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50">
-                <CardTitle className="flex items-center gap-2 mb-4">
-                  <Icon name="Star" size={16} className="text-emerald-600" />
-                  North Star Метрика
-                </CardTitle>
-                
-                <div className="text-center py-4">
-                  <Icon name="Plus" size={24} className="text-emerald-400 mb-2 mx-auto" />
-                  <div className="text-sm font-semibold text-emerald-800 mb-1">
-                    Выберите ключевую метрику
-                  </div>
-                  <div className="text-xs text-emerald-600 mb-3">
-                    Добавьте главный показатель для отслеживания успеха
-                  </div>
-                  <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
-                    <Icon name="Plus" size={12} className="mr-1" />
-                    Add (Free)
-                  </Button>
+            {/* North Star блок */}
+            <Card className="p-4 border-2 border-dashed border-emerald-300 bg-emerald-50 mb-6">
+              <CardTitle className="flex items-center gap-2 mb-4">
+                <Icon name="Star" size={16} className="text-emerald-600" />
+                North Star Метрика
+              </CardTitle>
+              
+              <div className="text-center py-4">
+                <Icon name="Plus" size={24} className="text-emerald-400 mb-2 mx-auto" />
+                <div className="text-sm font-semibold text-emerald-800 mb-1">
+                  Выберите ключевую метрику
                 </div>
-              </Card>
-            </div>
+                <div className="text-xs text-emerald-600 mb-3">
+                  Добавьте главный показатель для отслеживания успеха
+                </div>
+                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
+                  <Icon name="Plus" size={12} className="mr-1" />
+                  Add (Free)
+                </Button>
+              </div>
+            </Card>
 
           </div>
 
